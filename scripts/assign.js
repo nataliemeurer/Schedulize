@@ -38,6 +38,11 @@ var FlowNetwork = function(users, shifts){
 	this.addEdge = function(from, to, capacity){
 		var newEdge = new Edge(from, to, capacity);
 		newEdge.reverseEdge = new Edge(to, from, capacity);
+		reverseEdge.reverseEdge = newEdge;
+		// Push edge to edges array in from and to
+		this.network[from].push(newEdge);
+		this.network[to].push(newEdge);
+
 	}
 
 
