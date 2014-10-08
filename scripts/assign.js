@@ -9,7 +9,7 @@ var Edge = function(from, to, capacity) {
 
 
 // CREATE AN OBJECT THAT WILL HANDLE THE ENTIRE NETWORK
-var FlowNetwork = function(users, shifts){
+var FlowNetwork = function(employees, shifts){
 	// create network object to store graph
 	this.network = {};
 	
@@ -22,22 +22,33 @@ var FlowNetwork = function(users, shifts){
 	//assign all shifts and edges to network
 	this.assignEdges = function(){
 		for ( var key in shifts ){
-			var shiftKey = shifts[key][name].split(' ').join('');
+			var shiftKey = shifts[key][name].split('/').join(' ');
+			// assign employees to network to be saved by their time shift
 			this.network[shiftKey] = shifts[key];
 			//Add edge from shift to sink
 			this.addEdge(shiftKey, 'sink', 1);
 		}
 		// assign keys and edges to network
-		for ( var key in users ){ 
-			var userKey = users[key][name].split(' ').join('');
-			// assign users to network to be saved by their full name
-			this.network[userKey] = users[key];
-			// Add edge to users 
+		for ( var key in employees ){ 
+			var userKey = employees[key][name].split('/').join(' ');
+			// assign employees to network to be saved by their full name
+			this.network[userKey] = employees[key];
+			// Add edge to employees 
 			this.addEdge('source', userKey, this.network[userKey][shiftsDesired]);
 		}
 
 		//TODO: assign user edges to shifts using the addEdge function.  This functionality should be contained elsewhere
+		// this.userEdgesToShifts();
 	}
+
+	//I can't find a way to attach to this.network[shiftKey] and this.network[userKey]
+	//Maybe put all this.network[shiftKey] 's into it's own object?
+	//Maybe put all this.network[userKey] 's into it's own object?
+	this.userEdgesToShifts = function() {
+		for ( var key in employees ) {
+			employees[key][edges][userKey]
+		}
+	};
 
 	this.addEdge = function(from, to, capacity){
 		var newEdge = new Edge(from, to, capacity);
