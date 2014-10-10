@@ -18,23 +18,25 @@ exports.FlowNetwork = function(employees, shifts){
 	
 	// create sink with no edges assigned
 	this.network.sink = {edges: []};
-	
+
 	//assign all shifts and edges to network
 	this.assignEdges = function(){
 		for ( var key in shifts ){
-			var shiftKey = shifts[key][name].split('/').join(' ');
+			var shiftKey = shifts[key]['name'].split('/').join('');
 			// assign employees to network to be saved by their time shift
 			this.network[shiftKey] = shifts[key];
+			console.log("SHIFT KEY IS: ", shiftKey);
 			//Add edge from shift to sink
 			this.addEdge(shiftKey, 'sink', 1);
 		}
 		// assign keys and edges to network
 		for ( var key in employees ){ 
-			var userKey = employees[key][name].split('/').join(' ');
+			var userKey = employees[key]['name'].split(' ').join('');
 			// assign employees to network to be saved by their full name
 			this.network[userKey] = employees[key];
+			console.log('USER KEY IS: ', userKey);
 			// Add edge to employees 
-			this.addEdge('source', userKey, this.network[userKey][shiftsDesired]);
+			this.addEdge('source', userKey, this.network[userKey]['shiftsDesired']);
 		}
 
 		//TODO: assign user edges to shifts using the addEdge function.  This functionality should be contained elsewhere
@@ -51,13 +53,12 @@ exports.FlowNetwork = function(employees, shifts){
 	};
 
 	this.addEdge = function(from, to, capacity){
-		var newEdge = new Edge(from, to, capacity);
-		newEdge.reverseEdge = new Edge(to, from, capacity);
-		reverseEdge.reverseEdge = newEdge;
+		var newEdge = new exports.Edge(from, to, capacity);
+		newEdge.reverseEdge = new exports.Edge(to, from, capacity);
+		newEdge.reverseEdge.reverseEdge = newEdge;
 		// Push edge to edges array in from and to
-		this.network[from].push(newEdge);
-		this.network[to].push(newEdge);
-
+		this.network[from]['edges'].push(newEdge);
+		this.network[to]['edges'].push(newEdge);
 	};
 
 	this.removeSameDayShifts = function(){

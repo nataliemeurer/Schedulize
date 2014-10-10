@@ -7,7 +7,7 @@ var expect = require('expect.js');
 var employees = {
 	1: {name: 'Kevin Meurer', shiftsDesired: 3, availability: [], edges:[], canManage: true},
 	2: {name: 'Paul Allen', shiftsDesired: 4, availability: [], edges:[], canManage: false},
-	3: {name: 'Raythursd Ramon', shiftsDesired: 2, availability: [], edges:[], canManage: true},
+	3: {name: 'Ray Ramon', shiftsDesired: 2, availability: [], edges:[], canManage: true},
 	4: {name: 'Riley Zinar', shiftsDesired: 1, availability: [], edges:[], canManage: true},
 	5: {name: 'Jeff Gladchun', shiftsDesired: 3, availability: [], edges:[], canManage: false},
 	6: {name: 'Will Burgo', shiftsDesired: 3, availability: [], edges:[], canManage: false},
@@ -58,6 +58,8 @@ var shifts = {
 };
 
 var flowNetwork = new assign.FlowNetwork(employees, shifts);
+flowNetwork.assignEdges();
+
 
 describe('Flow Network Object Instantiation', function(){
   
@@ -66,8 +68,37 @@ describe('Flow Network Object Instantiation', function(){
       expect(flowNetwork.network['source']).to.be.ok();
       expect(flowNetwork.network['source']['edges']).to.be.an('array');
     }),
-    it('should have a sink property with an edges array')
+    it('should have a sink property with an edges array', function(){
+    	expect(flowNetwork.network['sink']).to.be.ok();
+      expect(flowNetwork.network['sink']['edges']).to.be.an('array');
+    });
+    it('should store users by name with no spaces', function(){
+    	expect(flowNetwork.network['KevinMeurer']).to.be.ok();
+    	expect(flowNetwork.network['KevinMeurer']['edges']).to.be.an('array');
+    	expect(flowNetwork.network['KevinMeurer']['availability']).to.be.an('array');
+    });
+    it('should store shifts by name', function(){
+    	expect(flowNetwork.network['1430-1630monman']).to.be.ok();
+    	expect(flowNetwork.network['1430-1630monman']['edges']).to.be.an('array');
+    });
+  }),
+
+  describe('Edge Object Instantiation', function(){
+  	it('should create edges', function(){
+  		var newEdge = new assign.Edge('source', 'sink', 5);
+  		expect(newEdge).to.be.ok();
+  		expect(newEdge.capacity).to.eql(5);
+  		expect(newEdge.from).to.eql('source');
+  	}),
+  	it('should successfully assign edges to an object using the add edge function', function(){
+  		flowNetwork.addEdge('KevinMeurer', 'RileyZinar', 4);
+  		expect(flowNetwork.network['KevinMeurer'].edges[flowNetwork.network['KevinMeurer'].edges.length -1].from).to.eql('KevinMeurer');
+  		expect(flowNetwork.network['KevinMeurer'].edges[flowNetwork.network['KevinMeurer'].edges.length -1].to).to.eql('RileyZinar');
+  		expect(flowNetwork.network['KevinMeurer'].edges[flowNetwork.network['KevinMeurer'].edges.length -1].capacity).to.eql(4);
+  		expect(flowNetwork.network['KevinMeurer'].edges[flowNetwork.network['KevinMeurer'].edges.length -1].reverseEdge.from).to.eql('RileyZinar');
+  		expect(flowNetwork.network['KevinMeurer'].edges[flowNetwork.network['KevinMeurer'].edges.length -1].reverseEdge.to).to.eql('KevinMeurer');
+  		flowNetwork.network['KevinMeurer'].edges.pop();
+  	})
   })
-  // describe('Adds edges to each element')
 
 })
