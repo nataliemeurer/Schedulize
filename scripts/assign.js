@@ -1,5 +1,5 @@
 // CREATE CONSTRUCTOR FOR EDGE PROPERTY
-var Edge = function(from, to, capacity) {
+exports.Edge = function(from, to, capacity) {
     this.from = from;
     this.to = to;
     this.capacity = capacity;
@@ -9,7 +9,7 @@ var Edge = function(from, to, capacity) {
 
 
 // CREATE AN OBJECT THAT WILL HANDLE THE ENTIRE NETWORK
-var FlowNetwork = function(employees, shifts){
+exports.FlowNetwork = function(employees, shifts){
 	// create network object to store graph
 	this.network = {};
 	
@@ -102,6 +102,7 @@ var FlowNetwork = function(employees, shifts){
 		return this.network;
 	}
 
+	this.parseFlowResults = function(network){
 
-
+	}
 }
