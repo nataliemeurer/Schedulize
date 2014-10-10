@@ -16,7 +16,7 @@ var employees = {
 	9: {name: 'Andrew Morrison', shiftsDesired: 4, availability: [], edges:[], canManage: true},
 	10: {name: 'Mike Crafts', shiftsDesired: 3, availability: [], edges:[], canManage: false},
 	11: {name: 'Tade Anzalone', shiftsDesired: 4, availability: [], edges:[], canManage: false},
-	12: {name: 'Justin Pinili', shiftsDesired: 2, availability: [], edges:[], canManage: true}
+	12: {name: 'Justin Pinili', shiftsDesired: 0, availability: [], edges:[], canManage: true}
 };
 
 var shifts = {
@@ -59,27 +59,28 @@ var shifts = {
 
 var flowNetwork = new assign.FlowNetwork(employees, shifts);
 flowNetwork.assignEdges();
+var network = flowNetwork.network;
 
 
 describe('Flow Network Object Instantiation', function(){
   
   describe('Flow Network should have the necessary keys', function(){
     it('should have a source property with an edges array', function(){
-      expect(flowNetwork.network['source']).to.be.ok();
-      expect(flowNetwork.network['source']['edges']).to.be.an('array');
+      expect(network['source']).to.be.ok();
+      expect(network['source']['edges']).to.be.an('array');
     }),
     it('should have a sink property with an edges array', function(){
-    	expect(flowNetwork.network['sink']).to.be.ok();
-      expect(flowNetwork.network['sink']['edges']).to.be.an('array');
+    	expect(network['sink']).to.be.ok();
+      expect(network['sink']['edges']).to.be.an('array');
     });
     it('should store users by name with no spaces', function(){
-    	expect(flowNetwork.network['KevinMeurer']).to.be.ok();
-    	expect(flowNetwork.network['KevinMeurer']['edges']).to.be.an('array');
-    	expect(flowNetwork.network['KevinMeurer']['availability']).to.be.an('array');
+    	expect(network['KevinMeurer']).to.be.ok();
+    	expect(network['KevinMeurer']['edges']).to.be.an('array');
+    	expect(network['KevinMeurer']['availability']).to.be.an('array');
     });
     it('should store shifts by name', function(){
-    	expect(flowNetwork.network['1430-1630monman']).to.be.ok();
-    	expect(flowNetwork.network['1430-1630monman']['edges']).to.be.an('array');
+    	expect(network['1430-1630monman']).to.be.ok();
+    	expect(network['1430-1630monman']['edges']).to.be.an('array');
     });
   }),
 
@@ -91,14 +92,16 @@ describe('Flow Network Object Instantiation', function(){
   		expect(newEdge.from).to.eql('source');
   	}),
   	it('should successfully assign edges to an object using the add edge function', function(){
+  		//Add an edge to the network that will not be covered by the assign edges function
   		flowNetwork.addEdge('KevinMeurer', 'RileyZinar', 4);
-  		expect(flowNetwork.network['KevinMeurer'].edges[flowNetwork.network['KevinMeurer'].edges.length -1].from).to.eql('KevinMeurer');
-  		expect(flowNetwork.network['KevinMeurer'].edges[flowNetwork.network['KevinMeurer'].edges.length -1].to).to.eql('RileyZinar');
-  		expect(flowNetwork.network['KevinMeurer'].edges[flowNetwork.network['KevinMeurer'].edges.length -1].capacity).to.eql(4);
-  		expect(flowNetwork.network['KevinMeurer'].edges[flowNetwork.network['KevinMeurer'].edges.length -1].reverseEdge.from).to.eql('RileyZinar');
-  		expect(flowNetwork.network['KevinMeurer'].edges[flowNetwork.network['KevinMeurer'].edges.length -1].reverseEdge.to).to.eql('KevinMeurer');
+  		expect(network['KevinMeurer'].edges[network['KevinMeurer'].edges.length -1].from).to.eql('KevinMeurer');
+  		expect(network['KevinMeurer'].edges[network['KevinMeurer'].edges.length -1].to).to.eql('RileyZinar');
+  		expect(network['KevinMeurer'].edges[network['KevinMeurer'].edges.length -1].capacity).to.eql(4);
+  		expect(network['KevinMeurer'].edges[network['KevinMeurer'].edges.length -1].reverseEdge.from).to.eql('RileyZinar');
+  		expect(network['KevinMeurer'].edges[network['KevinMeurer'].edges.length -1].reverseEdge.to).to.eql('KevinMeurer');
   		flowNetwork.network['KevinMeurer'].edges.pop();
-  	})
+  	}),
+  	it('should successfully pair users with shifts based on availability')
   })
 
 })

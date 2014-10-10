@@ -25,7 +25,6 @@ exports.FlowNetwork = function(employees, shifts){
 			var shiftKey = shifts[key]['name'].split('/').join('');
 			// assign employees to network to be saved by their time shift
 			this.network[shiftKey] = shifts[key];
-			console.log("SHIFT KEY IS: ", shiftKey);
 			//Add edge from shift to sink
 			this.addEdge(shiftKey, 'sink', 1);
 		}
@@ -34,7 +33,6 @@ exports.FlowNetwork = function(employees, shifts){
 			var userKey = employees[key]['name'].split(' ').join('');
 			// assign employees to network to be saved by their full name
 			this.network[userKey] = employees[key];
-			console.log('USER KEY IS: ', userKey);
 			// Add edge to employees 
 			this.addEdge('source', userKey, this.network[userKey]['shiftsDesired']);
 		}
