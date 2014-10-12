@@ -3,7 +3,7 @@ exports.Edge = function(from, to, capacity) {
     this.from = from;
     this.to = to;
     this.capacity = capacity;
-    this.reverseEdge = null;
+    this.reversed = false; //used to manage residual changes
     this.flow = 0;
 };
 
@@ -71,11 +71,46 @@ exports.FlowNetwork = function(employees, shifts){
 
 	//recursive function used to find a path through the graph
 	this.findPath = function(currentNodeKey, sink, path){
-		// if currentNode is equal to sink
-		if (currentNodeKey === sink ){
+		// if currentNode is equal to sink, we have a complete path from the source to the sink
+		if ( currentNodeKey === sink ){
 			return path;
 		}
-
+		//assign to variable for convenience and clarity
+		var currentNode = this.network[currentNodeKey];
+		
+		//collect all potential paths forward/backward to the sink
+		var forwardEdges = [];
+		var backwardEdges = [];
+		for( var i = 0; i < currentNode.edges.length; i++){
+			if( edges[i].from === currentNodeKey && (edges[i].capacity - edges[i].flow) > 0 ){
+				forwardEdges.push(edges[i]);
+			}
+			if( edges[i].to === currentNodeKey && (edges[i].flow) > 0 ){
+				backwardEdges.push(edges[i]);
+			}
+		}
+		//collect all potential paths back in the residual graph
+		// test if we have an augmenting path forward from here
+		for(var i = 0; i < forwardEdges.length; i++){
+			//This algorithm implements breadth first search to find a path
+			path.push(forwardEdges[i]);
+			var result = this.findPath(forwardEdges[i].to, 'sink', path);
+			if(result){
+				return result;
+			}
+		} 
+		// test if we have an augmenting path backward through the residual from here
+		for(var i = 0; i < backwardEdges.length; i++){
+			//This algorithm implements breadth first search to find a path
+			path.push(backwardEdges[i]);
+			path[path.length - 1].reversed = true;
+			var result = this.findPath(backwardEdges[i].to, 'sink', path);
+			if(result){
+				return result;
+			}
+		}
+		// return null if no paths found
+		return null;
 	}
 
 	// main function used to find the flow in the network
@@ -101,7 +136,8 @@ exports.FlowNetwork = function(employees, shifts){
 		return this.network;
 	}
 
+	// this function will 
 	this.parseFlowResults = function(network){
 
 	}
-}
+};
