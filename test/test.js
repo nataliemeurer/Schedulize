@@ -97,8 +97,6 @@ describe('Flow Network Object Instantiation', function(){
   		expect(network['KevinMeurer'].edges[network['KevinMeurer'].edges.length -1].from).to.eql('KevinMeurer');
   		expect(network['KevinMeurer'].edges[network['KevinMeurer'].edges.length -1].to).to.eql('RileyZinar');
   		expect(network['KevinMeurer'].edges[network['KevinMeurer'].edges.length -1].capacity).to.eql(4);
-  		expect(network['KevinMeurer'].edges[network['KevinMeurer'].edges.length -1].reverseEdge.from).to.eql('RileyZinar');
-  		expect(network['KevinMeurer'].edges[network['KevinMeurer'].edges.length -1].reverseEdge.to).to.eql('KevinMeurer');
   		flowNetwork.network['KevinMeurer'].edges.pop();
   	}),
   	it('should successfully pair users with shifts based on availability')

@@ -52,8 +52,6 @@ exports.FlowNetwork = function(employees, shifts){
 
 	this.addEdge = function(from, to, capacity){
 		var newEdge = new exports.Edge(from, to, capacity);
-		newEdge.reverseEdge = new exports.Edge(to, from, capacity);
-		newEdge.reverseEdge.reverseEdge = newEdge;
 		// Push edge to edges array in from and to
 		this.network[from]['edges'].push(newEdge);
 		this.network[to]['edges'].push(newEdge);
@@ -89,27 +87,31 @@ exports.FlowNetwork = function(employees, shifts){
 				backwardEdges.push(edges[i]);
 			}
 		}
-		//collect all potential paths back in the residual graph
+
 		// test if we have an augmenting path forward from here
-		for(var i = 0; i < forwardEdges.length; i++){
-			//This algorithm implements breadth first search to find a path
-			path.push(forwardEdges[i]);
-			var result = this.findPath(forwardEdges[i].to, 'sink', path);
-			if(result){
-				return result;
-			}
-		} 
-		// test if we have an augmenting path backward through the residual from here
-		for(var i = 0; i < backwardEdges.length; i++){
-			//This algorithm implements breadth first search to find a path
-			path.push(backwardEdges[i]);
-			path[path.length - 1].reversed = true;
-			var result = this.findPath(backwardEdges[i].to, 'sink', path);
-			if(result){
-				return result;
+		if(forwardEdges.length){
+			for(var i = 0; i < forwardEdges.length; i++){
+				//This algorithm implements breadth first search to find a path
+				path.push(forwardEdges[i]);
+				var result = this.findPath(forwardEdges[i].to, 'sink', path);
+				if(result){
+					return result;
+				}
 			}
 		}
-		// return null if no paths found
+		// test if we have an augmenting path backward through the residual from here
+		if(backwardEdges.length){
+			for(var i = 0; i < backwardEdges.length; i++){
+				//This algorithm implements breadth first search to find a path
+				path.push(backwardEdges[i]);
+				path[path.length - 1].reversed = true;
+				var result = this.findPath(backwardEdges[i].to, 'sink', path);
+				if(result){
+					return result;
+				}
+			}
+		}
+		// return null if no paths are found
 		return null;
 	}
 
@@ -136,7 +138,7 @@ exports.FlowNetwork = function(employees, shifts){
 		return this.network;
 	}
 
-	// this function will 
+	// this function will do the actual assigning of shifts by managing the network results
 	this.parseFlowResults = function(network){
 
 	}
