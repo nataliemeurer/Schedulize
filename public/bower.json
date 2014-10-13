@@ -1,0 +1,25 @@
+{
+  "name": "bower.json",
+  "version": "*",
+  "homepage": "https://github.com/kmeurer/Schedulize",
+  "authors": [
+    "Kevin Meurer <kevin.a.meurer@gmail.com>"
+  ],
+  "description": "for front end dependencies",
+  "main": "bower.json",
+  "keywords": [
+    "*"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "moment": "~2.8.3"
+  }
+}

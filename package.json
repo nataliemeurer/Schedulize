@@ -6,14 +6,15 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "express": "~4.0.0",
-    "serve-favicon": "~2.1.3",
-    "morgan": "~1.0.0",
-    "cookie-parser": "~1.0.1",
     "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.1",
     "debug": "~0.7.4",
+    "express": "~4.0.0",
+    "grunt": "^0.4.5",
     "jade": "~1.3.0",
     "mongodb": "*",
-    "monk": "*"
-}
+    "monk": "*",
+    "morgan": "~1.0.0",
+    "serve-favicon": "~2.1.3"
+  }
 }

@@ -21,14 +21,13 @@ coverage
 
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
-dist/
+public/dist/
 
 # Dependency directories
 # Deployed apps should consider commenting these lines out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules/
-server/node_modules/
-bower_components/
+public/bower_components/
 
 # Floobits
 .floo
