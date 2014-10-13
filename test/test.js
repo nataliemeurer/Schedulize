@@ -118,6 +118,8 @@ describe('Finding Maximum Flow', function(){
 	});
 });
 
-// describe('Outputs a schedule', function(){
-// 	describe('should return an object that has shifts assigned');
-// })
+describe('Outputs a schedule', function(){
+	describe('should return an object that has shifts assigned', function(){
+		it('should return a complete schedule');
+	});
+})
