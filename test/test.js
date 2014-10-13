@@ -1,5 +1,5 @@
 var assert = require("assert");
-var assign = require('../scripts/assign.js');
+var assign = require('../public/scripts/assign.js');
 var expect = require('expect.js');
 
 
@@ -102,4 +102,22 @@ describe('Flow Network Object Instantiation', function(){
   	it('should successfully pair users with shifts based on availability')
   })
 
-})
+});
+
+describe('Finding Maximum Flow', function(){
+	describe('FindPath function', function(){
+		it('should return an array of edges');
+		it('should return null if no path exists from the source to the sink');
+	});
+	describe('findMaximumFlow Function', function(){
+		it('should return a network object');
+		it('should store the number of shifts assigned in the network');
+	});
+	describe('Shifts on the same day', function(){
+		it('should not assign a user to two shifts on the same day');
+	});
+});
+
+// describe('Outputs a schedule', function(){
+// 	describe('should return an object that has shifts assigned');
+// })
