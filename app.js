@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 //DATABASE DECLARATIONS
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/nodetest1');
+var db = monk('localhost:27017/schedulize');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -17,7 +17,7 @@ var users = require('./routes/users');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'public/views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public

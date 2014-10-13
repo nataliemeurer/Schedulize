@@ -1,22 +1,23 @@
 var assert = require("assert");
 var assign = require('../public/scripts/assign.js');
 var expect = require('expect.js');
-
+var moment = require('../node_modules/moment/min/moment.min.js');
+moment().format();
 
 // Declare test variables
 var employees = {
-	1: {name: 'Kevin Meurer', shiftsDesired: 3, availability: [], edges:[], canManage: true},
-	2: {name: 'Paul Allen', shiftsDesired: 4, availability: [], edges:[], canManage: false},
-	3: {name: 'Ray Ramon', shiftsDesired: 2, availability: [], edges:[], canManage: true},
-	4: {name: 'Riley Zinar', shiftsDesired: 1, availability: [], edges:[], canManage: true},
-	5: {name: 'Jeff Gladchun', shiftsDesired: 3, availability: [], edges:[], canManage: false},
-	6: {name: 'Will Burgo', shiftsDesired: 3, availability: [], edges:[], canManage: false},
-	7: {name: 'Andrew Teich', shiftsDesired: 2, availability: [], edges:[], canManage: false},
-	8: {name: 'Conor McNulty', shiftsDesired: 1, availability: [], edges:[], canManage: false},
-	9: {name: 'Andrew Morrison', shiftsDesired: 4, availability: [], edges:[], canManage: true},
-	10: {name: 'Mike Crafts', shiftsDesired: 3, availability: [], edges:[], canManage: false},
-	11: {name: 'Tade Anzalone', shiftsDesired: 4, availability: [], edges:[], canManage: false},
-	12: {name: 'Justin Pinili', shiftsDesired: 0, availability: [], edges:[], canManage: true}
+	1: {name: 'Kevin Meurer', shiftsDesired: 3, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: true},
+	2: {name: 'Paul Allen', shiftsDesired: 4, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: false},
+	3: {name: 'Ray Ramon', shiftsDesired: 2, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: true},
+	4: {name: 'Riley Zinar', shiftsDesired: 1, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: true},
+	5: {name: 'Jeff Gladchun', shiftsDesired: 3, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: false},
+	6: {name: 'Will Burgo', shiftsDesired: 3, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: false},
+	7: {name: 'Andrew Teich', shiftsDesired: 2, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: false},
+	8: {name: 'Conor McNulty', shiftsDesired: 1, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: false},
+	9: {name: 'Andrew Morrison', shiftsDesired: 4, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: true},
+	10: {name: 'Mike Crafts', shiftsDesired: 3, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: false},
+	11: {name: 'Tade Anzalone', shiftsDesired: 4, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: false},
+	12: {name: 'Justin Pinili', shiftsDesired: 0, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: true}
 };
 
 var shifts = {
@@ -76,7 +77,7 @@ describe('Flow Network Object Instantiation', function(){
     it('should store users by name with no spaces', function(){
     	expect(network['KevinMeurer']).to.be.ok();
     	expect(network['KevinMeurer']['edges']).to.be.an('array');
-    	expect(network['KevinMeurer']['availability']).to.be.an('array');
+    	expect(network['KevinMeurer']['availability']).to.be.an('object');
     });
     it('should store shifts by name', function(){
     	expect(network['1430-1630monman']).to.be.ok();
@@ -106,11 +107,31 @@ describe('Flow Network Object Instantiation', function(){
 
 describe('Finding Maximum Flow', function(){
 	describe('FindPath function', function(){
-		it('should return an array of edges');
-		it('should return null if no path exists from the source to the sink');
+		it('should return an array of edges', function(){
+			//create network with a single path to test if it works
+			var singlePathNetwork = new assign.FlowNetwork({1:{name: 'Kevin Meurer', shiftsDesired: 3, availability: [], edges:[], canManage: true}}, {1: {name: '1430-1630/mon/man', time: '1430-1630', day: 'mon', type: 'man', edges: []}});
+			singlePathNetwork.assignEdges();
+			singlePathNetwork.addEdge('source', 'KevinMeurer', 1);
+			singlePathNetwork.addEdge('KevinMeurer', '1430-1630monman', 1);
+			singlePathNetwork.addEdge('1430-1630monman', 'sink', 1);
+			var result = singlePathNetwork.findPath('source', 'sink', []);
+			expect(result).to.be.an('array');
+			expect(result.length).to.eql(3);
+		});
+		it('should return null if no path exists from the source to the sink', function(){
+			var singlePathNetwork = new assign.FlowNetwork({1:{name: 'Kevin Meurer', shiftsDesired: 3, availability: [], edges:[], canManage: true}}, {1: {name: '1430-1630/mon/man', time: '1430-1630', day: 'mon', type: 'man', edges: []}});
+			singlePathNetwork.assignEdges();
+			singlePathNetwork.addEdge('KevinMeurer', '1430-1630monman', 1);
+			singlePathNetwork.network['KevinMeurer'].edges[1]++;
+			var result = singlePathNetwork.findPath('source', 'sink', []);
+			expect(result).to.eql(null);
+		});
 	});
 	describe('findMaximumFlow Function', function(){
-		it('should return a network object');
+		it('should return a network object', function(){
+			var result = flowNetwork.findMaxFlow();
+			expect(result).to.be.an('object');
+		});
 		it('should store the number of shifts assigned in the network');
 	});
 	describe('Shifts on the same day', function(){

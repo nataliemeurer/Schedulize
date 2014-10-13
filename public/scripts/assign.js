@@ -1,9 +1,12 @@
+var moment = require('../../node_modules/moment/min/moment.min.js');
+moment().format();
+
 // CREATE CONSTRUCTOR FOR EDGE PROPERTY
 exports.Edge = function(from, to, capacity) {
     this.from = from;
     this.to = to;
     this.capacity = capacity;
-    this.reversed = false; //used to manage residual changes
+    this.forward = null; //used to manage residual changes
     this.flow = 0;
 };
 
@@ -63,6 +66,16 @@ exports.FlowNetwork = function(employees, shifts){
 
 	this.addFlowToPath = function(path){
 		// add one unit of flow to each item in the path
+		for(var i = 0; i < path.length; i++){
+			//if it's a forward edge, add to the path, else subtract from the edge
+			if(path[i].forward === true){
+				path[i].forward = null;
+				path[i].flow++;
+			} else {
+				path[i].forward = null;
+				path[i].flow--;
+			}
+		}
 		// for Forward edges, add one flow
 		// for Reverse edges, remove one flow 
 	}
@@ -80,11 +93,11 @@ exports.FlowNetwork = function(employees, shifts){
 		var forwardEdges = [];
 		var backwardEdges = [];
 		for( var i = 0; i < currentNode.edges.length; i++){
-			if( edges[i].from === currentNodeKey && (edges[i].capacity - edges[i].flow) > 0 ){
-				forwardEdges.push(edges[i]);
+			if( currentNode.edges[i].from === currentNodeKey && (currentNode.edges[i].capacity - currentNode.edges[i].flow) > 0 ){
+				forwardEdges.push(currentNode.edges[i]);
 			}
-			if( edges[i].to === currentNodeKey && (edges[i].flow) > 0 ){
-				backwardEdges.push(edges[i]);
+			if( currentNode.edges[i].to === currentNodeKey && (currentNode.edges[i].flow) > 0 ){
+				backwardEdges.push(currentNode.edges[i]);
 			}
 		}
 
@@ -92,6 +105,7 @@ exports.FlowNetwork = function(employees, shifts){
 		if(forwardEdges.length){
 			for(var i = 0; i < forwardEdges.length; i++){
 				//This algorithm implements breadth first search to find a path
+				forwardEdges[i]['forward'] = true;
 				path.push(forwardEdges[i]);
 				var result = this.findPath(forwardEdges[i].to, 'sink', path);
 				if(result){
@@ -103,6 +117,7 @@ exports.FlowNetwork = function(employees, shifts){
 		if(backwardEdges.length){
 			for(var i = 0; i < backwardEdges.length; i++){
 				//This algorithm implements breadth first search to find a path
+				backwardEdges[i]['forward'] = false;
 				path.push(backwardEdges[i]);
 				path[path.length - 1].reversed = true;
 				var result = this.findPath(backwardEdges[i].to, 'sink', path);
