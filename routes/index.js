@@ -28,7 +28,7 @@ router.get('/newuser', function(req, res) {
 });
 
 /*SUBMIT data for new user. */
-router.get('/adduser', functionpost('/adduser', function(req, res) {
+router.post('/adduser', function(req, res) {
 
     // Set our internal DB variable
     var db = req.db;
