@@ -23,19 +23,28 @@ userApp
     
     $urlRouterProvider.otherwise("/user");
   })
-  .controller('availabilityController', function($scope, $location, TimeSlot){
+  .controller('availabilityController', function($scope, $location, Availability){
     $scope.markedShifts = 0;
-    $scope.timeSlots = TimeSlot.slots;
+    $scope.timeSlots = Availability.slots;
+    
     $scope.toggleAvailability = function(shift) {
       if(shift.available){
+        $scope.markedShifts--;
         shift.available = false;
         shift.unavailable = true;
       } else if (shift.unavailable === true){
         shift.unavailable = false;
       } else {
+        $scope.markedShifts++;
         shift.available = true;
       }
     }
+
+    $scope.sendAvailability = function(filledSlots){
+      console.log(filledSlots);
+      Availability.sendAvailability(filledSlots);
+    }
+
   });
 // .factory('AttachTokens', function ($window) {
 //   // this is an $httpInterceptor

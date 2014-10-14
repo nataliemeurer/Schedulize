@@ -1,11 +1,10 @@
 angular.module('user.services', ['angularMoment'])
 
-.factory('TimeSlot', function($http) {
+.factory('Availability', function($http) {
   var slots = new Array(48);
   for(var i = 0; i < 48; i++){
     slots[i] = [];
   }
-
   var days = ['sun', 'mon', 'tues', 'wed', 'thurs', 'fri', 'sat']
   // push each time into slots
   for( var hour = 0; hour < 24; hour+=.5 ){
@@ -42,8 +41,24 @@ angular.module('user.services', ['angularMoment'])
       }
     }
   }
+
+  var _sendAvailability = function(filledSlots){
+    return $http({
+      method: 'POST',
+      url: '/user/availability',
+      data: filledSlots
+    })
+    .success(function(data, status, headers, config){
+      console.log('Successfully posted')
+    })
+    .error(function(data, status, headers, config) {
+      console.log('fail silently');
+    });
+  };
+
   return {
-    slots: slots
+    slots: slots,
+    sendAvailability: _sendAvailability
   };
 });
 
