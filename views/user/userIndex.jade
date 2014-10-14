@@ -1,13 +1,13 @@
 extends layout
 
 block content
-	h1= title
-	p Signed in as #{username}
-	nav
-		a(href='/#/dashboard') Dashboard
-		a(href='/#/userprofile') Profile
-		a(href='/#/setavailability') Availability
-		a(href='/#/Admin') Admin
-	div(ng-app='userApp')
-	h2= 'Hello everyone! I\'m learning jade'
+  h1= title
+  p Signed in as #{username}
+  nav
+    a(ui-sref='dashboard') Dashboard
+    a(ui-sref='userprofile') Profile
+    a(ui-sref='setavailability') Availability
+    a(href='../Admin') Admin View
+  input(type="button" method='post' value="logout" action="")
+  div(ui-view)
 

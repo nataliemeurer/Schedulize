@@ -3,11 +3,10 @@ extends layout
 block content
   h1= title
   p Signed in as #{username}
-  nav
-  	a(href='/#/dashboard') Company Dashboard
-  	a(href='/#/userprofile') Company Profile
-  	a(href='/#/setavailability') Create Schedule
-  	a(href='/user') User View
-  input(type="button" method='post' value="logout")
-	div(ng-app='adminApp')
-  h2= 'Hello everyone! I\'m learning jade'
+  div(ui-view)
+    nav
+      a(ui-sref='dashboard') Company Dashboard
+      a(ui-href='companyprofile') Company Profile
+      a(ui-href='createschedule') Create Schedule
+      a(href='/user') User View
+    input(type="button" method='post' value="logout" action="")
