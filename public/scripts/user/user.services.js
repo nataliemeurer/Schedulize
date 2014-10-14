@@ -42,7 +42,7 @@ angular.module('user.services', ['angularMoment'])
     }
   }
 
-  var _sendAvailability = function(filledSlots){
+  var _sendAvailability = function(data){
     return $http({
       method: 'POST',
       url: '/user/availability',

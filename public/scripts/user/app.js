@@ -21,13 +21,13 @@ userApp
         templateUrl: "partials/user/availability.html"
       });
     
-    $urlRouterProvider.otherwise("/user");
+    $urlRouterProvider.otherwise("/user/dashboard");
   })
   .controller('availabilityController', function($scope, $location, Availability){
+    //object to be filled out with form
     $scope.availabilityData = {};
     $scope.markedShifts = 0;
     $scope.timeSlots = Availability.slots;
-    $scope.canManage = false;
     
     $scope.toggleAvailability = function(shift) {
       if(shift.available){
@@ -44,8 +44,13 @@ userApp
 
     $scope.sendAvailability = function(filledSlots){
       console.log(filledSlots);
-      Availability.sendAvailability(filledSlots);
+      $scope.availabilityData['availability'] = filledSlots;
+      console.log($scope.availabilityData);
+      Availability.sendAvailability($scope.availabilityData);
     }
+
+  })
+  .controller('dashboardController', function($scope,$location){
 
   });
 // .factory('AttachTokens', function ($window) {

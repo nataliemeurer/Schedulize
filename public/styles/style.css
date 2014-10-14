@@ -1,12 +1,17 @@
 body {
   margin: 0;
   margin-top: 10px;
+  padding-top: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  color: #2c3e50;
   font-size: 14px;
+}
+
+a:hover{
+  color: #7f8c8d;
 }
 
 h1 {
@@ -14,6 +19,10 @@ h1 {
   margin-bottom: 10px;
 }
 
+h2 {
+  text-align: center;
+  clear: both;
+}
 .table{
   width:90%;
   margin: auto;
@@ -42,6 +51,14 @@ td.unavailable {
   width: 100%;
   height: 40px;
   background-color: #eee;
+}
+
+.sendWrapper {
+  padding: 10px;
+  padding-bottom: 20px;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 50px;
 }
 
 .navigation ul {
@@ -172,6 +189,12 @@ input[type=url]:focus {
 .help-block {
   color: red;
   margin-bottom: 0px;
+}
+
+.logout {
+  display: inline-block;
+  width: 70px;
+  float: right;
 }
 
 input{

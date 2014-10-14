@@ -1,13 +1,14 @@
 extends layout
 
 block content
-  h1= title
-  p Signed in as #{username}
-  nav
-    a(ui-sref='dashboard') Dashboard
-    a(ui-sref='userprofile') Profile
-    a(ui-sref='setavailability') Availability
-    a(href='../Admin') Admin View
-  input(type="button" method='post' value="logout" action="")
+  p User Access: Signed in as #{username}
+  nav(class='navbar navbar-default navbar-fixed-top' role='navigation')
+    div(class='container') 
+      a(href='/' class='navbar-brand') Schedulize
+      a(ui-sref='dashboard' class='btn navbar-btn .navbar-left') Dashboard
+      a(ui-sref='userprofile' class='btn navbar-btn .navbar-left') Profile
+      a(ui-sref='setavailability' class='btn navbar-btn .navbar-left') Availability
+      a(href='../Admin' class='btn navbar-btn .navbar-left') Admin View
+      button(method='post' class='logout btn btn-default navbar-btn .navbar-right' action="") Logout
   div(ui-view)
 
