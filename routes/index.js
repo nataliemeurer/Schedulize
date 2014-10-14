@@ -3,12 +3,12 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('external/index', {title: 'Schedulize'});
 });
 
 /* GET Hello World page. */
 router.get('/helloworld', function(req, res){
-    res.render('helloworld', { title: 'Hello, World!' })
+    res.render('helloworld')
 });
 
 /* GET Userlist page. */

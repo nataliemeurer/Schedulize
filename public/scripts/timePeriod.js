@@ -2,21 +2,17 @@ var moment = require('../node_modules/moment/min/moment.min.js');
 moment().format();
 
 // Functional constructor to create shift objects that will pass in moments
-exports.Shift = function(start, duration, end, day){
+exports.Shift = function(start, end, day){
 	// we create an object that will store information about the shift
 	var shiftPeriod = {};
+	shiftPeriod['day'] = day;
 	shiftPeriod['start'] = start;
 	//if a duration was passed in, we use this
-	if(duration){
-		shiftPeriod['duration'] = duration;
-		start.add(duration.hours(), 'hours');
-		start.add(duration.minutes(), 'minutes');
-		shiftPeriod['end'] = start;
-	} else if(end){
+	if(end){
 		shiftPeriod['end'] = end;
-		start.hours()
+		end.subtract(start.hours())
 		end.subtract(start.minutes(), 'minutes');
-		shiftPeriod['duration'] = moment({})
+		shiftPeriod['duration'] = moment.duration({hour: end.hour() - start.hour(), minute: end.minute() - start.minute()})
 	} else {
 		console.log("Error creating object");
 		return null;
@@ -24,7 +20,19 @@ exports.Shift = function(start, duration, end, day){
 	return shiftPeriod;
 }
 
-exports.AvailabilityPeriod = function(start, duration, end){
-	start = start.split(':');
-
+exports.AvailabilityPeriod = function(start, end, day){
+	var availabilityPeriod = {};
+	availabilityPeriod['day'] = day;
+	availabilityPeriod['start'] = start;
+	//if a duration was passed in, we use this
+	if(end){
+		availabilityPeriod['end'] = end;
+		end.subtract(start.hours())
+		end.subtract(start.minutes(), 'minutes');
+		availabilityPeriod['duration'] = moment.duration({hour: end.hour() - start.hour(), minute: end.minute() - start.minute()})
+	} else {
+		console.log("Error creating object");
+		return null;
+	}
+	return availabilityPeriod;
 }

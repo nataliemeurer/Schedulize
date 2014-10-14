@@ -1,0 +1,18 @@
+<div id='container' ng-controller="LinksController">
+  <!-- Your html here -->
+  <h1>LINKS</h1>
+  <nav>
+    <a href="#/links">Links</a>
+    <a href="#/shorten">Shorten</a>
+  </nav>
+  Search: <input ng-model="searchText">
+  <table id="searchTextResults">
+    <tr><th>Title</th><th>URL</th><th>Short Link</th><th>Visits</th></tr>
+    <tr ng-repeat='url in data.links | orderBy:"-visits" | filter:searchText'>
+      <td>{{ url.title }}</td>
+      <td>{{url.url}}</td>
+      <td><a href="{{url.base_url}}/{{url.code}}">{{url.base_url}}/{{url.code}}</a></td>
+      <td>{{url.visits}}</td>
+    </tr>
+  </table>
+</div>

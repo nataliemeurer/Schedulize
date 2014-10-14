@@ -1,0 +1,16 @@
+<div id='container' ng-controller="ShortenController">
+  <h1>SHORTEN</h1>
+  <nav>
+    <a href="#/links">Links</a>
+    <a href="#/shorten">Shorten</a>
+  </nav>
+  <form name="shortenForm" ng-submit="addLink()">
+    <input type="url" name="submission" ng-model="link.url" placeholder="Type a URL here">
+    <input type="submit" value="Shorten!">
+    <div ng-show='shortenForm.submission.$invalid'>
+      <h3>Please Enter a Valid URL</h3>
+    </div>
+  </form>
+</div>
+
+
