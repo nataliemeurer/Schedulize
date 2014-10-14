@@ -1,14 +1,14 @@
 extends layout
 
 block content
-  h1= 'Admin'
-  p Signed in as #{username}
-    nav(class='navbar navbar-default navbar-fixed-top' role='navigation')
-      div(class='container')
-        a(href='/' class='navbar-brand') Schedulize
-        a(ui-sref='dashboard' class='btn navbar-btn .navbar-left') Company Dashboard
-        a(ui-href='companyprofile' class='btn navbar-btn .navbar-left') Company Profile
-        a(ui-href='createschedule' class='btn navbar-btn .navbar-left') Create Schedule
-        a(href='/user') User View
-        button(method='post' class='logout btn btn-default navbar-btn .navbar-right' action="") Logout
+  nav(class='navbar navbar-default navbar-fixed-top' role='navigation')
+    div(class='container')
+      a(href='/' class='navbar-brand') Schedulize
+      a(ui-sref='dashboard' class='btn navbar-btn .navbar-left') Company Dashboard
+      a(ui-sref='companydata' class='btn navbar-btn .navbar-left') Company Data
+      a(ui-sref='createschedule' class='btn navbar-btn .navbar-left') Create Schedule
+      a(ui-sref='editshifts' class='btn navbar-btn .navbar-left') Add/Edit Shifts
+      a(href='/user' class='btn navbar-btn .navbar-left') User View
+      button(method='post' class='logout btn btn-default navbar-btn .navbar-right' action="") Logout
   div(ui-view)
+  footer(class='navbar navbar-default')

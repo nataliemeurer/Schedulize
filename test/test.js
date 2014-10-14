@@ -6,7 +6,7 @@ moment().format();
 
 // Declare test variables
 var employees = {
-	1: {name: 'Kevin Meurer', shiftsDesired: 3, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: true},
+	1: {name: 'Kevin Meurer', shiftsDesired: 3, availability: [ {start: {}, duration: {}, end: {}} ], edges:[], canManage: true},
 	2: {name: 'Paul Allen', shiftsDesired: 4, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: false},
 	3: {name: 'Ray Ramon', shiftsDesired: 2, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: true},
 	4: {name: 'Riley Zinar', shiftsDesired: 1, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: true},

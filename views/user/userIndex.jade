@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  p User Access: Signed in as #{username}
+  //- p User Access: Signed in as #{username}
   nav(class='navbar navbar-default navbar-fixed-top' role='navigation')
     div(class='container') 
       a(href='/' class='navbar-brand') Schedulize
@@ -11,4 +11,4 @@ block content
       a(href='../Admin' class='btn navbar-btn .navbar-left') Admin View
       button(method='post' class='logout btn btn-default navbar-btn .navbar-right' action="") Logout
   div(ui-view)
-
+  footer(class='navbar navbar-default')
