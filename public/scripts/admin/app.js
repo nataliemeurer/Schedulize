@@ -25,5 +25,13 @@ adminApp
     $urlRouterProvider.otherwise("/companydashboard");
   })
   .controller('createScheduleController', function($scope, $location){
-
+    $scope.options= {};
+    $scope.statusMessage;
+    $scope.showForm = true;
+    $scope.showLoading = false;
+    $scope.compileSchedule = function(){
+      console.log("compiling")
+      $scope.showForm = false;
+      $scope.showLoading = true;
+    };
   });

@@ -121,6 +121,26 @@ td.unavailable {
   background-color: #ccc;
 }
 
+.checkboxes {
+  margin: 0 auto;
+}
+
+.checkboxes label {
+  display: block;
+  padding-left: 15px;
+}
+
+.checkboxes input[type='checkbox']{
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin:0;
+  vertical-align: bottom;
+  position: relative;
+  top: 2px;
+  *overflow: hidden;
+}
+
 #container {
   clear: both;
   margin-top: 10px;
