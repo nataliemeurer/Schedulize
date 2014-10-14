@@ -1,21 +1,28 @@
 angular.module('user.services', ['angularMoment'])
 
 .factory('TimeSlot', function($http) {
-  var slots = {sun: [], mon: [], tues: [], wed: [], thurs: [], fri: [], sat: []};
-  for( var key in slots ){
-    // push each time into slots
-    for( var i = 0; i <= 24; i+=.5 ){
-      if(i % 1 != 0){
-        slots[key].push({
-          start: moment({hour: Math.floor(i), minute: 30}),
+  var slots = new Array(48);
+  for(var i = 0; i < 48; i++){
+    slots[i] = [];
+  }
+
+  var days = ['sun', 'mon', 'tues', 'wed', 'thurs', 'fri', 'sat']
+  // push each time into slots
+  for( var hour = 0; hour < 24; hour+=.5 ){
+    for(var day = 0; day < days.length; day++){
+      if(hour % 1 != 0){
+        slots[hour*2].push({
+          start: moment({hour: Math.floor(hour), minute: 30}),
           duration: moment.duration(30, "minutes"),
-          end: moment({hour: Math.ceil(i), minute: 0})
+          end: moment({hour: Math.ceil(hour), minute: 0}),
+          day: days[day]
         });
       } else {
-        slots[key].push({
-          start: moment({hour: i, minute: 0}),
+        slots[hour*2].push({
+          start: moment({hour: hour, minute: 0}),
           duration: moment.duration(30, "minutes"),
-          end: moment({hour: i, minute: 30})
+          end: moment({hour: hour, minute: 30}),
+          day: days[day]
         });
       }
     }
