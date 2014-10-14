@@ -11,12 +11,21 @@ angular.module('user.services', ['angularMoment'])
   for( var hour = 0; hour < 24; hour+=.5 ){
     for(var day = 0; day < days.length; day++){
       if(hour % 1 != 0){
-        slots[hour*2].push({
-          start: moment({hour: Math.floor(hour), minute: 30}),
-          duration: moment.duration(30, "minutes"),
-          end: moment({hour: Math.ceil(hour), minute: 0}),
-          day: days[day]
-        });
+        if(hour === 23.5){
+          slots[hour*2].push({
+            start: moment({hour: Math.floor(hour), minute: 30}),
+            duration: moment.duration(30, "minutes"),
+            end: moment({hour: Math.floor(hour), minute: 59}),
+            day: days[day]
+          });
+        } else {
+          slots[hour*2].push({
+            start: moment({hour: Math.floor(hour), minute: 30}),
+            duration: moment.duration(30, "minutes"),
+            end: moment({hour: Math.ceil(hour), minute: 0}),
+            day: days[day]
+          });
+        }
       } else {
         slots[hour*2].push({
           start: moment({hour: hour, minute: 0}),

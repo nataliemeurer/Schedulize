@@ -17,8 +17,7 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat='time in timeSlots'>
-
-			 		<td ng-repeat='day in time'>{{ day.start.format('H:mm') }}</td>
+			 		<td ng-repeat='day in time'>{{ day.start.format('H:mm') + ' - ' + day.end.format('H:mm') }}</td>
 
 			</tr>
 		</span>
