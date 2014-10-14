@@ -1,5 +1,7 @@
 var userApp = angular.module('userApp', [
   'ui.router',
+  // 'user.services'
+  'angularMoment'
 ]);
 
 console.log("executing");
@@ -7,18 +9,21 @@ userApp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
     .state('dashboard', {
       url: "/dashboard",
-      templateUrl: "partials/dashboard.html"
+      templateUrl: "partials/user/dashboard.html"
     })
     .state('userprofile', {
       url: "/profile",
-      templateUrl: "partials/userprofile.html"
+      templateUrl: "partials/user/userprofile.html"
     })
     .state('setavailability', {
       url: "/availability",
-      templateUrl: "partials/availability.html"
+      templateUrl: "partials/user/availability.html"
     });
   
   $urlRouterProvider.otherwise("/user");
+})
+.controller('availabilityController', function($scope, $location, timeSlot){
+  
 });
 // .factory('AttachTokens', function ($window) {
 //   // this is an $httpInterceptor
