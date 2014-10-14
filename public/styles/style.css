@@ -146,6 +146,19 @@ td.unavailable {
   margin-top: 10px;
 }
 
+
+i {
+  text-align: center;
+  margin: 0 auto;
+  font-size: 90px;
+  display: inline;
+}
+
+.loader {
+  margin: 0px auto;
+  text-align: center;
+}
+
 .link {
   clear: both;
   margin-bottom: 5px;

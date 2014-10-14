@@ -152,7 +152,7 @@ exports.FlowNetwork = function(employees, shifts){
 		// return the Filled network, which we will use to determine to whom shifts were assigned
 		return this.network;
 	}
-
+	
 	// this function will do the actual assigning of shifts by managing the network results
 	this.parseFlowResults = function(network){
 

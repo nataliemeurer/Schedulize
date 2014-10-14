@@ -1,61 +1,26 @@
 var express = require('express');
 var router = express.Router();
+var monk = require('monk');
+var db = monk('localhost:27017/schedulize');
+var companies = db.get('companies');
+var users = db.get('users');
 
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('external/index', {title: 'Schedulize'});
 });
 
-/* GET Hello World page. */
-router.get('/helloworld', function(req, res){
-    res.render('helloworld')
-});
-
-/* GET Userlist page. */
-router.get('/userlist', function(req, res) {
-    var db = req.db;
-    var collection = db.get('usercollection');
-    collection.find({},{},function(e,docs){
-        res.render('userlist', {
-            "userlist" : docs
-        });
-    });
-});
-
 /* GET New User page. */
 router.get('/signup', function(req, res) {
-    res.render('newuser', { title: 'Add New User' });
+  res.render('external/newuser', { title: 'Sign Up for Schedulize' });
 });
 
-/*SUBMIT data for new user. */
-router.post('/adduser', function(req, res) {
+router.get('/signin', function(req, res){
 
-    // Set our internal DB variable
-    var db = req.db;
+})
 
-    // Get our form values. These rely on the "name" attributes
-    var userName = req.body.username;
-    var userEmail = req.body.useremail;
+router.post('/signin', function(req, res){
 
-    // Set our collection
-    var collection = db.get('usercollection');
-
-    // Submit to the DB
-    collection.insert({
-        "username" : userName,
-        "email" : userEmail
-    }, function (err, doc) {
-        if (err) {
-            // If it failed, return error
-            res.send("There was a problem adding the information to the database.");
-        }
-        else {
-            // If it worked, set the header so the address bar doesn't still say /adduser
-            res.location("userlist");
-            // And forward to success page
-            res.redirect("userlist");
-        }
-    });
 });
 
 module.exports = router;

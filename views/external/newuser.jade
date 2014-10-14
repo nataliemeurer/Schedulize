@@ -1,0 +1,37 @@
+extends layout
+
+block content
+    h1= 'Sign up for Schedulize'
+    nav(class='navbar navbar-default navbar-fixed-top' role='navigation')
+      div(class='container')
+        a(href='/' class='navbar-brand') Schedulize
+        a(href='/signin' class='logout btn btn-default navbar-btn .navbar-right' action="") Signin
+
+    form#formAddUser.form-horizontal(name="adduser", role="form" method="POST", action="/api/signup")
+      div.container
+        div
+          label.col-sm-2(for='nameRegister') Full Name:
+          div
+            input.form-control#nameRegister(type="text", placeholder="Enter your name...", name="name")
+        div
+          label.col-sm-2(for='emailRegister') Email:
+          div
+            input.form-control#emailRegister(type="email", placeholder="Enter your Email", name="email")
+        div
+          label.col-sm-2(for='userRegister') Username:
+          div
+            input.form-control#userRegister(type="text", placeholder="Choose a username", name="username")
+        div
+          label.col-sm-2(for='passwordRegister') Password:
+          div
+            input.form-control#passwordRegister(type="password", placeholder="Select a Password", name="password")
+        div
+          label.col-sm-2(for='companyRegister') Select your company:
+          div
+            input.form-control#companyRegister(type="text", placeholder="Company Name", name="company")
+        div
+          div.col-sm-2
+            button.btn.btn-submit#btnSubmit(type="submit") Start Scheduling!
+    br
+    p= 'Company not listed? Join Schedulize today.  It\'s free, now and forever!'
+    a(href='../') Click Here
