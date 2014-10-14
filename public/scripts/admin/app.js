@@ -1,5 +1,5 @@
 var adminApp = angular.module('adminApp', [
-  // 'admin.services',
+  'admin.services',
   'ui.router',
   'angularMoment'
 ]);
@@ -24,14 +24,26 @@ adminApp
       });
     $urlRouterProvider.otherwise("/companydashboard");
   })
-  .controller('createScheduleController', function($scope, $location){
+  .controller('createScheduleController', function($scope, $http, $location, Network){
     $scope.options= {};
-    $scope.statusMessage;
+    $scope.statusMessage = "Loading your custom Schedule";
     $scope.showForm = true;
     $scope.showLoading = false;
+    $scope.employees;
+    $scope.shifts;
+    Network.getEmployees($http, 'VitalVittles').then(function(data){
+      $scope.employees = data;
+    });
+
+    Network.getShifts($http, 'VitalVittles').then(function(data){
+      $scope.employees = data;
+    });
+
     $scope.compileSchedule = function(){
       console.log("compiling")
       $scope.showForm = false;
       $scope.showLoading = true;
+      var network = Network.createNetwork($scope.employees, $scope.shifts);
+
     };
   });

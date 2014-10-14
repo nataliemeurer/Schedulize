@@ -42,10 +42,20 @@ angular.module('user.services', ['angularMoment'])
     }
   }
 
+
+
+// 
+// app('/api/:companyId/:userId/availably')
+// .get(function(req, res){
+//   req.params.companyId;
+// });
+
+// app('/api/:coolid/::dudeid/availably')
+// 
   var _sendAvailability = function(data){
     return $http({
       method: 'POST',
-      url: '/user/availability',
+      url: '/api/user/availability',
       data: filledSlots
     })
     .success(function(data, status, headers, config){

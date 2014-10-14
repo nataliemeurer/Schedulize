@@ -14,6 +14,7 @@ var db = monk('localhost:27017/schedulize');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
+var api = require('./routes/api');
 
 var app = express();
 
@@ -36,7 +37,8 @@ app.use(function(req,res,next){
 });
 
 app.use('/', routes);
-app.use('/admin', admin)
+app.use('/api', api);
+app.use('/admin', admin);
 app.use('/user', users);
 
 // catch 404 and forward to error handler

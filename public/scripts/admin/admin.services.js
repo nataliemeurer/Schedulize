@@ -1,6 +1,33 @@
 angular.module('admin.services', ['angularMoment'])
 
 .factory('Network', function($http){
+	
+	var _getEmployees = function($http, companyName){
+		return $http({
+	      method: 'GET',
+	      url: '/api/employees/'+companyName
+	    })
+	    .success(function(data, status, headers, config) {
+	      return data;
+	    })
+	    .error(function(data, status, headers, config) {
+	      console.log('fail silently');
+	    });
+	};
+
+	var _getShifts = function($http, companyName){
+		return $http({
+	      method: 'GET',
+	      url: '/api/companies/' + companyName + '/'
+	    })
+	    .success(function(data, status, headers, config) {
+	      return data;
+	    })
+	    .error(function(data, status, headers, config) {
+	      console.log('fail silently');
+	    });
+	}
+
 	var Edge = function(from, to, capacity) {
 	    this.from = from;
 	    this.to = to;
@@ -158,4 +185,15 @@ angular.module('admin.services', ['angularMoment'])
 		}
 	};
 
+	var _createNetwork = function(employees, shifts){
+		var network = new FlowNetwork(user);
+		network.assignEdges();
+		return network;
+	}
+
+	return {
+		getShifts: _getShifts,
+		getEmployees: _getEmployees,
+		createNetwork: _createNetwork
+	}
 });
