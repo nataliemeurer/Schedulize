@@ -24,8 +24,10 @@ userApp
     $urlRouterProvider.otherwise("/user");
   })
   .controller('availabilityController', function($scope, $location, Availability){
+    $scope.availabilityData = {};
     $scope.markedShifts = 0;
     $scope.timeSlots = Availability.slots;
+    $scope.canManage = false;
     
     $scope.toggleAvailability = function(shift) {
       if(shift.available){
