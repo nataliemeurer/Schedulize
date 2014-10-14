@@ -23,7 +23,7 @@ router.get('/userlist', function(req, res) {
 });
 
 /* GET New User page. */
-router.get('/newuser', function(req, res) {
+router.get('/signup', function(req, res) {
     res.render('newuser', { title: 'Add New User' });
 });
 

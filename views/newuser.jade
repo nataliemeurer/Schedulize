@@ -1,8 +1,11 @@
 extends layout
 
 block content
-    h1= title
-    form#formAddUser(name="adduser",method="post",action="/adduser")
-        input#inputUserName(type="text", placeholder="username", name="username")
-        input#inputUserEmail(type="text", placeholder="useremail", name="useremail")
-        button#btnSubmit(type="submit") submit
+    h1= 'Sign up for Schedulize'
+    form#formAddUser(name="adduser", method="post", action="/adduser")
+        input#userRegister(type="text", placeholder="Choose a username", name="username")
+        input#passwordRegister(type="password", placeholder="Select a Password", name="password")
+        input#companyRegister(type="text", placeholder="Company Name", name="companyName")
+        button#btnSubmit(type="submit") Start Scheduling!
+    p= 'Company not listed? Join Schedulize today.  It\'s free, now and forever!'
+    a(href='../') Click Here
