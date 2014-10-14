@@ -3,12 +3,15 @@
 	<p>{{ markedShifts }}</p>
 	<!-- {{ timeSlots }} -->
 	<form name="availabilityForm" ng-submit="sendAvailability(timeSlots)">
-	<!-- 	<h3>What is your name?</h3>
-		<input name='shiftCount' type="text"
-        ng-model="availabilityData.shiftsDesired"
-        max="5" min="1"
-        placeholder="Enter your desired number here" required
-        ng-class="{'error': availabilityForm.$invalid && availabilityForm.$dirty}"/> -->
+		<h3>Full Name</h3>
+		<input name='name' type="text"
+        ng-model="availabilityData.name"
+        ng-minlength="5"
+        placeholder="Your Full Name goes here..." required
+        ng-class="{'error': availabilityForm.$invalid && availabilityForm.$dirty}"/>
+    <div ng-if='availabilityForm.shiftCount.$error.required && availabilityForm.$dirty' class="message">
+          <h2>Please Enter Your Name</h2>
+     	</div>
 		<h3>How many shifts would you like to work?</h3>
 		<input name='shiftCount' type="number"
         ng-model="availabilityData.shiftsDesired"
