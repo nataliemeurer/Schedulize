@@ -10,15 +10,16 @@ router.get('companies/:companyId/users', function(req, res){
 
 });
 
+
 router.post('/signup', function(req, res){
-	var name = req.name;
-	var email = req.email;
-	var password = req.password;
-	var company = req.company;
-	users.insert({ a: 'b' }, function (err, doc) {
+	var name = req.body.name;
+	var email = req.body.email;
+	var password = req.body.password;
+	var company = req.body.company;
+	var admin = req.body.admin;
+	users.insert({ name: name, email: email, password: password, company: company, admin: admin, availability: [], shiftsDesired: null, canManage: null}, function (err, doc) {
   	if (err) {throw err};
 	});
-
 });
 
 router.post('/signin', function(req, res){
