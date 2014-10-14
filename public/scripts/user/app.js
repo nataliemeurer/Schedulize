@@ -26,6 +26,16 @@ userApp
   .controller('availabilityController', function($scope, $location, TimeSlot){
     $scope.markedShifts = 0;
     $scope.timeSlots = TimeSlot.slots;
+    $scope.toggleAvailability = function(shift) {
+      if(shift.available){
+        shift.available = false;
+        shift.unavailable = true;
+      } else if (shift.unavailable === true){
+        shift.unavailable = false;
+      } else {
+        shift.available = true;
+      }
+    }
   });
 // .factory('AttachTokens', function ($window) {
 //   // this is an $httpInterceptor

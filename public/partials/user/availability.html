@@ -2,32 +2,27 @@
 <div id="availabilityTable" ng-controller="availabilityController">
 	<p>{{ markedShifts }}</p>
 	<!-- {{ timeSlots }} -->
-	<table id="timeSlots">
-		
-		<thead>
-		  <tr>
-		  	<th>Sunday</th>
-		  	<th>Monday</th>
-		  	<th>Tuesday</th>
-		  	<th>Wednesday</th>
-		  	<th>Thursday</th>
-		  	<th>Friday</th>
-		  	<th>Saturday</th>
-		  </tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat='time in timeSlots'>
-			 		<td ng-repeat='day in time'>{{ day.start.format('H:mm') + ' - ' + day.end.format('H:mm') }}</td>
+	<form name="shortenForm" ng-submit="addLink()">
+		<table id="timeSlots" class='table table-bordered'>
+			<thead>
+			  <tr>
+			  	<th>Sunday</th>
+			  	<th>Monday</th>
+			  	<th>Tuesday</th>
+			  	<th>Wednesday</th>
+			  	<th>Thursday</th>
+			  	<th>Friday</th>
+			  	<th>Saturday</th>
+			  </tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat='time in timeSlots'>
+				 		<td ng-repeat='day in time' class="slot" ng-click="toggleAvailability(day)" ng-class="{'available': day.available, 'unavailable': day.unavailable}" >{{ day.start.format('H:mm') + ' - ' + day.end.format('H:mm A')}}</td>
+				</tr>
+			<tbody>
+		</table>
+	</form>
 
-			</tr>
-		</span>
-
-			
-			<!-- <tr ng-repeat='slot in timeSlots.tues'>
-			  <td>{{ slot.start.format('H:mm') }}</td>
-			</tr> -->
-		<tbody>
-	</table>
 </div>
 
 <!-- <th>12:00 AM - 12:30 AM</th>

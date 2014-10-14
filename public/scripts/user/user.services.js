@@ -16,14 +16,18 @@ angular.module('user.services', ['angularMoment'])
             start: moment({hour: Math.floor(hour), minute: 30}),
             duration: moment.duration(30, "minutes"),
             end: moment({hour: Math.floor(hour), minute: 59}),
-            day: days[day]
+            day: days[day],
+            available: false,
+            unavailable: false
           });
         } else {
           slots[hour*2].push({
             start: moment({hour: Math.floor(hour), minute: 30}),
             duration: moment.duration(30, "minutes"),
             end: moment({hour: Math.ceil(hour), minute: 0}),
-            day: days[day]
+            day: days[day],
+            available: false,
+            unavailable: false
           });
         }
       } else {
@@ -31,7 +35,9 @@ angular.module('user.services', ['angularMoment'])
           start: moment({hour: hour, minute: 0}),
           duration: moment.duration(30, "minutes"),
           end: moment({hour: hour, minute: 30}),
-          day: days[day]
+          day: days[day],
+          available: false,
+          unavailable: false
         });
       }
     }
