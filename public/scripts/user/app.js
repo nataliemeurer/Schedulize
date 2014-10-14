@@ -1,30 +1,32 @@
 var userApp = angular.module('userApp', [
+  'user.services',
   'ui.router',
-  // 'user.services'
   'angularMoment'
 ]);
 
 console.log("executing");
-userApp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
-  $stateProvider
-    .state('dashboard', {
-      url: "/dashboard",
-      templateUrl: "partials/user/dashboard.html"
-    })
-    .state('userprofile', {
-      url: "/profile",
-      templateUrl: "partials/user/userprofile.html"
-    })
-    .state('setavailability', {
-      url: "/availability",
-      templateUrl: "partials/user/availability.html"
-    });
-  
-  $urlRouterProvider.otherwise("/user");
-})
-.controller('availabilityController', function($scope, $location, timeSlot){
-  
-});
+userApp
+  .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+    $stateProvider
+      .state('dashboard', {
+        url: "/dashboard",
+        templateUrl: "partials/user/dashboard.html"
+      })
+      .state('userprofile', {
+        url: "/profile",
+        templateUrl: "partials/user/userprofile.html"
+      })
+      .state('setavailability', {
+        url: "/availability",
+        templateUrl: "partials/user/availability.html"
+      });
+    
+    $urlRouterProvider.otherwise("/user");
+  })
+  .controller('availabilityController', function($scope, $location, TimeSlot){
+    $scope.markedShifts = 0;
+    $scope.timeSlots = TimeSlot.slots;
+  });
 // .factory('AttachTokens', function ($window) {
 //   // this is an $httpInterceptor
 //   // its job is to stop all out going request

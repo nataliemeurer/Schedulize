@@ -1,1 +1,24 @@
-<h2> Availability </h2>
+<h2> Fill out your Availability! </h2>
+<div id="availabilityTable" ng-controller="availabilityController">
+	<p>{{ markedShifts }}</p>
+	{{ timeSlots }}
+	<table id="timeSlots">
+		<thead>
+		  <tr>
+		  	<th>Sunday</th>
+		  	<th>Monday</th>
+		  	<th>Tuesday</th>
+		  	<th>Wednesday</th>
+		  	<th>Thursday</th>
+		  	<th>Friday</th>
+		  	<th>Saturday</th>
+		  </tr>
+		</thead>
+	  <tr ng-repeat='slot in timeSlots'>
+	    <td>{{ slot.start.format('H:mm') }}</td>
+	  </tr>
+	  <tr ng-repeat='slot in timeSlots.tues'>
+	    <td>{{ slot.start.format('H:mm') }}</td>
+	  </tr>
+	</table>
+</div>
