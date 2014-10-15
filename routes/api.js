@@ -38,7 +38,6 @@ router.param('companyId', function(req, res, next, code){
 
 router.param('userId', function(req, res, next, code){
 	users.findOne({_id: code}).on('success', function(doc){
-      console.log()
       req.user = doc;
       next();
 	})
@@ -63,6 +62,10 @@ router.get('/users', function(req, res){
 	users.find({}).on('success', function(docs){
 		res.send(200, docs);
 	})
+});
+
+router.get('/users/:userId', function(req, res){
+	res.send(req.user);
 });
 
 router.post('/users/:userId/availability', function(req, res){
