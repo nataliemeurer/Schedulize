@@ -32,6 +32,20 @@ router.post('/signup', function(req, res){
 	});
 });
 
+router.param('companyId', function(req, res, next, code){
+
+});
+
+router.param('userId', function(req, res, next, code){
+	users.findOne({_id: code}).on('success', function(doc){
+      console.log()
+      req.user = doc;
+      next();
+	})
+});
+
+
+
 router.post('/signin', function(req, res){
 
 });
@@ -45,14 +59,14 @@ router.get('companies/:companyId/users', function(req, res){
 
 });
 
+router.get('/users', function(req, res){
+	users.find({}).on('success', function(docs){
+		res.send(200, docs);
+	})
+});
 
 router.post('/users/:userId/availability', function(req, res){
 	
-});
-
-
-router.get('/:companyId/:userId', function(req, res) {
-  res.render('admin/adminIndex', {title: 'Administrator Page', username: "Kevin Meurer, Director of All Things Ever"});
 });
 
 router.post('/logout', function(req, res){

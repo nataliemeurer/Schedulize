@@ -1,22 +1,22 @@
 <div ng-controller='createScheduleController'>
-	<section ng-show='showForm'>
+	<section class='create' ng-show='showForm'>
 		<h1>It's time to Schedulize!</h1>
-		<h3 class="centered">Select your options below and hit the Schedulize button.  Your schedule will be compiled on the spot!</h3>
+		<h3 class="centered">Just hit the Schedulize button.  Your schedule will be compiled on the spot!</h3>
 		<div class='container'>
 			<form name="schedulizeForm" role='form' ng-submit='compileSchedule()'>
-				<div class='checkboxes'>	
+				<!-- <div class='checkboxes'>	
 			    <label><input name="sameDay" type="checkbox" ng-model="options.sameDay">
 			    Prevent Same Day Shifts</label>
 			    <label><input name="canManage" type="checkbox" ng-model="options.grantPreference">
 			    Give Preference?</label>
-				</div>
+				</div> -->
 				<div class="sendWrapper">
 					<input type="submit" class="btn btn-primary btn-block btn-lg" value="Schedulize">
 				</div>
 			</form>
 		</div>
 	</section>
-	<section ng-show='showLoading'>
+	<section class='create' ng-show='showLoading'>
 		<h1> {{ statusMessage }}</h1>
 		<div class='loader'><i class="icon ion-loading-c"></i></div>
 	</section>

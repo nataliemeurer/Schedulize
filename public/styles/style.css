@@ -236,26 +236,15 @@ input[type=url]:focus {
   height: 50px;
 }
 
-.creator form {
-  float: left;
-  height: 80px;
+.create {
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(50%);
 }
 
-.creator img.spinner {
-  height: 46px;
-  margin-bottom: 5px;
-  padding: 10px;
-  display: none;
-}
-
-.creator .message {
-  clear: both;
-}
-
-.form-horizontal .checkbox {
-  width: 40px;
-  margin-left: 20px;
-  margin-top: 0px;
+.slot {
+  cursor: pointer;
 }
 
 .help-block {
