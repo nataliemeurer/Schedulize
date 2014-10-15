@@ -43,7 +43,7 @@ adminApp
       console.log("compiling")
       $scope.showForm = false;
       $scope.showLoading = true;
+      $scope.statusMessage="Collecting unicorn blood.";
       var network = Network.createNetwork($scope.employees, $scope.shifts);
-
     };
   });

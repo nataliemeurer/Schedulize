@@ -1,5 +1,5 @@
 <h1> Availability </h1>
-<div id="availabilityTable" ng-controller="availabilityController">
+<div id="availabilityTable" ng-controller="availabilityController" ng-mouseup='stopSelect()'>
 	<!-- {{ timeSlots }} -->
 	<form name="availabilityForm" role='form' ng-submit="sendAvailability(timeSlots)">
 		<div class="container">
@@ -60,7 +60,7 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat='time in timeSlots'>
-				 		<td ng-repeat='day in time' class="slot" ng-click="toggleAvailability(day)" ng-class="{'available': day.available, 'unavailable': day.unavailable}" >{{ day.start.format('h:mm') + ' - ' + day.end.format('h:mm A')}}</td>
+				 		<td ng-repeat='day in time' class="slot" ng-class="{'available': day.available, 'unavailable': day.unavailable}" ng-mousedown='setSelect(); toggleAvailability(day)' ng-mouseover='toggleAvailability(day)' >{{ day.start.format('h:mm') + ' - ' + day.end.format('h:mm A')}}</td>
 				</tr>
 			<tbody>
 		</table>

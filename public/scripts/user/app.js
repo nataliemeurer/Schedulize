@@ -27,17 +27,20 @@ userApp
     $scope.availabilityData = {};
     $scope.markedShifts = 0;
     $scope.timeSlots = Availability.slots;
+    $scope.mouseDown = false;
     
     $scope.toggleAvailability = function(shift) {
-      if(shift.available){
-        $scope.markedShifts--;
-        shift.available = false;
-        shift.unavailable = true;
-      } else if (shift.unavailable === true){
-        shift.unavailable = false;
-      } else {
-        $scope.markedShifts++;
-        shift.available = true;
+      if($scope.mouseDown){
+        if(shift.available){
+          $scope.markedShifts--;
+          shift.available = false;
+          shift.unavailable = true;
+        } else if (shift.unavailable === true){
+          shift.unavailable = false;
+        } else {
+          $scope.markedShifts++;
+          shift.available = true;
+        }
       }
     }
 
@@ -54,6 +57,14 @@ userApp
       $scope.availabilityData['availability'] = filledSlots;
       console.log($scope.availabilityData);
       Availability.sendAvailability($scope.availabilityData);
+    }
+
+    $scope.setSelect = function(){
+      $scope.mouseDown = true;
+    }
+
+    $scope.stopSelect = function(){
+      $scope.mouseDown = false;
     }
 
   })
