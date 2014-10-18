@@ -30,7 +30,7 @@ h3 {
 }
 
 .table{
-  width:90%;
+  width:85%;
   margin: auto;
   text-align: center;
 }
@@ -64,6 +64,15 @@ h3 {
 th {
   text-align: center;
   background-color: #E4F1FE;
+}
+
+td {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 td.available {
