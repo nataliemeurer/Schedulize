@@ -42,7 +42,7 @@ userApp
           shift.available = true;
         }
       }
-    }
+    };
 
     $scope.getClass = function(path) {
         if ($location.path().substr(0, path.length) == path) {
@@ -50,22 +50,22 @@ userApp
         } else {
           return "";
         }
-    }
+    };
 
     $scope.sendAvailability = function(filledSlots){
-      console.log(filledSlots);
+      // console.log(filledSlots);
       $scope.availabilityData['availability'] = filledSlots;
-      console.log($scope.availabilityData);
+      // console.log($scope.availabilityData);
       Availability.sendAvailability($scope.availabilityData);
-    }
+    };
 
     $scope.setSelect = function(){
       $scope.mouseDown = true;
-    }
+    };
 
     $scope.stopSelect = function(){
       $scope.mouseDown = false;
-    }
+    };
 
   })
 .controller('dashboardController', function($scope,$location){

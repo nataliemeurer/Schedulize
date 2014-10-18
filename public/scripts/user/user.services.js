@@ -52,14 +52,39 @@ angular.module('user.services', ['angularMoment'])
 
 // app('/api/:coolid/::dudeid/availably')
 // 
-  var _sendAvailability = function(data){
+  var shrinkAvailability = function(filledSlots) {
+    var newAvailability = [];
+    for ( var day = 0; day < 7; day++ ) {
+      for ( var timeSlot = 0; timeSlot < filledSlots.availability.length; timeSlot++) {
+        // debugger;
+        if (filledSlots.availability[timeSlot][day].available) {
+        console.log(timeSlot, day);
+          var availableSlot = {};
+          availableSlot.start = filledSlots.availability[timeSlot][day].start;
+          var nextTimeSlot = timeSlot+1;
+          while( filledSlots.availability[nextTimeSlot][day].available ) {
+            nextTimeSlot += 1;
+          }
+          availableSlot.end = filledSlots.availability[nextTimeSlot-1][day].end;
+          newAvailability.push(availableSlot);
+        }
+      }
+    }
+    filledSlots.availability = newAvailability;
+    return filledSlots;
+  };
+
+  var _sendAvailability = function(filledSlots){
+    console.log(filledSlots);
+    filledSlots = shrinkAvailability(filledSlots);
+    console.log(filledSlots);
     return $http({
       method: 'POST',
-      url: '/api/user/availability',
-      data: filledSlots
+      url: '/api/users/availability',
+      data: JSON.stringify(filledSlots)
     })
     .success(function(data, status, headers, config){
-      console.log('Successfully posted')
+      console.log('Successfully posted');
     })
     .error(function(data, status, headers, config) {
       console.log('fail silently');
