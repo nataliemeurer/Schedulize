@@ -49,6 +49,7 @@
 		<table id="timeSlots" class='table table-bordered'>
 			<thead>
 			  <tr>
+			  	<th>Time</th>
 			  	<th>Sunday</th>
 			  	<th>Monday</th>
 			  	<th>Tuesday</th>
@@ -60,7 +61,8 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat='time in timeSlots'>
-				 		<td ng-repeat='day in time' class="slot" ng-class="{'available': day.available, 'unavailable': day.unavailable}" ng-mousedown='setSelect(); toggleAvailability(day)' ng-mouseover='toggleAvailability(day)' >{{ day.start.format('h:mm') + ' - ' + day.end.format('h:mm A')}}</td>
+				 		<td>{{ time[0].start.format('h:mm') + ' - ' + time[0].end.format('h:mm A')}}
+				 		<td ng-repeat='day in time' class="slot" ng-class="{'available': day.available, 'unavailable': day.unavailable}" ng-mousedown='setSelect(); toggleAvailability(day)' ng-mouseover='toggleAvailability(day)' ></td>
 				</tr>
 			<tbody>
 		</table>
