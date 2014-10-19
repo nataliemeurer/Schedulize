@@ -1,3 +1,4 @@
+//note: this file is not in use.  It is a mirror of the angular admin.services factory for convenience
 var moment = require('../../node_modules/moment/min/moment.min.js');
 moment().format();
 
@@ -40,16 +41,30 @@ exports.FlowNetwork = function(employees, shifts){
 			this.addEdge('source', userKey, this.network[userKey]['shiftsDesired']);
 		}
 
-		//TODO: assign user edges to shifts using the addEdge function.  This functionality should be contained elsewhere
+		// Add all edges between each user and shifts
+		// for( var key in employees ){
+		// 	this.addEmployeeEdges(employees[key], shifts);
+		// }
+		// TODO: assign user edges to shifts using the addEdge function.  This functionality should be contained elsewhere
 		// this.userEdgesToShifts();
 	}
 
-	//I can't find a way to attach to this.network[shiftKey] and this.network[userKey]
-	//Maybe put all this.network[shiftKey] 's into it's own object?
-	//Maybe put all this.network[userKey] 's into it's own object?
-	this.userEdgesToShifts = function() {
-		for ( var key in employees ) {
-			employees[key][edges][userKey]
+	this.addEmployeeEdges = function(employee, shifts) {
+		// users have an array of objects saved as their availability, each obj has a start, end, and a duration(all moment.js objects)
+		var userKey = employee['name'].split(' ').join('');
+		// iterate through the shifts and compare
+		for ( var key in shifts ){
+			var currentShift = shifts[key];
+			var shiftKey = shifts[key]['name'].split('/').join('');
+			var shiftTime = currentShift.time;
+			for( var i = 0 ; i < employee.availability.length; i++ ){
+				var currentWindow = employee.availability[i];
+				if (currentWindow['start'].isSame(shiftTime['start'], 'day')){
+					if ((currentWindow['start'].isSame(shiftTime['start'], 'hour', 'minute', 'day') || currentWindow['start'].isBefore(shiftTime['start'], 'hour', 'minute')) && (currentWindow['start'].isSame(shiftTime['start'], 'hour', 'minute', 'day') || currentWindow['end'].isAfter(shiftTime['start'], 'hour', 'minute'))){
+						this.addEdge( userKey, shiftKey, 1);
+					}
+				}
+			}
 		}
 	};
 
@@ -60,8 +75,8 @@ exports.FlowNetwork = function(employees, shifts){
 		this.network[to]['edges'].push(newEdge);
 	};
 
+	// Remove all shifts on the same day.  Used if the admin elects to not use same-day. It is time intensive
 	this.removeSameDayShifts = function(){
-
 	};
 
 	this.addFlowToPath = function(path){
@@ -76,8 +91,6 @@ exports.FlowNetwork = function(employees, shifts){
 				path[i].flow--;
 			}
 		}
-		// for Forward edges, add one flow
-		// for Reverse edges, remove one flow 
 	}
 
 	//recursive function used to find a path through the graph
@@ -104,7 +117,7 @@ exports.FlowNetwork = function(employees, shifts){
 		// test if we have an augmenting path forward from here
 		if(forwardEdges.length){
 			for(var i = 0; i < forwardEdges.length; i++){
-				//This algorithm implements breadth first search to find a path
+				// search for a path
 				forwardEdges[i]['forward'] = true;
 				path.push(forwardEdges[i]);
 				var result = this.findPath(forwardEdges[i].to, 'sink', path);
@@ -116,7 +129,7 @@ exports.FlowNetwork = function(employees, shifts){
 		// test if we have an augmenting path backward through the residual from here
 		if(backwardEdges.length){
 			for(var i = 0; i < backwardEdges.length; i++){
-				//This algorithm implements breadth first search to find a path
+				// search for a path
 				backwardEdges[i]['forward'] = false;
 				path.push(backwardEdges[i]);
 				path[path.length - 1].reversed = true;

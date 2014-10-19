@@ -5,7 +5,6 @@ angular.module('user.services', ['angularMoment'])
   for(var i = 0; i < 48; i++){
     slots[i] = [];
   }
-  var days = ['sun', 'mon', 'tues', 'wed', 'thurs', 'fri', 'sat']
   // push each time into slots
   for( var hour = 0; hour < 24; hour+=.5 ){
     for(var day = 0; day < days.length; day++){
@@ -58,15 +57,15 @@ angular.module('user.services', ['angularMoment'])
       for ( var timeSlot = 0; timeSlot < filledSlots.availability.length; timeSlot++) {
         // debugger;
         if (filledSlots.availability[timeSlot][day].available) {
-        console.log(timeSlot, day);
           var availableSlot = {};
           availableSlot.start = filledSlots.availability[timeSlot][day].start;
           var nextTimeSlot = timeSlot+1;
           while( filledSlots.availability[nextTimeSlot][day].available ) {
-            nextTimeSlot += 1;
+            nextTimeSlot ++;
           }
-          availableSlot.end = filledSlots.availability[nextTimeSlot-1][day].end;
+          availableSlot.end = filledSlots.availability[nextTimeSlot - 1][day].end;
           newAvailability.push(availableSlot);
+          timeSlot = nextTimeSlot;
         }
       }
     }

@@ -100,7 +100,9 @@ describe('Flow Network Object Instantiation', function(){
   		expect(network['KevinMeurer'].edges[network['KevinMeurer'].edges.length -1].capacity).to.eql(4);
   		flowNetwork.network['KevinMeurer'].edges.pop();
   	}),
-  	it('should successfully pair users with shifts based on availability')
+  	it('should successfully pair users with shifts based on availability', function(){
+  		
+  	})
   })
 
 });
