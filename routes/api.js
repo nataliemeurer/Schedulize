@@ -42,8 +42,16 @@ router.post('/users/:userId/availability', function(req, res){
 
 // To be deleted when Ids are set up
 router.post('/users/availability', function(req, res){
-  console.log("woo!");
-  console.log(req.data);
+  var availability = req.body.availability,
+      name = req.body.name,
+      canManage = req.body.canManage || false,
+      shiftsDesired = req.body.shiftsDesired;
+  users.insert({ name: name, availability: availability, shiftsDesired: shiftsDesired, canManage: canManage }, function(err, doc){
+  	console.log("DOC IS", doc);
+  	if (err) throw err;
+  	res.redirect('/users#/submitted');
+    res.send(201, doc);
+  });
 });
 
 router.get('/users/availabilty', function(req, res){

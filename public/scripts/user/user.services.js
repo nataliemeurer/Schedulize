@@ -1,28 +1,29 @@
 angular.module('user.services', ['angularMoment'])
 
 .factory('Availability', function($http) {
+  
+  // Create empty slots in which to store our availability
   var slots = new Array(48);
   for(var i = 0; i < 48; i++){
     slots[i] = [];
   }
+  var days = ['Sunday', 'Monday', 'Tuesday', 'Wedneday', 'Thursday', 'Friday', 'Saturday'];
   // push each time into slots
   for( var hour = 0; hour < 24; hour+=.5 ){
     for(var day = 0; day < days.length; day++){
       if(hour % 1 != 0){
         if(hour === 23.5){
           slots[hour*2].push({
-            start: moment({hour: Math.floor(hour), minute: 30}),
-            duration: moment.duration(30, "minutes"),
-            end: moment({hour: Math.floor(hour), minute: 59}),
+            start: moment({hour: Math.floor(hour), minute: 30}).day(days[day]),
+            end: moment({hour: Math.floor(hour), minute: 59}).day(days[day]),
             day: days[day],
             available: false,
             unavailable: false
           });
         } else {
           slots[hour*2].push({
-            start: moment({hour: Math.floor(hour), minute: 30}),
-            duration: moment.duration(30, "minutes"),
-            end: moment({hour: Math.ceil(hour), minute: 0}),
+            start: moment({hour: Math.floor(hour), minute: 30}).day(days[day]),
+            end: moment({hour: Math.ceil(hour), minute: 0}).day(days[day]),
             day: days[day],
             available: false,
             unavailable: false
@@ -30,9 +31,8 @@ angular.module('user.services', ['angularMoment'])
         }
       } else {
         slots[hour*2].push({
-          start: moment({hour: hour, minute: 0}),
-          duration: moment.duration(30, "minutes"),
-          end: moment({hour: hour, minute: 30}),
+          start: moment({hour: hour, minute: 0}).day(days[day]),
+          end: moment({hour: hour, minute: 30}).day(days[day]),
           day: days[day],
           available: false,
           unavailable: false
@@ -41,21 +41,11 @@ angular.module('user.services', ['angularMoment'])
     }
   }
 
-
-
-// 
-// app('/api/:companyId/:userId/availably')
-// .get(function(req, res){
-//   req.params.companyId;
-// });
-
-// app('/api/:coolid/::dudeid/availably')
-// 
+  // shrinkAvailability does preprocessing work before shifts are sent to the server, creating blocks of availability
   var shrinkAvailability = function(filledSlots) {
     var newAvailability = [];
     for ( var day = 0; day < 7; day++ ) {
       for ( var timeSlot = 0; timeSlot < filledSlots.availability.length; timeSlot++) {
-        // debugger;
         if (filledSlots.availability[timeSlot][day].available) {
           var availableSlot = {};
           availableSlot.start = filledSlots.availability[timeSlot][day].start;
@@ -64,6 +54,7 @@ angular.module('user.services', ['angularMoment'])
             nextTimeSlot ++;
           }
           availableSlot.end = filledSlots.availability[nextTimeSlot - 1][day].end;
+          availableSlot.day = filledSlots.availability[nextTimeSlot - 1][day].day;
           newAvailability.push(availableSlot);
           timeSlot = nextTimeSlot;
         }
@@ -73,20 +64,21 @@ angular.module('user.services', ['angularMoment'])
     return filledSlots;
   };
 
+  // sends availability to the server, which will store it under the user's name
   var _sendAvailability = function(filledSlots){
-    console.log(filledSlots);
     filledSlots = shrinkAvailability(filledSlots);
     console.log(filledSlots);
     return $http({
       method: 'POST',
       url: '/api/users/availability',
-      data: JSON.stringify(filledSlots)
+      data: JSON.stringify(filledSlots),
+      contentType: 'application/json'
     })
     .success(function(data, status, headers, config){
       console.log('Successfully posted');
     })
     .error(function(data, status, headers, config) {
-      console.log('fail silently');
+      console.log('Failed to Post to the Server');
     });
   };
 

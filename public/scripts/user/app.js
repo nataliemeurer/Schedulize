@@ -18,6 +18,10 @@ userApp
   .state('setavailability', {
     url: "/availability",
     templateUrl: "partials/user/availability.html"
+  })
+  .state('submitted', {
+    url: "/submitted",
+    templateUrl: "partials/user/submitted.html"
   });
 
   $urlRouterProvider.otherwise("/dashboard");
