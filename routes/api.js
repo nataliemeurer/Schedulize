@@ -46,11 +46,17 @@ router.post('/shifts', function(req, res){
       day = req.body.day,
       type = req.body.type,
       restricted = req.body.restricted;
-  shifts.insert({ time: time, day: day, type: type, restricted: restricted }).on('success', function(docs){
-    console.log("ENTERED INTO SHIFTS: ", docs);
+  shifts.insert({ time: time, day: day, type: type, restricted: restricted }).on('success', function(err, docs){
+    if(err) throw err;
     res.send(201, docs);
   });
 });
+
+router.get('/shifts', function(req, res){
+  shifts.find({}).on('success', function(docs){
+    res.send(200, docs);
+  });
+})
 
 // To be deleted when Ids are set up
 router.post('/users/availability', function(req, res){
@@ -59,14 +65,13 @@ router.post('/users/availability', function(req, res){
       canManage = req.body.canManage || false,
       shiftsDesired = req.body.shiftsDesired;
   users.insert({ name: name, availability: availability, shiftsDesired: shiftsDesired, canManage: canManage }, function(err, doc){
-  	console.log("DOC IS", doc);
   	if (err) throw err;
     res.send(201, doc);
   });
 });
 
 router.get('/users', function(req, res){
-	users.find({}).on('success', function(err, docs){
+	users.find({}).on('success', function(docs){
     res.send(200, docs);
 	});
 });

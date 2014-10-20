@@ -32,22 +32,22 @@ adminApp
     $scope.statusMessage = "Loading your custom Schedule";
     $scope.showForm = true;
     $scope.showLoading = false;
-    $scope.employees;
-    $scope.shifts;
     Network.getEmployees($http, 'VitalVittles').then(function(data){
-      $scope.employees = data;
+      $scope.employees = data.data;
     });
 
     Network.getShifts($http, 'VitalVittles').then(function(data){
-      $scope.employees = data;
+      $scope.shifts = data.data;
     });
 
     $scope.compileSchedule = function(){
-      console.log("compiling")
+      console.log($scope.shifts);
+      console.log($scope.employees);
       $scope.showForm = false;
       $scope.showLoading = true;
       var network = Network.createNetwork($scope.employees, $scope.shifts);
       $scope.statusMessage="Getting Users and Shifts.";
+      return '';
     };
   })
   .controller('shiftController', function($scope, $http, $location, Shifts){
@@ -56,12 +56,14 @@ adminApp
     $scope.sendShift = function(){
       var data = $scope.shiftData;
       var newShift = {};
+      // Assume shift spans same day
       data.endDay = data.day;
+      // Turn string input into int
       data.startHours = parseInt(data.startHours);
       data.startMinutes = parseInt(data.startMinutes);
       data.endHours = parseInt(data.endHours);
       data.endMinutes = parseInt(data.endMinutes);
-      console.log(" DATA TYPE IS: ", data.type);
+      // Change to Military time
       if( data.startampm === 'PM' ){
         if( data.startHours < 12 ){
           data.startHours += 12;
@@ -86,9 +88,7 @@ adminApp
         newShift.restricted = false;
       }
       Shifts.sendShift(newShift).then(function(doc){
-        console.log('SENT THAT SHIFT');
         $location.path('/editshifts');
-
       });
     }
   });

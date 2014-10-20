@@ -23,7 +23,7 @@ angular.module('admin.services', ['angularMoment'])
 })
 
 .factory('Network', function($http){
-	
+	moment().format();
 	var _getEmployees = function($http, companyName){
 		return $http({
 	      method: 'GET',
@@ -62,6 +62,7 @@ angular.module('admin.services', ['angularMoment'])
 	// CREATE AN OBJECT THAT WILL HANDLE THE ENTIRE NETWORK
 	var FlowNetwork = function(employees, shifts){
 		// create network object to store graph
+		moment().format();
 		this.network = {};
 		
 		// create source with no edges assigned
@@ -72,42 +73,50 @@ angular.module('admin.services', ['angularMoment'])
 
 		//assign all shifts and edges to network
 		this.assignEdges = function(){
-			for ( var key in shifts ){
-				var shiftKey = shifts[key]['name'].split('/').join('');
+			for ( var i = 0; i < shifts.length; i++ ){
+				// convert all times to moment objects
+				shifts[i].time['start'] = moment(Date.parse(shifts[i].time['start']));
+        shifts[i].time['end'] = moment(Date.parse(shifts[i].time['end']));
+				var shiftKey = shifts[i]._id;
 				// assign employees to network to be saved by their time shift
-				this.network[shiftKey] = shifts[key];
+				this.network[shiftKey] = shifts[i];
 				//Add edge from shift to sink
 				this.network[shiftKey]['edges'] = [];
 				this.addEdge(shiftKey, 'sink', 1);
 			}
 			// assign keys and edges to network
-			for ( var key in employees ){ 
-				var userKey = employees[key]['name'].split(' ').join('');
+			for ( var i = 0; i < employees.length; i++ ){ 
+			  // convert all times to moment objects
+			  for(var j = 0; j < employees[i].availability.length; j++){
+			    employees[i].availability[j]['start'] = moment(Date.parse(employees[i].availability[j]['start']));
+			    employees[i].availability[j]['end'] = moment(Date.parse(employees[i].availability[j]['end']));
+			  }
+				var userKey = employees[i]._id;
 				// assign employees to network to be saved by their full name
-				this.network[userKey] = employees[key];
+				this.network[userKey] = employees[i];
 				// Add edge to employees 
 				this.network[userKey]['edges'] = [];
 				this.addEdge('source', userKey, this.network[userKey]['shiftsDesired']);
 			}
 
 			// Add all edges between each user and shifts
-			for( var key in employees ){
-				this.addEmployeeEdges(employees[key], shifts);
+			for( var i = 0; i < employees.length; i++ ){
+				this.addEmployeeEdges(employees[i], shifts);
 			}
 			
 		}
 
 		this.addEmployeeEdges = function(employee, shifts) {
 				// users have an array of objects saved as their availability, each obj has a start, end, and a duration(all moment.js objects)
-				var userKey = employee['name'].split(' ').join('');
+				var userKey = employee._id;
 				// iterate through the shifts and compare
-				for ( var key in shifts ){
-					var currentShift = shifts[key];
-					var shiftKey = shifts[key]['name'].split('/').join('');
+				for ( var j = 0; j < shifts.length; j++ ){
+					var currentShift = shifts[j];
+					var shiftKey = shifts[j]._id;
 					var shiftTime = currentShift.time;
-					for( var i = 0 ; i < employee.availability.length; i++ ){
-						var currentWindow = employee.availability[i];
-						console.log(currentWindow['start'])
+					for( var k = 0 ; k < employee.availability.length; k++ ){
+						var currentWindow = employee.availability[k];
+								console.log(currentWindow['start']);
 						if (currentWindow['start'].isSame(shiftTime['start'], 'day')){
 							if ((currentWindow['start'].isSame(shiftTime['start'], 'hour', 'minute', 'day') || currentWindow['start'].isBefore(shiftTime['start'], 'hour', 'minute')) && (currentWindow['start'].isSame(shiftTime['start'], 'hour', 'minute', 'day') || currentWindow['end'].isAfter(shiftTime['start'], 'hour', 'minute'))){
 								this.addEdge( userKey, shiftKey, 1);
@@ -224,7 +233,7 @@ angular.module('admin.services', ['angularMoment'])
 	};
 
 	var _createNetwork = function(employees, shifts){
-		var network = new FlowNetwork(user);
+		var network = new FlowNetwork(employees, shifts);
 		network.assignEdges();
 		return network;
 	};
