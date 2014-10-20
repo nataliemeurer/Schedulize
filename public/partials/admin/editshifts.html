@@ -1,0 +1,103 @@
+<h1>Add/Edit Shifts</h1>
+<div ng-controller='shiftController'>
+	<div class='addShift col-md-4'>
+		<h2>Add Shift</h2>
+		<form name='addShiftForm' role='form' ng-submit='sendShift()'>
+			<h4>Day</h4>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="optionsRadios" ng-model='shiftData.day' id="optionsRadios1" value="Sunday" checked>
+			    Sunday
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="optionsRadios" ng-model='shiftData.day' id="optionsRadios2" value="Monday">
+			    Monday
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="optionsRadios" ng-model='shiftData.day' id="optionsRadios1" value="Tuesday" checked>
+			    Tuesday
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="optionsRadios" ng-model='shiftData.day' id="optionsRadios2" value="Wednesday">
+			    Wednesday
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="optionsRadios" ng-model='shiftData.day' id="optionsRadios1" value="Thursday" checked>
+			    Thursday
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="optionsRadios" ng-model='shiftData.day' id="optionsRadios2" value="Friday">
+			    Friday
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="optionsRadios" ng-model='shiftData.day' id="optionsRadios2" value="Saturday">
+			    Saturday
+			  </label>
+			</div>
+			<h4>Start Time</h4>
+			<div class='form-inline'>
+				<div class='form-group'>
+					<input type='text' id='startHours' ng-model='shiftData.startHours'class='form-control' name='startHours'>
+				</div>
+				<strong>:</strong>
+				<div class='form-group'>
+					<input class='form-control' type='text' ng-model='shiftData.startMinutes' name='startMinutes'>
+					<select type='select' ng-model='shiftData.startampm' name='startAMPM'>
+						<option>AM</option> 
+						<option>PM</option>
+					</select>
+				</div>
+			</div>
+			<h4>End Time</h4>
+			<div class='form-inline'>
+				<div class='form-group'>
+					<input type='text' id='endHours' ng-model='shiftData.endHours' class='form-control' name='endHours'>
+				</div>
+				<strong>:</strong>
+				<div class='form-group'>
+					<input class='form-control' type='text' ng-model='shiftData.endMinutes' name='endMinutes'>
+					<select type='select' ng-model='shiftData.endampm' name='endAMPM'>
+						<option>AM</option> 
+						<option>PM</option>
+					</select>
+				</div>
+			</div>
+			<div class='form-inline'>
+				<h4>Shift Type</h4>
+				<div class='form-group'>
+					<input type='text' ng-model='shiftData.shiftType' class='form-control' name='shiftType'>
+				</div>
+			</div>
+			<h4>Manager Restricted?</h4>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="optionsRadios" ng-model='shiftData.managerRestricted' id="optionsRadios1" value="true" checked>
+			    Yes, only managers can work this shift
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="optionsRadios" ng-model='shiftData.managerRestricted' id="optionsRadios2" value="false">
+			    No, there are no restrictions on this shift
+			  </label>
+			</div>
+			<input type='submit' class="btn btn-primary btn-block" value="Add shift to schedule">
+		</form>
+	</div>
+	<div class='shiftView col-md-8'>
+		<h2>Shift View</h2>
+		<h4>Displaying Shifts for The Hilltoss</h4>
+	</div>
+</div>

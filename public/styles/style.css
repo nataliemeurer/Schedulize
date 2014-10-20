@@ -80,9 +80,9 @@ td.available {
   background-color: #00B16A;
 }
 
-td.unavailable {
+td.tentative {
   color: #ecf0f1;
-  background-color: #D64541;
+  background-color: #f1c40f;
 }
 
 .navigation {

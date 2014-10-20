@@ -18,7 +18,7 @@ angular.module('user.services', ['angularMoment'])
             end: moment({hour: Math.floor(hour), minute: 59}).day(days[day]),
             day: days[day],
             available: false,
-            unavailable: false
+            tentative: false
           });
         } else {
           slots[hour*2].push({
@@ -26,7 +26,7 @@ angular.module('user.services', ['angularMoment'])
             end: moment({hour: Math.ceil(hour), minute: 0}).day(days[day]),
             day: days[day],
             available: false,
-            unavailable: false
+            tentative: false
           });
         }
       } else {
@@ -35,7 +35,7 @@ angular.module('user.services', ['angularMoment'])
           end: moment({hour: hour, minute: 30}).day(days[day]),
           day: days[day],
           available: false,
-          unavailable: false
+          tentative: false
         });
       }
     }
@@ -67,6 +67,12 @@ angular.module('user.services', ['angularMoment'])
   // sends availability to the server, which will store it under the user's name
   var _sendAvailability = function(filledSlots){
     filledSlots = shrinkAvailability(filledSlots);
+    filledSlots.shiftsDesired = parseInt(filledSlots.shiftsDesired);
+    if(filledSlots.canManage === 'true'){
+      filledSlots.canManage = true;
+    } else {
+      filledSlots.canManage = false;
+    }
     console.log(filledSlots);
     return $http({
       method: 'POST',

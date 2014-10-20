@@ -1,11 +1,33 @@
 angular.module('admin.services', ['angularMoment'])
 
+.factory('Shifts', function($http){
+	var _sendShift = function( shift ){
+		console.log(shift);
+		return $http({
+		  method: 'POST',
+		  url: '/api/shifts',
+		  data: JSON.stringify(shift),
+		  contentType: 'application/json'
+		})
+		.success(function(data, status, headers, config){
+		  console.log('Successfully posted shift');
+		})
+		.error(function(data, status, headers, config) {
+		  console.log('Failed to Post to the Server')
+		});
+	};
+
+	return {
+		sendShift: _sendShift
+	};
+})
+
 .factory('Network', function($http){
 	
 	var _getEmployees = function($http, companyName){
 		return $http({
 	      method: 'GET',
-	      url: '/api/employees/'+companyName
+	      url: '/api/users/'
 	    })
 	    .success(function(data, status, headers, config) {
 	      return data;
@@ -18,7 +40,7 @@ angular.module('admin.services', ['angularMoment'])
 	var _getShifts = function($http, companyName){
 		return $http({
 	      method: 'GET',
-	      url: '/api/companies/' + companyName + '/'
+	      url: '/api/shifts'
 	    })
 	    .success(function(data, status, headers, config) {
 	      return data;
@@ -55,6 +77,7 @@ angular.module('admin.services', ['angularMoment'])
 				// assign employees to network to be saved by their time shift
 				this.network[shiftKey] = shifts[key];
 				//Add edge from shift to sink
+				this.network[shiftKey]['edges'] = [];
 				this.addEdge(shiftKey, 'sink', 1);
 			}
 			// assign keys and edges to network
@@ -63,21 +86,36 @@ angular.module('admin.services', ['angularMoment'])
 				// assign employees to network to be saved by their full name
 				this.network[userKey] = employees[key];
 				// Add edge to employees 
+				this.network[userKey]['edges'] = [];
 				this.addEdge('source', userKey, this.network[userKey]['shiftsDesired']);
 			}
 
-			//TODO: assign user edges to shifts using the addEdge function.  This functionality should be contained elsewhere
-			// this.userEdgesToShifts();
+			// Add all edges between each user and shifts
+			for( var key in employees ){
+				this.addEmployeeEdges(employees[key], shifts);
+			}
+			
 		}
 
-		//I can't find a way to attach to this.network[shiftKey] and this.network[userKey]
-		//Maybe put all this.network[shiftKey] 's into it's own object?
-		//Maybe put all this.network[userKey] 's into it's own object?
-		this.userEdgesToShifts = function() {
-			for ( var key in employees ) {
-				employees[key][edges][userKey]
-			}
-		};
+		this.addEmployeeEdges = function(employee, shifts) {
+				// users have an array of objects saved as their availability, each obj has a start, end, and a duration(all moment.js objects)
+				var userKey = employee['name'].split(' ').join('');
+				// iterate through the shifts and compare
+				for ( var key in shifts ){
+					var currentShift = shifts[key];
+					var shiftKey = shifts[key]['name'].split('/').join('');
+					var shiftTime = currentShift.time;
+					for( var i = 0 ; i < employee.availability.length; i++ ){
+						var currentWindow = employee.availability[i];
+						console.log(currentWindow['start'])
+						if (currentWindow['start'].isSame(shiftTime['start'], 'day')){
+							if ((currentWindow['start'].isSame(shiftTime['start'], 'hour', 'minute', 'day') || currentWindow['start'].isBefore(shiftTime['start'], 'hour', 'minute')) && (currentWindow['start'].isSame(shiftTime['start'], 'hour', 'minute', 'day') || currentWindow['end'].isAfter(shiftTime['start'], 'hour', 'minute'))){
+								this.addEdge( userKey, shiftKey, 1);
+							}
+						}
+					}
+				}
+			};
 
 		this.addEdge = function(from, to, capacity){
 			var newEdge = new Edge(from, to, capacity);
@@ -154,7 +192,7 @@ angular.module('admin.services', ['angularMoment'])
 			}
 			// return null if no paths are found
 			return null;
-		}
+		};
 
 		// main function used to find the flow in the network
 		this.findMaxFlow = function(){
@@ -189,11 +227,11 @@ angular.module('admin.services', ['angularMoment'])
 		var network = new FlowNetwork(user);
 		network.assignEdges();
 		return network;
-	}
+	};
 
 	return {
 		getShifts: _getShifts,
 		getEmployees: _getEmployees,
 		createNetwork: _createNetwork
-	}
+	};
 });

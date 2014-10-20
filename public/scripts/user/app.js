@@ -38,9 +38,9 @@ userApp
         if(shift.available){
           $scope.markedShifts--;
           shift.available = false;
-          shift.unavailable = true;
-        } else if (shift.unavailable === true){
-          shift.unavailable = false;
+          shift.tentative = true;
+        } else if (shift.tentative === true){
+          shift.tentative = false;
         } else {
           $scope.markedShifts++;
           shift.available = true;
@@ -57,9 +57,7 @@ userApp
     };
 
     $scope.sendAvailability = function(filledSlots){
-      // console.log(filledSlots);
       $scope.availabilityData['availability'] = filledSlots;
-      // console.log($scope.availabilityData);
       Availability.sendAvailability($scope.availabilityData).then(function(data){
         $location.path('/submitted');
       });

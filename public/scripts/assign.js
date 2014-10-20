@@ -47,8 +47,6 @@ exports.FlowNetwork = function(employees, shifts){
 		for( var key in employees ){
 			this.addEmployeeEdges(employees[key], shifts);
 		}
-		// TODO: assign user edges to shifts using the addEdge function.  This functionality should be contained elsewhere
-		// this.userEdgesToShifts();
 	}
 
 	this.addEmployeeEdges = function(employee, shifts) {
@@ -64,7 +62,6 @@ exports.FlowNetwork = function(employees, shifts){
 				console.log(currentWindow['start'])
 				if (currentWindow['start'].isSame(shiftTime['start'], 'day')){
 					if ((currentWindow['start'].isSame(shiftTime['start'], 'hour', 'minute', 'day') || currentWindow['start'].isBefore(shiftTime['start'], 'hour', 'minute')) && (currentWindow['start'].isSame(shiftTime['start'], 'hour', 'minute', 'day') || currentWindow['end'].isAfter(shiftTime['start'], 'hour', 'minute'))){
-						console.log('SHIFT KEY IS: ',shiftKey);
 						this.addEdge( userKey, shiftKey, 1);
 					}
 				}

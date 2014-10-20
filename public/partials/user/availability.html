@@ -4,46 +4,26 @@
 	<form name="availabilityForm" role='form' ng-submit="sendAvailability(timeSlots)">
 		<div class="container">
 			<div class='form-horizontal'>
-				<h3>Full Name</h3>
-				<input name='name' class='form-control' type="text"
-		        ng-model="availabilityData.name"
-		        ng-minlength="5"
-		        placeholder="Your Full Name goes here..." required
-		        ng-class="{'has-error': availabilityForm.name.$invalid && availabilityForm.name.$dirty}"/>
-		    	
-		    	<div ng-if='availabilityForm.shiftCount.$error.required && availabilityForm.name.$dirty' class="control-label">
-		         	<label>Please Enter Your Name</label>
-		    	</div>
-				
-			<h3>How many shifts would you like to work?</h3>
-				<input name='shiftCount' class='form-control' type="number"
-		        ng-model="availabilityData.shiftsDesired"
-		        max="5" min="1"
-		        placeholder="Enter your desired number here" required
-		        ng-class="{'has-error': availabilityForm.$invalid && availabilityForm.$dirty}"/>
-		    	
-		    	<div ng-if='availabilityForm.shiftCount.$error.required && availabilityForm.$dirty' class="has-error">
-		          <label>Shift Number Required</label>
-		     	</div>
-			      <div ng-show='availabilityForm.shiftCount.$error.number && availabilityForm.$dirty' class="control-label">
-			        <label>Please Enter a Number</label>
-			      </div>
-			      
-			      <div ng-show='availabilityForm.shiftCount.$error.min && availabilityForm.$dirty' class="control-label">
-			        <label>Please Enter a Number greater than 0</label>
-			      </div>
-			      
-			      <div ng-show='availabilityForm.shiftCount.$error.max && availabilityForm.$dirty' class="control-label">
-			        <label>Please Enter a Number less than 6</label>
-		      </div>
-
+				<h4>Full Name</h4>
+				<div class='form-group'>
+					<input name='name' id='name' class='form-control' type="text" ng-model="availabilityData.name" placeholder="Enter your name" required />
+				</div>
+				<h4>How many shifts would you like to work?</h4>
+				<div class='form-group'>
+					<input name='shiftCount' id='shiftCount'class='form-control' type="text" ng-model="availabilityData.shiftsDesired"max="5" min="1" placeholder="Enter your desired number here" required/>
+			    </div>
 		    </div>
-		    <div class='form-group form-horizontal checkManage'>
-		    	<label>
-		    		<h3>Are you eligible to manage?(check the box if so)</h3>
-		    		<input name="canManage" type="checkbox" class="checkbox" ng-model="availabilityData.canManage">
-		    	</label>
-		    </div> 
+		    <h4>Are you eligible to manage?</h4>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="canManage" id="optionsRadios1" value="true" ng-model="availabilityData.canManage">
+			    Yes
+			  </label>
+			  <label>
+			    <input type="radio" name="canManage" id="optionsRadios2" value="false" ng-model="availabilityData.canManage">
+			    No
+			  </label>
+			</div>
     	<p><strong>Instructions:</strong> Please fill out the following chart to indicate which times you would be available to work.  Click each time once to mark as available and twice to mark as unavailable.  You will not be assigned to shifts during times you have not marked as available. However, we do keep track of how many times you have indicated you would be available to work...</p>
 		</div>
 		<table id="timeSlots" class='table table-bordered'>
@@ -61,8 +41,8 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat='time in timeSlots'>
-				 		<td>{{ time[0].start.format('h:mm') + ' - ' + time[0].end.format('h:mm A')}}
-				 		<td ng-repeat='day in time' class="slot" ng-class="{'available': day.available, 'unavailable': day.unavailable}" ng-mousedown='setSelect(); toggleAvailability(day)' ng-mouseover='toggleAvailability(day)' ></td>
+				 	<td>{{ time[0].start.format('h:mm') + ' - ' + time[0].end.format('h:mm A')}}
+				 	<td ng-repeat='day in time' class="slot" ng-class="{'available': day.available, 'tentative': day.tentative}" ng-mousedown='setSelect(); toggleAvailability(day)' ng-mouseover='toggleAvailability(day)' ></td>
 				</tr>
 			<tbody>
 		</table>

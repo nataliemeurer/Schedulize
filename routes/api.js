@@ -40,6 +40,13 @@ router.post('/users/:userId/availability', function(req, res){
 	
 });
 
+
+router.post('/shifts', function(req, res){
+  shifts.find({}).on('success', function(docs){
+    res.send(200, docs);
+  });
+});
+
 // To be deleted when Ids are set up
 router.post('/users/availability', function(req, res){
   var availability = req.body.availability,
@@ -53,8 +60,10 @@ router.post('/users/availability', function(req, res){
   });
 });
 
-router.get('/users/availabilty', function(req, res){
-
+router.get('/users', function(req, res){
+	users.find({}).on('success', function(err, docs){
+    res.send(200, docs);
+	});
 });
 
 router.post('/logout', function(req, res){
