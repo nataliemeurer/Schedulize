@@ -3,7 +3,7 @@ var router = express.Router();
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/schedulize');
-var companies = db.get('companies');
+var shifts = db.get('shifts');
 var users = db.get('users');
 
 router.param('companyId', function(req, res, next, code){
@@ -42,8 +42,13 @@ router.post('/users/:userId/availability', function(req, res){
 
 
 router.post('/shifts', function(req, res){
-  shifts.find({}).on('success', function(docs){
-    res.send(200, docs);
+  var time = req.body.time,
+      day = req.body.day,
+      type = req.body.type,
+      restricted = req.body.restricted;
+  shifts.insert({ time: time, day: day, type: type, restricted: restricted }).on('success', function(docs){
+    console.log("ENTERED INTO SHIFTS: ", docs);
+    res.send(201, docs);
   });
 });
 

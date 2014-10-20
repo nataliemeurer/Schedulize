@@ -5,7 +5,7 @@ angular.module('admin.services', ['angularMoment'])
 		console.log(shift);
 		return $http({
 		  method: 'POST',
-		  url: '/api/shifts',
+		  url: '/api/shifts/',
 		  data: JSON.stringify(shift),
 		  contentType: 'application/json'
 		})

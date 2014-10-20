@@ -61,6 +61,7 @@ adminApp
       data.startMinutes = parseInt(data.startMinutes);
       data.endHours = parseInt(data.endHours);
       data.endMinutes = parseInt(data.endMinutes);
+      console.log(" DATA TYPE IS: ", data.type);
       if( data.startampm === 'PM' ){
         if( data.startHours < 12 ){
           data.startHours += 12;
@@ -73,13 +74,17 @@ adminApp
       } else if( data.endHours === 'PM') {
         data.endHours += 12;
       }
-
       newShift.time = {
         start: moment({hour: $scope.shiftData.startHours, minute: $scope.shiftData.startMinutes}).day($scope.shiftData.day),
         end: moment({hour: $scope.shiftData.endHours, minute: $scope.shiftData.endMinutes}).day($scope.shiftData.endDay)
       };
       newShift.day = data.day;
-      newShift.type = data.type;
+      newShift.type = data.shiftType;
+      if( data.managerRestricted === 'true' ){
+        newShift.restricted = true;
+      } else {
+        newShift.restricted = false;
+      }
       Shifts.sendShift(newShift).then(function(doc){
         console.log('SENT THAT SHIFT');
         $location.path('/editshifts');
