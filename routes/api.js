@@ -49,7 +49,6 @@ router.post('/users/availability', function(req, res){
   users.insert({ name: name, availability: availability, shiftsDesired: shiftsDesired, canManage: canManage }, function(err, doc){
   	console.log("DOC IS", doc);
   	if (err) throw err;
-  	res.redirect('/users#/submitted');
     res.send(201, doc);
   });
 });

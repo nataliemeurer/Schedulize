@@ -1,6 +1,6 @@
 angular.module('user.services', ['angularMoment'])
 
-.factory('Availability', function($http) {
+.factory('Availability', function($http, $location) {
   
   // Create empty slots in which to store our availability
   var slots = new Array(48);
@@ -78,7 +78,7 @@ angular.module('user.services', ['angularMoment'])
       console.log('Successfully posted');
     })
     .error(function(data, status, headers, config) {
-      console.log('Failed to Post to the Server');
+      console.log('Failed to Post to the Server')
     });
   };
 

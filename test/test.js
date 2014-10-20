@@ -6,20 +6,19 @@ moment().format();
 
 // Declare test variables
 var employees = {
-	1: {name: 'Kevin Meurer', shiftsDesired: 3, availability: [ {start: {}, duration: {}, end: {}} ], edges:[], canManage: true},
-	2: {name: 'Paul Allen', shiftsDesired: 4, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: false},
-	3: {name: 'Ray Ramon', shiftsDesired: 2, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: true},
-	4: {name: 'Riley Zinar', shiftsDesired: 1, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: true},
-	5: {name: 'Jeff Gladchun', shiftsDesired: 3, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: false},
-	6: {name: 'Will Burgo', shiftsDesired: 3, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: false},
-	7: {name: 'Andrew Teich', shiftsDesired: 2, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: false},
-	8: {name: 'Conor McNulty', shiftsDesired: 1, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: false},
-	9: {name: 'Andrew Morrison', shiftsDesired: 4, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: true},
-	10: {name: 'Mike Crafts', shiftsDesired: 3, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: false},
-	11: {name: 'Tade Anzalone', shiftsDesired: 4, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: false},
-	12: {name: 'Justin Pinili', shiftsDesired: 0, availability: {mon: [],tues: [], wed: [], thurs: [], fri: [], sat: [], sun:[]}, edges:[], canManage: true}
+	1: {name: 'Kevin Meurer', shiftsDesired: 3, availability: [], edges:[], canManage: true},
+	2: {name: 'Paul Allen', shiftsDesired: 4, availability: [], edges:[], canManage: false},
+	3: {name: 'Ray Ramon', shiftsDesired: 2, availability: [], edges:[], canManage: true},
+	4: {name: 'Riley Zinar', shiftsDesired: 1, availability: [], edges:[], canManage: true},
+	5: {name: 'Jeff Gladchun', shiftsDesired: 3, availability: [], edges:[], canManage: false},
+	6: {name: 'Will Burgo', shiftsDesired: 3, availability: [], edges:[], canManage: false},
+	7: {name: 'Andrew Teich', shiftsDesired: 2, availability: [], edges:[], canManage: false},
+	8: {name: 'Conor McNulty', shiftsDesired: 1, availability: [], edges:[], canManage: false},
+	9: {name: 'Andrew Morrison', shiftsDesired: 4, availability: [], edges:[], canManage: true},
+	10: {name: 'Mike Crafts', shiftsDesired: 3, availability: [], edges:[], canManage: false},
+	11: {name: 'Tade Anzalone', shiftsDesired: 4, availability: [], edges:[], canManage: false},
+	12: {name: 'Justin Pinili', shiftsDesired: 0, availability: [], edges:[], canManage: true}
 };
-
 var shifts = {
 	1: {name: '1430-1630/mon/man', time: '1430-1630', day: 'mon', type: 'man', edges: []},
 	2: {name: '1630-1830/mon/man', time: '1630-1830', day: 'mon', type: 'man', edges: []},
@@ -91,7 +90,7 @@ describe('Flow Network Object Instantiation', function(){
   		expect(newEdge).to.be.ok();
   		expect(newEdge.capacity).to.eql(5);
   		expect(newEdge.from).to.eql('source');
-  	}),
+  	});
   	it('should successfully assign edges to an object using the add edge function', function(){
   		//Add an edge to the network that will not be covered by the assign edges function
   		flowNetwork.addEdge('KevinMeurer', 'RileyZinar', 4);
@@ -99,10 +98,19 @@ describe('Flow Network Object Instantiation', function(){
   		expect(network['KevinMeurer'].edges[network['KevinMeurer'].edges.length -1].to).to.eql('RileyZinar');
   		expect(network['KevinMeurer'].edges[network['KevinMeurer'].edges.length -1].capacity).to.eql(4);
   		flowNetwork.network['KevinMeurer'].edges.pop();
-  	}),
+  	});
   	it('should successfully pair users with shifts based on availability', function(){
-  		
-  	})
+  		var employee = { name: 'Kevin Meurer', shiftsDesired: 1, availability: [{ start: moment({hour: 10, minute: 30}).day("Monday"), end: moment({hour: 15, minute: 0}).day("Monday") }], canManage:true};
+  		var shift = {name: '1100-1330/mon/man', time: { start: moment({hour: 11, minute: 0}).day("Monday"), end: moment({hour: 13, minute: 30}).day("Monday") }, day: 'mon', type: 'man', edges: []};
+  		console.log(shift);
+  		var successfulEdgeMatchNetwork = new assign.FlowNetwork({1: employee}, {1: shift});
+  		var network = successfulEdgeMatchNetwork.network;
+  		successfulEdgeMatchNetwork.assignEdges();
+  		expect(network['KevinMeurer']).to.be.ok();
+  		expect(network['KevinMeurer'].edges.length).to.eql(2);
+  		expect(network['1100-1330monman']).to.be.ok();
+  		expect(network['1100-1330monman'].edges.length).to.eql(2);
+  	});
   })
 
 });

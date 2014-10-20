@@ -15,13 +15,13 @@ userApp
     url: "/profile",
     templateUrl: "partials/user/userprofile.html"
   })
-  .state('setavailability', {
-    url: "/availability",
-    templateUrl: "partials/user/availability.html"
-  })
   .state('submitted', {
     url: "/submitted",
     templateUrl: "partials/user/submitted.html"
+  })
+  .state('setavailability', {
+    url: "/availability",
+    templateUrl: "partials/user/availability.html"
   });
 
   $urlRouterProvider.otherwise("/dashboard");
@@ -60,7 +60,9 @@ userApp
       // console.log(filledSlots);
       $scope.availabilityData['availability'] = filledSlots;
       // console.log($scope.availabilityData);
-      Availability.sendAvailability($scope.availabilityData);
+      Availability.sendAvailability($scope.availabilityData).then(function(data){
+        $location.path('/submitted');
+      });
     };
 
     $scope.setSelect = function(){

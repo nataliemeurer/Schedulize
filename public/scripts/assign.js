@@ -30,6 +30,7 @@ exports.FlowNetwork = function(employees, shifts){
 			// assign employees to network to be saved by their time shift
 			this.network[shiftKey] = shifts[key];
 			//Add edge from shift to sink
+			this.network[shiftKey]['edges'] = [];
 			this.addEdge(shiftKey, 'sink', 1);
 		}
 		// assign keys and edges to network
@@ -38,13 +39,14 @@ exports.FlowNetwork = function(employees, shifts){
 			// assign employees to network to be saved by their full name
 			this.network[userKey] = employees[key];
 			// Add edge to employees 
+			this.network[userKey]['edges'] = [];
 			this.addEdge('source', userKey, this.network[userKey]['shiftsDesired']);
 		}
 
 		// Add all edges between each user and shifts
-		// for( var key in employees ){
-		// 	this.addEmployeeEdges(employees[key], shifts);
-		// }
+		for( var key in employees ){
+			this.addEmployeeEdges(employees[key], shifts);
+		}
 		// TODO: assign user edges to shifts using the addEdge function.  This functionality should be contained elsewhere
 		// this.userEdgesToShifts();
 	}
@@ -59,8 +61,10 @@ exports.FlowNetwork = function(employees, shifts){
 			var shiftTime = currentShift.time;
 			for( var i = 0 ; i < employee.availability.length; i++ ){
 				var currentWindow = employee.availability[i];
+				console.log(currentWindow['start'])
 				if (currentWindow['start'].isSame(shiftTime['start'], 'day')){
 					if ((currentWindow['start'].isSame(shiftTime['start'], 'hour', 'minute', 'day') || currentWindow['start'].isBefore(shiftTime['start'], 'hour', 'minute')) && (currentWindow['start'].isSame(shiftTime['start'], 'hour', 'minute', 'day') || currentWindow['end'].isAfter(shiftTime['start'], 'hour', 'minute'))){
+						console.log('SHIFT KEY IS: ',shiftKey);
 						this.addEdge( userKey, shiftKey, 1);
 					}
 				}
