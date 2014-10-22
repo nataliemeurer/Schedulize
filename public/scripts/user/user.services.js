@@ -67,6 +67,17 @@ angular.module('user.services', ['angularMoment'])
   // sends availability to the server, which will store it under the user's name
   var _sendAvailability = function(filledSlots){
     filledSlots = shrinkAvailability(filledSlots);
+    //get rid of moment object-ness, necessary to avoid time change issues
+    for( var i = 0; i < filledSlots.availability.length; i++ ){
+      var currentItem = filledSlots['availability'][i];
+      console.log(currentItem.day);
+      filledSlots['availability'][i] = {
+        start: {hour: currentItem.start.hour(), minute: currentItem.start.minute()},
+        end: { hour: currentItem.end.hour(), minute: currentItem.end.minute() },
+        day: currentItem.day
+      }
+    }
+
     filledSlots.shiftsDesired = parseInt(filledSlots.shiftsDesired);
     if(filledSlots.canManage === 'true'){
       filledSlots.canManage = true;
