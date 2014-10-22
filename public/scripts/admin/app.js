@@ -77,9 +77,11 @@ adminApp
         data.endHours += 12;
       }
       newShift.time = {
-        start: moment({hour: $scope.shiftData.startHours, minute: $scope.shiftData.startMinutes}).day($scope.shiftData.day),
-        end: moment({hour: $scope.shiftData.endHours, minute: $scope.shiftData.endMinutes}).day($scope.shiftData.endDay)
+        start: {hour: data.startHours, minute: data.startMinutes},
+        end: {hour: data.endHours, minute: data.endMinutes},
+        day: data.day
       };
+      newShift.endDay = data.endDay;
       newShift.day = data.day;
       newShift.type = data.shiftType;
       if( data.managerRestricted === 'true' ){
@@ -92,5 +94,3 @@ adminApp
       });
     }
   });
-
-  

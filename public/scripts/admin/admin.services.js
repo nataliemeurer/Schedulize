@@ -23,7 +23,6 @@ angular.module('admin.services', ['angularMoment'])
 })
 
 .factory('Network', function($http){
-	moment().format();
 	var _getEmployees = function($http, companyName){
 		return $http({
 	      method: 'GET',
