@@ -61,7 +61,6 @@ angular.module('admin.services', ['angularMoment'])
 	// CREATE AN OBJECT THAT WILL HANDLE THE ENTIRE NETWORK
 	var FlowNetwork = function(employees, shifts){
 		// create network object to store graph
-		moment().format();
 		this.network = {};
 		
 		// create source with no edges assigned
