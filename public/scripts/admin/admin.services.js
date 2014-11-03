@@ -57,7 +57,6 @@ angular.module('admin.services', ['angularMoment'])
 	    this.flow = 0;
 	};
 
-
 	// CREATE AN OBJECT THAT WILL HANDLE THE ENTIRE NETWORK
 	var FlowNetwork = function(employees, shifts){
 		// create network object to store graph
@@ -73,8 +72,6 @@ angular.module('admin.services', ['angularMoment'])
 		this.assignEdges = function(){
 			for ( var i = 0; i < shifts.length; i++ ){
 				// convert all times to moment objects
-				shifts[i].time['start'] = moment(Date.parse(shifts[i].time['start']));
-        shifts[i].time['end'] = moment(Date.parse(shifts[i].time['end']));
 				var shiftKey = shifts[i]._id;
 				// assign employees to network to be saved by their time shift
 				this.network[shiftKey] = shifts[i];
@@ -84,11 +81,6 @@ angular.module('admin.services', ['angularMoment'])
 			}
 			// assign keys and edges to network
 			for ( var i = 0; i < employees.length; i++ ){ 
-			  // convert all times to moment objects
-			  for(var j = 0; j < employees[i].availability.length; j++){
-			    employees[i].availability[j]['start'] = moment(Date.parse(employees[i].availability[j]['start']));
-			    employees[i].availability[j]['end'] = moment(Date.parse(employees[i].availability[j]['end']));
-			  }
 				var userKey = employees[i]._id;
 				// assign employees to network to be saved by their full name
 				this.network[userKey] = employees[i];
@@ -110,14 +102,21 @@ angular.module('admin.services', ['angularMoment'])
 				// iterate through the shifts and compare
 				for ( var j = 0; j < shifts.length; j++ ){
 					var currentShift = shifts[j];
+					var shiftStart = convertTimeToNumber(currentShift.time.start);
+					var shiftEnd = convertTimeToNumber(currentShift.time.end);
 					var shiftKey = shifts[j]._id;
-					var shiftTime = currentShift.time;
 					for( var k = 0 ; k < employee.availability.length; k++ ){
 						var currentWindow = employee.availability[k];
-								console.log(currentWindow['start']);
-						if (currentWindow['start'].isSame(shiftTime['start'], 'day')){
-							if ((currentWindow['start'].isSame(shiftTime['start'], 'hour', 'minute', 'day') || currentWindow['start'].isBefore(shiftTime['start'], 'hour', 'minute')) && (currentWindow['start'].isSame(shiftTime['start'], 'hour', 'minute', 'day') || currentWindow['end'].isAfter(shiftTime['start'], 'hour', 'minute'))){
-								this.addEdge( userKey, shiftKey, 1);
+						var windowStart = convertTimeToNumber(currentWindow.start);
+						var windowEnd = convertTimeToNumber(currentWindow.end);
+						var userKey = employee._id;
+						if ( currentShift.day === currentWindow.day ){
+							if ( windowStart <= shiftStart && windowEnd >= shiftEnd ){
+								console.log("WINDOW START: ", windowStart);
+								console.log("WINDOW END: ", windowEnd);
+								console.log("SHIFT START: ", shiftStart);
+								console.log("SHIFT END: ", shiftEnd);
+								this.addEdge( userKey, shiftKey, 1 );
 							}
 						}
 					}
@@ -157,6 +156,7 @@ angular.module('admin.services', ['angularMoment'])
 			if ( currentNodeKey === sink ){
 				return path;
 			}
+			
 			//assign to variable for convenience and clarity
 			var currentNode = this.network[currentNodeKey];
 			
@@ -171,7 +171,6 @@ angular.module('admin.services', ['angularMoment'])
 					backwardEdges.push(currentNode.edges[i]);
 				}
 			}
-
 			// test if we have an augmenting path forward from here
 			if(forwardEdges.length){
 				for(var i = 0; i < forwardEdges.length; i++){
@@ -235,6 +234,13 @@ angular.module('admin.services', ['angularMoment'])
 		network.assignEdges();
 		return network;
 	};
+
+	/* HELPER FUNCTIONS */
+	var convertTimeToNumber = function(time){
+		var number = time.hour;
+		number += (time.minute / 60);
+		return number;
+	}
 
 	return {
 		getShifts: _getShifts,
