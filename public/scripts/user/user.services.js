@@ -49,8 +49,8 @@ angular.module('user.services', ['angularMoment'])
         if (filledSlots.availability[timeSlot][day].available) {
           var availableSlot = {};
           availableSlot.start = filledSlots.availability[timeSlot][day].start;
-          var nextTimeSlot = timeSlot+1;
-          while( filledSlots.availability[nextTimeSlot][day].available ) {
+          var nextTimeSlot = timeSlot + 1;
+          while( filledSlots.availability[ nextTimeSlot + 1 ] && filledSlots.availability[nextTimeSlot][day].available ) {
             nextTimeSlot ++;
           }
           availableSlot.end = filledSlots.availability[nextTimeSlot - 1][day].end;

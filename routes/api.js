@@ -42,11 +42,14 @@ router.post('/users/:userId/availability', function(req, res){
 
 
 router.post('/shifts', function(req, res){
+  console.log("Made it here");
   var time = req.body.time,
       day = req.body.day,
+      endDay = req.body.endDay;
       type = req.body.type,
       restricted = req.body.restricted;
-  shifts.insert({ time: time, day: day, type: type, restricted: restricted }).on('success', function(err, docs){
+  console.log( "REQ BODY IS", req.body );
+  shifts.insert({ time: time, day: day, endDay: endDay, type: type, restricted: restricted }).on('success', function(docs, err){
     if(err) throw err;
     res.send(201, docs);
   });
@@ -64,7 +67,7 @@ router.post('/users/availability', function(req, res){
       name = req.body.name,
       canManage = req.body.canManage || false,
       shiftsDesired = req.body.shiftsDesired;
-  users.insert({ name: name, availability: availability, shiftsDesired: shiftsDesired, canManage: canManage }, function(err, doc){
+  users.insert({ name: name, availability: availability, shiftsDesired: shiftsDesired, canManage: canManage }).on('success', function(doc, err){
   	if (err) throw err;
     res.send(201, doc);
   });

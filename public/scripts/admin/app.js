@@ -73,7 +73,7 @@ adminApp
         } else {
           data.endHours += 12;
         }
-      } else if( data.endHours === 'PM') {
+      } else if( data.endampm === 'PM') {
         data.endHours += 12;
       }
       newShift.time = {

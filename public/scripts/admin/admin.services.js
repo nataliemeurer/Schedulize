@@ -5,7 +5,7 @@ angular.module('admin.services', ['angularMoment'])
 		console.log(shift);
 		return $http({
 		  method: 'POST',
-		  url: '/api/shifts/',
+		  url: '/api/shifts',
 		  data: JSON.stringify(shift),
 		  contentType: 'application/json'
 		})
@@ -26,7 +26,7 @@ angular.module('admin.services', ['angularMoment'])
 	var _getEmployees = function($http, companyName){
 		return $http({
 	      method: 'GET',
-	      url: '/api/users/'
+	      url: '/api/users'
 	    })
 	    .success(function(data, status, headers, config) {
 	      return data;
