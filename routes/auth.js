@@ -17,20 +17,27 @@ router.post('/signup', function(req, res){
   var admin = req.body.admin;
 
   bcrypt.hash(password, 8, function(err, hash){
-    users.insert({ name: name, email: email, password: hash, company: company, admin: admin, availability: [], shiftsDesired: null, canManage: null}, function (err, doc) {
-      if (err) {throw err};
-      req.session.regenerate(function(){
-        req.session.name = name;
-        req.session.company = company;
-        res.redirect('/user');
-        res.send(200);
-      });
-    });
+    users.insert({ name: name,
+                   email: email,
+                   password: hash,
+                   company: company,
+                   admin: admin, availability: [],
+                   shiftsDesired: null,
+                   canManage: null
+                 }, function (err, doc) {
+                      if (err) {throw err};
+                      req.session.regenerate(function(){
+                        req.session.name = name;
+                        req.session.company = company;
+                        res.redirect('/user');
+                        res.send(200);
+                      });
+                });
   });
 });
 
 router.post('/signin', function(req, res){
-	
+
 });
 
 module.exports = router;
