@@ -1,6 +1,9 @@
 // THIS FILE DEMONSTRATES THE OBJECT STORAGE METHODS OF OUR MONGO DB
 // IN ASSIGN.JS, OBJECTS COME IN IN THIS FORMAT
 
+{_id: "", name: 'Kevin Meurer', shiftsDesired: 3, availability: [], canManage: true, password: }
+
+
 var employees = {
 	1: {name: 'Kevin Meurer', shiftsDesired: 3, availability: [], edges:[], canManage: true},
 	2: {name: 'Paul Allen', shiftsDesired: 4, availability: [], edges:[], canManage: false},
