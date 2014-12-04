@@ -1,13 +1,16 @@
 doctype html
-html
+html(ng-app='adminApp')
   head
-    title= title
+    title= 'Schedulize Admin'
     link(rel='stylesheet', href='../bower_components/bootstrap/dist/css/bootstrap.min.css')
     link(rel='stylesheet', href='../styles/style.css')
     link(href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css')
+    link(rel='stylesheet' href='../bower_components/ionicons/css/ionicons.css')
     script(src='./bower_components/angular/angular.min.js')
     script(src='./bower_components/ui-router/release/angular-ui-router.min.js')
-    script(src='./scripts/app.js')
-    script(src='./scripts/services.js')
+    script(src='./bower_components/moment/min/moment.min.js')
+    script(src='./bower_components/angular-moment/angular-moment.min.js')
+    script(src='./js/admin/app.js')
+    script(src='./js/admin/admin.services.js')
   body
     block content

@@ -112,10 +112,6 @@ angular.module('admin.services', ['angularMoment'])
 						var userKey = employee._id;
 						if ( currentShift.day === currentWindow.day ){
 							if ( windowStart <= shiftStart && windowEnd >= shiftEnd ){
-								console.log("WINDOW START: ", windowStart);
-								console.log("WINDOW END: ", windowEnd);
-								console.log("SHIFT START: ", shiftStart);
-								console.log("SHIFT END: ", shiftEnd);
 								this.addEdge( userKey, shiftKey, 1 );
 							}
 						}
@@ -225,7 +221,7 @@ angular.module('admin.services', ['angularMoment'])
 
 		// this function will do the actual assigning of shifts by managing the network results
 		this.parseFlowResults = function(network){
-
+			console.log(network.shiftsAssigned);
 		}
 	};
 
