@@ -1,6 +1,7 @@
 var userApp = angular.module('userApp', [
   'user.services',
-  'ui.router'
+  'ui.router',
+  'app.directives.availabilityCal'
   ]);
 
 userApp

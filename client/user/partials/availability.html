@@ -1,7 +1,6 @@
 <h1> Availability </h1>
 <div id="availabilityTable" ng-controller="availabilityController" ng-mouseup='stopSelect()'>
-	<!-- {{ timeSlots }} -->
-	<form name="availabilityForm" role='form' ng-submit="sendAvailability(timeSlots)">
+	<!-- <form name="availabilityForm" role='form' ng-submit="sendAvailability(timeSlots)">
 		<div class="container">
 			<div class='form-horizontal'>
 				<h4>Full Name</h4>
@@ -28,7 +27,23 @@
 		</div>
 		<div class="sendWrapper">
 			<input type="submit" class="btn btn-primary btn-block btn-lg" value="Complete availability!">
+		</div> -->
+		<div class="col-sm-10" availability-cal="{height: 500, defaultView: 'agendaWeek', buttonIcons: false, allDaySlot: false, columnFormat: {week: 'dddd'}, header: {left: '', right: ''}, eventStartEditable: true, eventDurationEditable: true, firstHour: 6, selectable: true, selectHelper: true, unselectAuto: false}">
 		</div>
 	</form>
+	<script>
+		$('.fc-today').removeClass('fc-state-highlight');
+	</script>
+	<style type="text/css">
+	.fc-widget-header {
+		background-color: white;
+		padding: 5px 0;
+	}
+
+	.fc-today {
+		background-color: white;
+	}
+
+	</style>
 
 </div>

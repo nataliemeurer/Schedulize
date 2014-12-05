@@ -32,7 +32,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/../client')));
 app.use(session({
-  secret: 'schedulizetheapp'
+  secret: 'schedulizetheapp',
+  saveUninitialized: true,
+  resave: false
 }));
 
 // Make our db accessible to our router
