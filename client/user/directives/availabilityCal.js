@@ -4,8 +4,8 @@ userApp.directive('availabilityCal', function($http){
   return {
     restrict: 'A',
     template: '<div class="calendar">' +
-                '<button class="btn btn-success" ng-class="{selected: {{ preferred }} }" ng-click="togglePreferred()"}"">Preferred</button>' +
-                '<button class="btn btn-warning" ng-class="{ selected: !{{ preferred }} }" ng-click="togglePreferred()"} "{>Available</button>' +
+                '<button class="btn btn-success" ng-class="{ selected: preferred }" ng-click="togglePreferred()"}"">Preferred</button>' +
+                '<button class="btn btn-warning" ng-class="{ selected: !preferred }" ng-click="togglePreferred()"} "{>Available</button>' +
               '<div id="availabilityCal"></div></div>',
     replace: true,
     link: function(scope, element, attrs) {
