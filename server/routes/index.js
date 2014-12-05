@@ -7,12 +7,12 @@ var users = db.get('users');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('external/index', {title: 'Schedulize'});
+  res.render('public/index', {title: 'Schedulize'});
 });
 
 /* GET New User page. */
 router.get('/signup', function(req, res) {
-  res.render('external/newuser', { title: 'Sign Up for Schedulize' });
+  res.render('public/newuser', { title: 'Sign Up for Schedulize' });
 });
 
 router.get('/signin', function(req, res){

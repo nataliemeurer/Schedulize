@@ -1,4 +1,4 @@
-angular.module('user.services', ['angularMoment'])
+angular.module('user.services', [])
 
 .factory('Availability', function($http, $location) {
 

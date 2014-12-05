@@ -1,28 +1,25 @@
 var adminApp = angular.module('adminApp', [
   'admin.services',
-  'ui.router',
-  'angularMoment'
+  'ui.router'
 ]);
-
-var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 adminApp
   .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     $stateProvider
       .state('dashboard', {
         url: "/companydashboard",
-        templateUrl: "partials/admin/dashboard.html"
+        templateUrl: "/admin/partials/dashboard.html"
       })
       .state('companydata', {
         url: "/companydata",
-        templateUrl: "partials/admin/companydata.html"
+        templateUrl: "/admin/partials/companydata.html"
       })
       .state('createschedule', {
         url: "/createschedule",
-        templateUrl: "partials/admin/createschedule.html"
+        templateUrl: "/admin/partials/createschedule.html"
       }).state('editshifts', {
         url: "/editshifts",
-        templateUrl: "partials/admin/editshifts.html"
+        templateUrl: "/admin/partials/editshifts.html"
       });
     $urlRouterProvider.otherwise("/companydashboard");
   })
