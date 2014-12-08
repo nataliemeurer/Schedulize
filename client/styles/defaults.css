@@ -19,7 +19,7 @@ p, h1, h2, h3 {
 }
 
 i, h4, h5, h6 {
-	color: rgba(0, 0, 0, 0.87);
+	color: rgba(0, 0, 0, 0.57);
 }
 
 h1 {
@@ -91,4 +91,12 @@ h3 {
 
 div.text-light {
 	color: #ECEFF1;
+}
+
+.btn-green {
+  background-color: #4CAF50 !important;
+}
+
+.btn-yellow {
+  background-color: #FFEB3B !important;
 }

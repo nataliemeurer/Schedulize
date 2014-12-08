@@ -4,8 +4,8 @@ userApp.directive('availabilityCal', function($http){
   return {
     restrict: 'A',
     template: '<div class="calendar">' +
-                '<button class="btn btn-success" ng-class="{ active: preferred }" ng-click="setPreferred()"}"">Preferred</button>' +
-                '<button class="btn btn-warning" ng-class="{ active: !preferred }" ng-click="setAvailable()"} "{>Available</button>' +
+                '<button class="btn btn-default btn-raised" ng-class="{ \'btn-green\': preferred }" ng-click="setPreferred()">Preferred</button>' +
+                '<button class="btn btn-default btn-raised" ng-class="{ \'btn-yellow\': !preferred }" ng-click="setAvailable()">Available</button>' +
               '<div id="availabilityCal"></div></div>',
     replace: true,
     link: function(scope, element, attrs) {
@@ -25,14 +25,18 @@ userApp.directive('availabilityCal', function($http){
               title: 'Preferred',
               start: start,
               end: end,
-              color: '#26A65B'
+              color: '#4CAF50',
+              borderColor: '#4CAF50',
+              textColor: 'rgba(0, 0, 0, 0.87)'
             };
         } else {
           eventData = {
               title: 'Available',
               start: start,
               end: end,
-              color: '#F9BF3B'
+              color: '#FFEB3B',
+              borderColor: '#FFEB3B',
+              textColor: 'rgba(0, 0, 0, 0.87)'
             };
         }
         $('#availabilityCal').fullCalendar('renderEvent', eventData, false); // stick? = true

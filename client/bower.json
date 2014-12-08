@@ -27,6 +27,7 @@
     "ionicons": "~1.5.2",
     "jquery": "~2.1.1",
     "fullcalendar": "~2.2.3",
-    "bootstrap-material-design": "~0.2.0"
+    "bootstrap-material-design": "~0.2.0",
+    "sweetalert": "~0.3.2"
   }
 }
