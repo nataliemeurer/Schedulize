@@ -1,10 +1,12 @@
 <div id="availabilityTable" ng-controller="availabilityController" ng-mouseup='stopSelect()'>
-	<aside class="sidebar">
+	<aside class="sidebar-left">
 		<p>Content content content</p>
 	</aside>
-	<div class="availabilityModule">
-		<h1> Availability </h1>
-		<div class="col-sm-8 availabilityCal" availability-cal="{ height: 600, allDaySlot: false, eventStartEditable: true, eventDurationEditable: true, firstHour: 6, selectable: true, selectHelper: true, unselectAuto: false}">
+	<div class="left-sidebar-content">
+		<div class="sidebar-header">
+			<h1> Availability Calendar View</h1>
+		</div>
+		<div class="availabilityCal" availability-cal="{ height: 600, allDaySlot: false, eventStartEditable: true, eventDurationEditable: true, firstHour: 6, selectable: true, selectHelper: true, unselectAuto: false}">
 	</div>
 	<script>
 		$('.fc-today').removeClass('fc-state-highlight');

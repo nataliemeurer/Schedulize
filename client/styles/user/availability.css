@@ -1,0 +1,5 @@
+/* Remove Default Toolbar */
+div.fc-toolbar {
+	display: none;
+}
+
