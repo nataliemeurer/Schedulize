@@ -48,16 +48,6 @@ td {
   user-select: none;
 }
 
-td.available {
-  color: #ecf0f1;
-  background-color: #00B16A;
-}
-
-td.tentative {
-  color: #ecf0f1;
-  background-color: #f1c40f;
-}
-
 .navigation {
   width: 100%;
   height: 40px;
@@ -110,17 +100,6 @@ td.tentative {
 .checkboxes label {
   display: block;
   padding-left: 15px;
-}
-
-.checkboxes input[type='checkbox']{
-  width: 13px;
-  height: 13px;
-  padding: 0;
-  margin:0;
-  vertical-align: bottom;
-  position: relative;
-  top: 2px;
-  *overflow: hidden;
 }
 
 #container {
@@ -181,26 +160,6 @@ i {
   margin-left: 55px;
 }
 
-form {
-  margin: 10px;
-}
-
-input {
-  width: 360px;
-  display: block;
-  font-size: 13px;
-  padding: 5px;
-  margin-bottom: 5px;
-}
-
-input[type=url] {
-  display: inline
-}
-
-input[type=url]:focus {
-  outline: none;
-}
-
 
 .error {
   border: red solid 4px;
@@ -225,16 +184,6 @@ input[type=url]:focus {
   transform: translateY(50%);
 }
 
-.slot {
-  cursor: pointer;
-  -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
 .help-block {
   color: red;
   margin-bottom: 0px;
@@ -244,9 +193,4 @@ input[type=url]:focus {
   display: inline-block;
   width: 70px;
   float: right;
-}
-
-input{
-  clear: both;
-  float: left;
 }

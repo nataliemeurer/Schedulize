@@ -24,8 +24,6 @@ userApp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $urlRouterProvider.otherwise("/dashboard");
 })
 .controller('mainController', function($scope, $state){
-  // Used to track active tab
   $.material.init();
-  $scope.tabs = $state.get();
-  $scope.state = $state;
+  $.material.checkbox();
 });

@@ -3,3 +3,14 @@ div.fc-toolbar {
 	display: none;
 }
 
+.fc-widget-header {
+	background-color: transparent;
+}
+
+.cal-toolbar *{
+	margin-right: 10px;
+}
+
+tbody, table, thead, th, tr, td{
+	border-color: #CECECE !important;
+}

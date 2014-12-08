@@ -2,6 +2,7 @@
 
 userApp.controller('availabilityController', function($scope, $location, Availability){
     $scope.preferred = true;
+    $scope.events = {};
     $scope.setPreferred = function(){
         $scope.preferred = true;
     }

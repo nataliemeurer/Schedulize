@@ -38,16 +38,17 @@ h3 {
 .sidebar-left, .sidebar-right {
   box-sizing: border-box;
   background-color: #455A64;
-  height: 5000px;
+  height: 1000px;
   position: fixed;
-  margin-top: -20px;
+  margin-top: -29px;
   margin: none;
   width: 20%;
   padding: 2% 15px;
   color: #ECEFF1;
+  overflow-y: scroll;
 }
 
-.sidebar-left p, .sidebar-left h5, .sidebar-left h6 {
+.sidebar-left p, .sidebar-left h5, .sidebar-left h6, sidebar-right p, .sidebar-right h5, .sidebar-right h6, .sidebar-left input {
   color: #ECEFF1;
 }
 
@@ -55,15 +56,10 @@ h3 {
   color: rgba(255, 255, 255, 0.70);
 }
 
-.sidebar-right p, .sidebar-right h5, .sidebar-right h6 {
-  color: #ECEFF1;
-}
-
 .sidebar-right h1, .sidebar-right h2, .sidebar-right h3, .sidebar-right h4 {
   color: rgba(255, 255, 255, 0.70);
 }
 
-}
 .sidebar-left {
   float: left;
 }
@@ -99,4 +95,8 @@ div.text-light {
 
 .btn-yellow {
   background-color: #FFEB3B !important;
+}
+
+.btn-light {
+  background-color: #CFD8DC !important;
 }

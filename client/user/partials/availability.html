@@ -1,24 +1,50 @@
 <div id="availabilityTable" ng-controller="availabilityController" ng-mouseup='stopSelect()'>
-	<aside class="sidebar-left">
-		<p>Content content content</p>
-	</aside>
-	<div class="left-sidebar-content">
-		<div class="sidebar-header">
-			<h2> Availability Calendar View</h2>
+	<form role="form">
+		<aside class="sidebar-left">
+			<h1>Availability Steps:</h1>
+			<div class="inputs">
+				<h4>1. Enter your desired number of shifts</h4>
+				<div class="form-group has-success">
+					<input type="number" class="form-control floating-label" placeholder="Desired Shifts">
+				</div>
+				<h4>2. Indicate which positions you are eligible to work</h4>
+				<div class="checkbox">
+	                <label>
+	                    <input type="checkbox" name="Cashier"/> Cashier
+	                </label>
+	            </div>
+	            <div class="checkbox">
+	                <label>
+	                    <input type="checkbox" name="Manager"/> Manager
+	                </label>
+	            </div>
+	            <div class="checkbox">
+	                <label>
+	                    <input type="checkbox" name="Stocker"/> Stocker
+	                </label>
+	            </div>
+	            <div class="checkbox">
+	                <label>
+	                    <input type="checkbox" name="Tosser"/> Tosser
+	                </label>
+	            </div>
+	            <h4>3. Drag on the calendar to indicate times you could work.</h4>
+	            <!-- insert fancy right arrow here -->
+	            <h4>4. Press Submit</h4>
+	            <button type="submit" class="btn btn-default btn-raised btn-light">Submit Availability</button>
+			</div>
+		</aside>
+		<div class="left-sidebar-content">
+			<div class="sidebar-header">
+				<h2> Availability Calendar View</h2>
+			</div>
+			<div class="availabilityCal" availability-cal="{ height: 520, allDaySlot: false, eventStartEditable: true, eventDurationEditable: true, firstHour: 6, selectable: true, selectHelper: true, unselectAuto: false}">
 		</div>
-		<div class="availabilityCal" availability-cal="{ height: 600, allDaySlot: false, eventStartEditable: true, eventDurationEditable: true, firstHour: 6, selectable: true, selectHelper: true, unselectAuto: false}">
-	</div>
+	</form>
 	<script>
-		$('.fc-today').removeClass('fc-state-highlight');
+	$.material.init();
 	</script>
 	<style type="text/css">
-	.fc-widget-header {
-		background-color: transparent;
-	}
-
-	.fc-today {
-		background-color: white;
-	}
 
 	.selected, .selected:hover, .selected:active, .selected:focus {
 		color: black;
