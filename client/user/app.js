@@ -16,10 +16,16 @@ userApp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     url: "/submitted",
     templateUrl: "/user/partials/submitted.html"
   })
-  .state('setavailability', {
+  .state('availability', {
     url: "/availability",
     templateUrl: "/user/partials/availability.html"
   });
 
   $urlRouterProvider.otherwise("/dashboard");
+})
+.controller('mainController', function($scope, $state){
+  // Used to track active tab
+  $.material.init();
+  $scope.tabs = $state.get();
+  $scope.state = $state;
 });

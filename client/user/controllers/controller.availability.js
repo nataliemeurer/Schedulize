@@ -2,9 +2,11 @@
 
 userApp.controller('availabilityController', function($scope, $location, Availability){
     $scope.preferred = true;
-    $scope.togglePreferred = function(){
-
-        $scope.preferred = !$scope.preferred;
+    $scope.setPreferred = function(){
+        $scope.preferred = true;
+    }
+    $scope.setAvailable = function(){
+        $scope.preferred = false;
     }
     // //object to be filled out with form
     // $scope.availabilityData = {};

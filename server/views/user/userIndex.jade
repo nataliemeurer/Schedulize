@@ -2,12 +2,56 @@ extends layout
 
 block content
   //- p User Access: Signed in as #{username}
-  nav(class='navbar navbar-default navbar-fixed-top' role='navigation')
-    div(class='container') 
-      a(href='/' class='navbar-brand') Schedulize
-      a(ui-sref='dashboard' class='btn navbar-btn .navbar-left') Dashboard
-      a(ui-sref='userprofile' class='btn navbar-btn .navbar-left') Profile
-      a(ui-sref='setavailability' class='btn navbar-btn .navbar-left') Availability
-      a(href='../Admin' class='btn navbar-btn .navbar-left') Admin View
-      button(method='post' class='logout btn btn-default navbar-btn .navbar-right' action="") Logout
+  nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
+    div.navbar-header
+      button.navbar-toggle(type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse")
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href='/') Schedulize
+    div.navbar-collapse.collapse.navbar-responsive-collapse
+      ul.nav.navbar-nav
+        li(ui-sref-active="active")
+          a(ui-sref='dashboard') Dashboard
+        li(ui-sref-active="active")
+          a(ui-sref='availability') Availability
+        li
+          a(href='../Admin') Admin View
   div(ui-view)
+
+//- <div class="navbar navbar-default">
+//-   <div class="navbar-collapse collapse navbar-responsive-collapse">
+//-     <ul class="nav navbar-nav">
+//-       <li class="active"><a href="javascript:void(0)">Active</a></li>
+//-       <li><a href="javascript:void(0)">Link</a></li>
+//-       <li class="dropdown">
+//-         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+//-         <ul class="dropdown-menu">
+//-           <li><a href="javascript:void(0)">Action</a></li>
+//-           <li><a href="javascript:void(0)">Another action</a></li>
+//-           <li><a href="javascript:void(0)">Something else here</a></li>
+//-           <li class="divider"></li>
+//-           <li class="dropdown-header">Dropdown header</li>
+//-           <li><a href="javascript:void(0)">Separated link</a></li>
+//-           <li><a href="javascript:void(0)">One more separated link</a></li>
+//-         </ul>
+//-       </li>
+//-     </ul>
+//-     <form class="navbar-form navbar-left">
+//-       <input type="text" class="form-control col-lg-8" placeholder="Search">
+//-     </form>
+//-     <ul class="nav navbar-nav navbar-right">
+//-       <li><a href="javascript:void(0)">Link</a></li>
+//-       <li class="dropdown">
+//-         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+//-         <ul class="dropdown-menu">
+//-           <li><a href="javascript:void(0)">Action</a></li>
+//-           <li><a href="javascript:void(0)">Another action</a></li>
+//-           <li><a href="javascript:void(0)">Something else here</a></li>
+//-           <li class="divider"></li>
+//-           <li><a href="javascript:void(0)">Separated link</a></li>
+//-         </ul>
+//-       </li>
+//-     </ul>
+//-   </div>
+//- </div>
