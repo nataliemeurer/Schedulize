@@ -63,11 +63,12 @@ router.get('/shifts', function(req, res){
 
 // To be deleted when Ids are set up
 router.post('/users/availability', function(req, res){
-  var availability = req.body.availability,
-      name = req.body.name,
-      canManage = req.body.canManage || false,
-      shiftsDesired = req.body.shiftsDesired;
-  users.insert({ name: name, availability: availability, shiftsDesired: shiftsDesired, canManage: canManage }).on('success', function(doc, err){
+  console.log(req.body);
+  var availability = req.body.availability;
+  var name = req.body.name;
+  var eligibility = req.body.eligibility;
+  var shiftsDesired = req.body.desiredShifts;
+  users.insert({ name: name, availability: availability, shiftsDesired: shiftsDesired, eligibility: eligibility }).on('success', function(doc, err){
   	if (err) throw err;
     res.send(201, doc);
   });

@@ -5,8 +5,8 @@ userApp.directive('availabilityCal', function($http){
     restrict: 'A',
     template: '<div class="calendar">' +
                 '<div class="cal-toolbar">' +
-                  '<button class="btn btn-default btn-raised" ng-class="{ \'btn-green\': preferred }" ng-click="setPreferred()">Preferred</button>' +
-                  '<button class="btn btn-default btn-raised" ng-class="{ \'btn-yellow\': !preferred }" ng-click="setAvailable()">Available</button>' +
+                  '<button type="button" class="btn btn-default btn-raised" ng-class="{ \'btn-green\': preferred }" ng-click="setPreferred()">Preferred</button>' +
+                  '<button type="button" class="btn btn-default btn-raised" ng-class="{ \'btn-yellow\': !preferred }" ng-click="setAvailable()">Available</button>' +
                 '</div>' +
               '<div id="availabilityCal"></div></div>',
     replace: true,
@@ -20,11 +20,12 @@ userApp.directive('availabilityCal', function($http){
       properties.timezone = 'UTC';
       properties.defaultView = 'agendaWeek',
       properties.columnFormat = {week: 'dddd'};
-      properties.eventDragStop = function(event){
-        console.log("EVENT IS: ", event);
-        scope.events[event.storageKey] = event;
-      }
-
+      properties.allDaySlot = false;
+      properties.eventStartEditable = true;
+      properties.selectHelper = true;
+      properties.overlap = false;
+      
+      // CREATE AND STORE EVENTS
       properties.select = function(start, end) {
         var eventData;
         if(scope.preferred === true){
@@ -50,9 +51,16 @@ userApp.directive('availabilityCal', function($http){
         }
         scope.events[eventIdx] = eventData;
         eventIdx++;
-        console.log(scope.events);
         $('#availabilityCal').fullCalendar('renderEvent', eventData, false); // stick? = true
         $('#availabilityCal').fullCalendar('unselect');
+      }
+      // OVERWRITE EVENT
+      properties.eventResize = function(event){
+        scope.events[event.storageKey] = event;
+      }
+      // EVENT DRAGGING
+      properties.eventDrop = function(event){
+        scope.events[event.storageKey] = event;
       }
 
       $('#availabilityCal').fullCalendar(properties);

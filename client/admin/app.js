@@ -14,9 +14,9 @@ adminApp
         url: "/companydata",
         templateUrl: "/admin/partials/companydata.html"
       })
-      .state('createschedule', {
-        url: "/createschedule",
-        templateUrl: "/admin/partials/createschedule.html"
+      .state('schedulemanager', {
+        url: "/schedulemanager",
+        templateUrl: "/admin/partials/schedulemanager.html"
       }).state('editshifts', {
         url: "/editshifts",
         templateUrl: "/admin/partials/editshifts.html"
