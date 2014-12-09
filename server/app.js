@@ -6,17 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
-
-//DATABASE DECLARATIONS
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/schedulize');
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
 var api = require('./routes/api');
 var auth = require('./routes/auth');
+var db = require('./database/dbSchema');
 
 var app = express();
 
