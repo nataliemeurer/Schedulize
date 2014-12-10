@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var mongo = require('mongodb');
-var monk = require('monk');
 var db = require('../database/dbSchema');
 var User = db.User;
 var Company = db.Company;
@@ -33,7 +32,7 @@ router.get('/companies/:companyId/users', function(req, res){
 router.get('/users', function(req, res){
 	User
     .find({})
-    .populate(companies)
+    .populate('companies')
     .exec(function (err, users) {
       if (err) return err;
       res.status(200).send(users);
