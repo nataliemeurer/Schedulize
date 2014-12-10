@@ -5,9 +5,6 @@ var db = require('../database/dbSchema');
 var User = db.User;
 var Company = db.Company;
 var Schedule = db.Schedule;
-// var db = monk('localhost:27017/schedulize');
-// var shifts = db.get('shifts');
-// var users = db.get('users');
 
 router.param('companyId', function(req, res, next, code){
 
@@ -75,7 +72,7 @@ router.post('/users/availability', function(req, res){
   var name = req.body.name;
   var eligibility = req.body.eligibility;
   var shiftsDesired = req.body.desiredShifts;
-  users.insert({ name: name, availability: availability, shiftsDesired: shiftsDesired, eligibility: eligibility }).on('success', function(doc, err){
+  users.findOne({ name: name, availability: availability, shiftsDesired: shiftsDesired, eligibility: eligibility }).on('success', function(doc, err){
   	if (err) throw err;
     res.send(201, doc);
   });
