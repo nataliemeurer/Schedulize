@@ -12,6 +12,8 @@ db.once('open', function callback () {
 	console.log("Connected to database");
 	var _userSchema = new Schema({
 		name: String,
+		email: String,
+		password: String,
 		companies: [{type: ObjectId, ref: 'Company'}],
 		shiftsDesired: Number,
 		shiftsAssigned: Number,
@@ -36,9 +38,16 @@ db.once('open', function callback () {
 		active: Boolean
 	});
 
+	var User = mongoose.model('User', _userSchema);
+	var Company = mongoose.model('Company', _companySchema);
+	var Schedule = mongoose.model('Schedule', _scheduleSchema);
+
 	module.exports = {
 		userSchema: _userSchema,
+		User: User,
 		companySchema: _companySchema,
-		scheduleSchema: _scheduleSchema
+		Company: Company,
+		scheduleSchema: _scheduleSchema,
+		Schedule: Schedule
 	}
 });

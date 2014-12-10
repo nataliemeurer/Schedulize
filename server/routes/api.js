@@ -2,9 +2,13 @@ var express = require('express');
 var router = express.Router();
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/schedulize');
-var shifts = db.get('shifts');
-var users = db.get('users');
+var db = require('../database/dbSchema');
+var User = db.User;
+var Company = db.Company;
+var Schedule = db.Schedule;
+// var db = monk('localhost:27017/schedulize');
+// var shifts = db.get('shifts');
+// var users = db.get('users');
 
 router.param('companyId', function(req, res, next, code){
 
@@ -27,9 +31,13 @@ router.get('/companies/:companyId/users', function(req, res){
 });
 
 router.get('/users', function(req, res){
-	users.find({}).on('success', function(docs){
-		res.send(200, docs);
-	});
+	User
+    .find({})
+    .populate(companies)
+    .exec(function (err, users) {
+      if (err) return err;
+      res.status(200).send(users);
+    })
 });
 
 router.get('/users/:userId', function(req, res){

@@ -1,4 +1,5 @@
-var db = require('dbSchema.js');
+var db = require('./dbSchema');
+var mongoose = require('mongoose');
 
 var _User = mongoose.model('User', db.userSchema);
 
