@@ -6,14 +6,16 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var admin = require('./routes/admin');
-var api = require('./routes/api');
-var auth = require('./routes/auth');
 var db = require('./database/dbSchema');
 
 var app = express();
+
+// Declare routers
+var authRouter = express.Router();
+var apiRouter = express.Router();
+var userRouter = express.Router();
+var publicRouter = express.Router();
+var adminRouter = express.Router();
 
 // view engine setup
 app.set('views', __dirname + '/views');
@@ -38,11 +40,26 @@ app.use(function(req,res,next){
     next();
 });
 
-app.use('/', routes);
-app.use('/auth', auth);
-app.use('/api', api);
-app.use('/admin', admin);
-app.use('/user', users);
+// Set Basic routing paths
+app.use('/', publicRouter);
+app.use('/user', userRouter);
+app.use('/api', apiRouter);
+app.use('/auth', authRouter);
+app.use('/admin', adminRouter);
+
+// // Include Router files
+require('./routes/apiRoutes.js')(apiRouter);
+require('./routes/publicRoutes.js')(publicRouter);
+require('./routes/authRoutes.js')(authRouter);
+require('./routes/userRoutes.js')(userRouter);
+require('./routes/adminRoutes.js')(adminRouter);
+
+
+// app.use('/', routes);
+// app.use('/auth', auth);
+// app.use('/api', api);
+// app.use('/admin', admin);
+// app.use('/user', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

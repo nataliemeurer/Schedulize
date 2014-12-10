@@ -7,6 +7,9 @@ var companies = db.get('companies');
 var users = db.get('users');
 var bcrypt = require('bcrypt');
 
+module.exports = function (app) {
+
+};
 router.post('/signup', function(req, res){
   console.log('signing you up!');
   var name = req.body.name;
@@ -39,5 +42,3 @@ router.post('/signup', function(req, res){
 router.post('/signin', function(req, res){
 
 });
-
-module.exports = router;
