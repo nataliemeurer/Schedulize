@@ -6,6 +6,7 @@ var companies = db.get('companies');
 var users = db.get('users');
 
 module.exports = function (app) {
+	// RENDERING ROUTES
 	app.get('/', function(req, res) {
 	  res.render('admin/adminIndex', {title: 'Administrator Page', username: "Kevin Meurer, Director of All Things Ever"});
 	});

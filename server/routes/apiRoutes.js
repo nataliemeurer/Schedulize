@@ -5,58 +5,86 @@ var Company = db.Company;
 var Schedule = db.Schedule;
 
 module.exports = function (app) {
+  // PARAM ROUTING
   app.param('companyId', function(req, res, next, code){
 
   });
 
+  app.param('companyId', function(req, res, next, code){
+
+  })
+
   app.param('userId', function(req, res, next, code){
-  	users.findOne({_id: code}).on('success', function(doc){
-        req.user = doc;
-        next();
-  	});
+  	User.findOne({_id: code})
+        .exec(function(doc){
+          req.user = doc;
+          next();
+        });
   });
 
-  app.get('/companies/:companyId/', function(req, res){
+  // API ROUTES
+  // Companies:
+  app.route('/companies')
+      .get(function(req, res){}) // Get all company names
+      .post(function(req, res){}); // Add new company
 
-  });
+  app.route('/companies/:companyId')
+      .get(function(req, res){}) // Get company data
+      .post(function(req, res){}) // Update company
+      .put(function(req, res){}) // Update company
+      .delete(function(req, res){}); // Delete company data
 
-
-  app.get('/companies/:companyId/users', function(req, res){
-
-  });
-
-  app.get('/users', function(req, res){
-  	User
-      .find({})
-      .populate('companies')
-      .exec(function (err, users) {
-        if (err) return err;
-        res.status(200).send(users);
+  app.route('/companies/:companyId/employees')
+      .get(function(req, res){}) // get employees of a given company
+      .post(function(req, res){}) // add employee(s) to a given company
+      .delete(function(req, res){}); // remove employees from a given company
+  
+  // Users:
+  app.route('/users')
+      .get(function(req, res){ // return all users
+      	User
+          .find({})
+          .populate('companies')
+          .exec(function (err, users) {
+            if (err) return err;
+            res.status(200).send(users);
+          })
       })
-  });
+      .post(function(req, res){}); // add new user
 
-  app.get('/users/:userId', function(req, res){
-  	res.send(req.user);
-  });
+  app.route('/users/:userId')
+      .get(function(req, res){ // get user data
+        res.send(req.user);
+      })
+      .post(function(req, res){}) // add new values to user data
+      .put(function(req, res){}) // update user data
+      .delete(function(req, res){}); // delete user
 
-  app.post('/users/:userId/availability', function(req, res){
-  	
-  });
+  app.route('/users/availability')
+      .get(function(req, res){})
+      .post(function(req, res){})
+      .put(function(req, res){})
+      .delete(function(req, res){});
 
+  app.route('/users/availability/:userId')
+      .get(function(req, res){})
+      .post(function(req, res){})
+      .put(function(req, res){})
+      .delete(function(req, res){});
 
-  app.post('/shifts', function(req, res){
-    console.log("Made it here");
-    var time = req.body.time,
-        day = req.body.day,
-        endDay = req.body.endDay;
-        type = req.body.type,
-        restricted = req.body.restricted;
-    console.log( "REQ BODY IS", req.body );
-    shifts.insert({ time: time, day: day, endDay: endDay, type: type, restricted: restricted }).on('success', function(docs, err){
-      if(err) throw err;
-      res.send(201, docs);
-    });
-  });
+  // Schedules
+  app.route('/schedules')
+      .get(function(req, res){}) // get all schedules
+      .post(function(req, res){}); // add a new schedule
+
+  app.route('/schedules/:companyId')
+      .get(function(req, res){}) // get all schedules for that company
+      .post(function(req, res){}) // add a new schedule for that company
+      .put(function(req, res){}) // update schedule for that company
+      .delete(function(req, res){}); // delete all schedules for a given company
+
+  app.route('/schedules/:companyId/:scheduleId/populate')
+      .post(function(req, res){}); // populate the schedule for a given company
 
   app.get('/shifts', function(req, res){
     shifts.find({}).on('success', function(docs){
@@ -74,18 +102,6 @@ module.exports = function (app) {
     users.findOne({ name: name, availability: availability, shiftsDesired: shiftsDesired, eligibility: eligibility }).on('success', function(doc, err){
     	if (err) throw err;
       res.send(201, doc);
-    });
-  });
-
-  app.get('/users', function(req, res){
-  	users.find({}).on('success', function(docs){
-      res.send(200, docs);
-  	});
-  });
-
-  app.post('/logout', function(req, res){
-  	req.session.destroy(function(){
-      res.redirect('/');
     });
   });
 };
