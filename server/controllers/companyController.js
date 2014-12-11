@@ -14,7 +14,7 @@ module.exports = {
         }
         req.company = company;
         next();
-      })
+      });
   },
 
   getAllCompanies: function(req, res){
@@ -38,11 +38,10 @@ module.exports = {
       });
     newCompany.save(function(err, doc){
       if(err){
-        return handleError(err);
+        res.status(500).send(err);
       }
       console.log("Saved");
       res.status(201).send(doc);
-    })
+    });
 	}
-
-}
+};

@@ -35,6 +35,6 @@ module.exports = {
         res.status(500).send(err);
       }
       res.status(201).send(user);
-    })
+    });
   }
-}
+};

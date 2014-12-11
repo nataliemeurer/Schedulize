@@ -45,8 +45,8 @@ module.exports = function(grunt) {
         force: 'true',
         jshintrc: '.jshintrc',
         ignores: [
-          'public/bower_components/**/*.js',
-          'public/dist/**/*.js'
+          'client/bower_components/**/*.js',
+          'client/dist/**/*.js'
         ]
       }
     },

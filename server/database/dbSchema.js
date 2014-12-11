@@ -51,4 +51,4 @@ module.exports = {
 	Company: Company,
 	scheduleSchema: _scheduleSchema,
 	Schedule: Schedule
-}
+};

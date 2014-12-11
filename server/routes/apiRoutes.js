@@ -38,9 +38,11 @@ module.exports = function (app) {
           .find({})
           .populate('companies')
           .exec(function (err, users) {
-            if (err) return err;
+            if (err) {
+              return err;
+            }
             res.status(200).send(users);
-          })
+          });
       })
       .post(userController.createNewUser); // add new user
 
@@ -84,22 +86,16 @@ module.exports = function (app) {
   app.route('/schedules/:companyId/:scheduleId/populate')
       .post(function(req, res){}); // populate the schedule for a given company
 
-  app.get('/shifts', function(req, res){
-    shifts.find({}).on('success', function(docs){
-      res.send(200, docs);
-    });
-  })
-
   // To be deleted when Ids are set up
   app.post('/users/availability', function(req, res){
-    console.log(req.body);
-    var availability = req.body.availability;
-    var name = req.body.name;
-    var eligibility = req.body.eligibility;
-    var shiftsDesired = req.body.desiredShifts;
-    users.findOne({ name: name, availability: availability, shiftsDesired: shiftsDesired, eligibility: eligibility }).on('success', function(doc, err){
-    	if (err) throw err;
-      res.send(201, doc);
-    });
+    // console.log(req.body);
+    // var availability = req.body.availability;
+    // var name = req.body.name;
+    // var eligibility = req.body.eligibility;
+    // var shiftsDesired = req.body.desiredShifts;
+    // users.findOne({ name: name, availability: availability, shiftsDesired: shiftsDesired, eligibility: eligibility }).on('success', function(doc, err){
+    // 	if (err) throw err;
+    //   res.send(201, doc);
+    // });
   });
 };
