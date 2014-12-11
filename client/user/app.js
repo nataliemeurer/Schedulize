@@ -1,8 +1,5 @@
-var userApp = angular.module('userApp', [
-  'ui.router'
-  ]);
-
-userApp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+angular.module('userApp', ['ui.router'])
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
   .state('dashboard', {
     url: "/dashboard",

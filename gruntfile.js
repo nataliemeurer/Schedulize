@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 
     nodemon: {
       dev: {
-        script: 'server/server.js'
+        script: 'server/app.js'
       }
     },
 
@@ -38,13 +38,14 @@ module.exports = function(grunt) {
     },
     jshint: {
       files: [
-        'scripts/*.js'
+        'server/**/*.js',
+        'client/**/*.js'
       ],
       options: {
         force: 'true',
         jshintrc: '.jshintrc',
         ignores: [
-          'public/lib/**/*.js',
+          'public/bower_components/**/*.js',
           'public/dist/**/*.js'
         ]
       }
@@ -119,6 +120,10 @@ module.exports = function(grunt) {
     'concat',
     'uglify',
     'cssmin'
+  ]);
+
+  grunt.registerTask('serve', [
+    'nodemon'
   ]);
 
   grunt.registerTask('upload', function(n) {

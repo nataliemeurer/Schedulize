@@ -1,5 +1,7 @@
 'use strict';
 
+var userApp = angular.module('userApp');
+
 userApp.directive('availabilityCal', function($http){
   return {
     restrict: 'A',
@@ -18,7 +20,7 @@ userApp.directive('availabilityCal', function($http){
       properties.defaultDate = moment(1396310400000).utc();
       properties.header = {left: '', right: ''};
       properties.timezone = 'UTC';
-      properties.defaultView = 'agendaWeek',
+      properties.defaultView = 'agendaWeek';
       properties.columnFormat = {week: 'dddd'};
       properties.allDaySlot = false;
       properties.eventStartEditable = true;
@@ -53,17 +55,17 @@ userApp.directive('availabilityCal', function($http){
         eventIdx++;
         $('#availabilityCal').fullCalendar('renderEvent', eventData, false); // stick? = true
         $('#availabilityCal').fullCalendar('unselect');
-      }
+      };
       // OVERWRITE EVENT
       properties.eventResize = function(event){
         scope.events[event.storageKey] = event;
-      }
+      };
       // EVENT DRAGGING
       properties.eventDrop = function(event){
         scope.events[event.storageKey] = event;
-      }
+      };
 
       $('#availabilityCal').fullCalendar(properties);
     }
-  }
+  };
 });
