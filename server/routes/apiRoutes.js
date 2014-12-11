@@ -6,14 +6,13 @@ var Schedule = db.Schedule;
 var userController = require('../controllers/userController');
 var availabilityController = require('../controllers/availabilityController');
 var companyController = require('../controllers/companyController');
+var scheduleController = require('../controllers/scheduleController');
 
 module.exports = function (app) {
   // PARAM ROUTING
   app.param('companyId', companyController.processCompanyId);
 
-  app.param('companyId', function(req, res, next, code){
-
-  })
+  app.param('scheduleId', scheduleController.processScheduleId);
 
   app.param('userId', function(req, res, next, code){
   	User.findOne({_id: code})

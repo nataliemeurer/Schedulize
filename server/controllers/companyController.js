@@ -1,4 +1,3 @@
-var mongo = require('mongodb');
 var db = require('../database/dbSchema');
 var User = db.User;
 var Company = db.Company;
@@ -13,7 +12,7 @@ module.exports = {
         if(err){
           res.status(404);
         }
-        req.companyData = company;
+        req.company = company;
         next();
       })
   },
