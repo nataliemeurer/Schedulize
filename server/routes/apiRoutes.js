@@ -3,12 +3,13 @@ var db = require('../database/dbSchema');
 var User = db.User;
 var Company = db.Company;
 var Schedule = db.Schedule;
+var userController = require('../controllers/userController');
+var availabilityController = require('../controllers/availabilityController');
+var companyController = require('../controllers/companyController');
 
 module.exports = function (app) {
   // PARAM ROUTING
-  app.param('companyId', function(req, res, next, code){
-
-  });
+  app.param('companyId', companyController.processCompanyId);
 
   app.param('companyId', function(req, res, next, code){
 
@@ -25,8 +26,8 @@ module.exports = function (app) {
   // API ROUTES
   // Companies:
   app.route('/companies')
-      .get(function(req, res){}) // Get all company names
-      .post(function(req, res){}); // Add new company
+      .get(companyController.getAllCompanies) // Get all company names
+      .post(companyController.addNewCompany); // Add new company
 
   app.route('/companies/:companyId')
       .get(function(req, res){}) // Get company data
