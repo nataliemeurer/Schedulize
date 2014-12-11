@@ -30,7 +30,7 @@ public/dist/
 # Dependency directories
 # Deployed apps should consider commenting these lines out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
-server/node_modules/
+node_modules/
 client/bower_components/
 
 # Floobits
