@@ -1,7 +1,7 @@
 var db = require('../../server/database/dbSchema.js');
 var request = require('supertest');
 var mocha = require('mocha');
-var expect = require('expect.js');
+var expect = require('expect');
 var app = require('../../server/app.js');
 
 describe('API Test Suite', function(){
