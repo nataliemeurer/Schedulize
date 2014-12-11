@@ -13,16 +13,16 @@ db.once('open', function callback () {
 });
 
 var _userSchema = new Schema({
-		name: String,
-		email: String,
-		password: String,
-		companies: [{type: ObjectId, ref: 'Company'}],
-		shiftsDesired: Number,
-		shiftsAssigned: Number,
-		availability: {},
-		isAdmin: Boolean,
-		joinDate: { type: Date, default: Date.now }
-	});
+	name: String,
+	email: String,
+	password: String,
+	companies: [{type: ObjectId, ref: 'Company'}],
+	shiftsDesired: Number,
+	shiftsAssigned: Number,
+	availability: [{}],
+	isAdmin: Boolean,
+	joinDate: { type: Date, default: Date.now }
+});
 
 var _companySchema = new Schema({
 	name: String,

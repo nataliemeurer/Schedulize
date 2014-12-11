@@ -12,8 +12,29 @@ module.exports = {
         req.status(404).send(err);
       }
       req.userId = code;
-      req.user = doc;
+      req.user = user;
       next();
     });
+  },
+
+  createNewUser: function(req, res){
+    var newUser = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      companies: req.body.companies || [],
+      shiftsDesired: null,
+      shiftsAssigned: 0,
+      availability: null,
+      isAdmin: req.body.isAdmin || false,
+      joinDate: req.body.joinDate || new Date()
+    });
+
+    newUser.save(function(err, user){
+      if(err){
+        res.status(500).send(err);
+      }
+      res.status(201).send(user);
+    })
   }
 }

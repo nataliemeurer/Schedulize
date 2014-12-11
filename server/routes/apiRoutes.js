@@ -11,16 +11,8 @@ var scheduleController = require('../controllers/scheduleController');
 module.exports = function (app) {
   // PARAM ROUTING
   app.param('companyId', companyController.processCompanyId);
-
   app.param('scheduleId', scheduleController.processScheduleId);
-
-  app.param('userId', function(req, res, next, code){
-  	User.findOne({_id: code})
-        .exec(function(doc){
-          req.user = doc;
-          next();
-        });
-  });
+  app.param('userId', userController.processUserId);
 
   // API ROUTES
   // Companies:
@@ -50,7 +42,7 @@ module.exports = function (app) {
             res.status(200).send(users);
           })
       })
-      .post(function(req, res){}); // add new user
+      .post(userController.createNewUser); // add new user
 
   app.route('/users/:userId')
       .get(function(req, res){ // get user data
@@ -82,6 +74,12 @@ module.exports = function (app) {
       .post(function(req, res){}) // add a new schedule for that company
       .put(function(req, res){}) // update schedule for that company
       .delete(function(req, res){}); // delete all schedules for a given company
+
+  app.route('/schedules/:companyId/:scheduleId')
+      .get(function(req, res){}) // Get data for that schedule
+      .post(function(req, res){}) // Update schedule
+      .put(function(req, res){}) // Update schedule
+      .delete(function(req, res){}); // Delete schedule
 
   app.route('/schedules/:companyId/:scheduleId/populate')
       .post(function(req, res){}); // populate the schedule for a given company
