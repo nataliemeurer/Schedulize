@@ -21,6 +21,4 @@ angular.module('userApp', ['ui.router'])
   $urlRouterProvider.otherwise("/dashboard");
 })
 .controller('mainController', function($scope, $state){
-  $.material.init();
-  $.material.checkbox();
 });

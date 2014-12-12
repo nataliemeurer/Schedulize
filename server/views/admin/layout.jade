@@ -2,6 +2,7 @@ doctype html
 html(ng-app='adminApp')
   head
     title= 'Schedulize Admin'
+    link(rel='stylesheet' href='/styles/normalize.css')
     link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
     link(rel='stylesheet' href='/bower_components/bootstrap-material-design/dist/css/material-wfont.min.css')
     link(rel='stylesheet' href='/bower_components/bootstrap-material-design/dist/css/ripples.min.css')
@@ -16,10 +17,11 @@ html(ng-app='adminApp')
     script(src='/bower_components/bootstrap-material-design/dist/js/ripples.min.js')
     script(src='/bower_components/angular/angular.min.js')
     script(src='/bower_components/ui-router/release/angular-ui-router.min.js')
+    script(src='/bower_components/angular-ui-router.stateHelper/stateHelper.min.js')
     script(src='/bower_components/moment/min/moment.min.js')
     script(src='/bower_components/angular-moment/angular-moment.min.js')
     script(src='/bower_components/fullcalendar/dist/fullcalendar.min.js')
     script(src='/admin/app.js')
     script(src='/admin/services/admin.services.js')
-  body
+  body(ng-controller="mainController")
     block content
