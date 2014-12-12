@@ -1,7 +1,7 @@
 <div id="availabilityTable" ng-controller="availabilityController" ng-mouseup='stopSelect()'>
 	<form role="form" method="POST" action="/api/users/availability">
 		<aside class="sidebar-left">
-			<h1>Availability:</h1>
+			<h2 style="margin-top: 0px">Steps:</h2>
 			<div class="inputs">
 				<h4>1. Enter your name:</h4>
 				<div class="form-group has-success">
@@ -39,7 +39,7 @@
 		</aside>
 		<div class="left-sidebar-content">
 			<div class="sidebar-header">
-				<h2> Availability Calendar View</h2>
+				<h2>Calendar View</h2>
 			</div>
 			<div class="availabilityCal" availability-cal="{ height: 520, eventDurationEditable: true, firstHour: 6, selectable: true, unselectAuto: false}">
 			</div>

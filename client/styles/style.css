@@ -1,3 +1,16 @@
+.title-bar {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  background-color: #B0BEC5;
+  border-bottom: #263238 2px solid;
+}
+
+.title-bar h1, .title-bar h2 {
+  margin-left: 40px;
+}
+
 .table{
   width:85%;
   margin: auto;
@@ -6,24 +19,6 @@
 
 .table>tbody>tr>td {
   padding: 4px;
-}
-
-
-.navbar {
-  background-color: #263238;
-  color: #ecf0f1;
-}
-
-.active {
-  background-color: #546E7A
-}
-
-.navbar-btn {
-  color: #ecf0f1;
-}
-
-.navbar-btn:hover {
-  color: #bdc3c7;
 }
 
 .logout{

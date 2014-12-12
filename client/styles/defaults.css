@@ -2,8 +2,8 @@ body {
 	background-color: #ECEFF1;
 	color: #191919;
 	margin: 0;
-  	margin-top: 10px;
-  	padding-top: 50px;
+  margin-top: 10px;
+  padding-top: 3%;
 }
 
 a {
@@ -40,9 +40,8 @@ h3 {
   background-color: #455A64;
   height: 1000px;
   position: fixed;
-  margin-top: -29px;
   margin: none;
-  width: 20%;
+  width: 23%;
   padding: 2% 15px;
   color: #ECEFF1;
   overflow-y: scroll;
@@ -54,10 +53,12 @@ h3 {
 
 .sidebar-left h1, .sidebar-left h2, .sidebar-left h3, .sidebar-left h4 {
   color: rgba(255, 255, 255, 0.70);
+  margin-top: 0px;
 }
 
 .sidebar-right h1, .sidebar-right h2, .sidebar-right h3, .sidebar-right h4 {
   color: rgba(255, 255, 255, 0.70);
+  margin-top: 0px;
 }
 
 .sidebar-left {
@@ -71,7 +72,7 @@ h3 {
 .left-sidebar-content {
 	width: 70%;
   float: right;
-  margin: 0 5%;
+  margin: 1% 5%;
 }
 
 .right-sidebar-content {
@@ -89,6 +90,25 @@ div.text-light {
 	color: #ECEFF1;
 }
 
+/* NAVBAR STYLES */
+.navbar {
+  background-color: #263238;
+  color: #ecf0f1;
+}
+
+.active {
+  background-color: #546E7A;
+}
+
+.navbar-btn {
+  color: #ecf0f1;
+}
+
+.navbar-btn:hover {
+  color: #bdc3c7;
+}
+
+/* GENERIC COLORED BUTTONS */
 .btn-green {
   background-color: #4CAF50 !important;
 }
