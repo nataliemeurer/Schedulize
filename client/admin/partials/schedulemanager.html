@@ -1,14 +1,31 @@
-<aside class='sidebar-left' style="text-align: center">
-	<button type="button" class="btn btn-default btn-raised btn-green with-icon">New Schedule<i class="ion ion-plus-circled"></i></button>
-	<h2>Existing Schedules</h2>
-	<ul>
-		<li>Schedule 1</li>
-		<li>Schedule 2</li>
-		<li>Schedule 3</li>
-	</ul>
-</aside>
+<div>
+	<aside class='sidebar-left' style="text-align: center">
+		<h2>Schedules</h2>
+    <button type="button" ui-sref="schedulemanager.newschedule" class="btn btn-default btn-green with-icon">New Schedule<i class="ion ion-plus-circled"></i></button>
+		<ul class="selection-list">
+			<a ui-sref-active="li-active" ui-sref="schedulemanager.scheduleview({scheduleId: '50'})">
+        <li>
+  				<h4>Vital Vittles Fall 2014</h4>
+          <p>Created On: November 21, 2014<br>Total Shifts: 124</p>
+  			</li>
+      </a>
+			<a ui-sref-active="li-active" ui-sref="schedulemanager.scheduleview({scheduleId: '51'})">
+        <li>
+  				<h4>The Hilltoss Falll 2014</h4>
+          <p>Created On: November 21, 2014<br>Total Shifts: 124</p>
+  			</li>
+      </a>
+			<a ui-sref-active="li-active" ui-sref="schedulemanager.scheduleview({scheduleId: '52'})">
+        <li>
+  				<h4>UG Fall 2014</h4>
+          <p>Created On: November 21, 2014<br>Total Shifts: 124</p>
+  			</li>
+      </a>
+		</ul>
+	</aside>
 
-<div class='left-sidebar-content'>
-	<h2>Workspace</h2>
-	<div ui-view></div>
+  <div class='left-sidebar-content'>
+    <div ui-view></div>
+  </div>
 </div>
+	

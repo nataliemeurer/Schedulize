@@ -28,8 +28,9 @@ var adminApp = angular.module('adminApp', [
           url: "/schedulemanager/:scheduleId",
           templateUrl: "/admin/partials/schedulemanager.scheduleview.html"
         })
-        .state('schedulemanager.populateschedule', {
-          templateUrl: "/admin/partials/schedulemanager.populateschedule.html"
+        .state('schedulemanager.newschedule', {
+          url: "/schedulemanager/newschedule",
+          templateUrl: "/admin/partials/schedulemanager.newschedule.html"
         })
       .state('editshifts', {
         url: "/editshifts",

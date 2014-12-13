@@ -1,0 +1,22 @@
+<form action="/api/schedule" method="POST">
+	<h2>Create a new Schedule:</h2>
+	<div class="inputs">
+		<h3>Schedule Name</h3>
+		<div class="form-group has-success">
+			<input required type="text" class="form-control floating-label" data-hint="Choose something descriptive and informative" name="scheduleName" placeholder="Name">
+		</div>
+		<h3>Add types of shifts for the schedule</h3>
+		<div class="form-group has-success">
+			<div class="input-group">
+				<input required type="text" class="form-control floating-label" data-hint="Make sure these names are clear to your employees" name="scheduleName" placeholder="i.e. Cashier, Manager, etc.">
+				<span class="input-group-btn">
+	            <button class="btn btn-green" type="button">Add</button>
+	        </div>
+        </span>
+		</div>
+
+	</div>
+	 <script type="text/javascript">
+    	$.material.init();
+  	</script>
+</form>

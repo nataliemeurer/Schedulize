@@ -37,14 +37,14 @@ h3 {
 /* Default Sidebar Settings */
 .sidebar-left, .sidebar-right {
   box-sizing: border-box;
-  background-color: #455A64;
+  background-color: #37474F;
   height: 1000px;
   position: fixed;
   margin: 0;
   width: 20%;
   padding: 2% 15px;
   color: #ECEFF1;
-  overflow-y: scroll;
+  overflow: auto;
 }
 
 .sidebar-left p, .sidebar-left h5, .sidebar-left h6, sidebar-right p, .sidebar-right h5, .sidebar-right h6, .sidebar-left input {
@@ -106,6 +106,10 @@ button .ion {
 }
 
 .active {
+  background-color: #546E7A;
+}
+
+.li-active li {
   background-color: #546E7A;
 }
 
