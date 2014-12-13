@@ -1,6 +1,9 @@
 'use strict';
 var adminApp = angular.module('adminApp');
 
-adminApp.controller('scheduleManagerController', function($scope, $location){
+adminApp.controller('scheduleManagerCtrl', function($scope, $location){
 	
+})
+.controller('createScheduleCtrl', function($scope){
+
 });

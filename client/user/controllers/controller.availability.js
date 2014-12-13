@@ -1,7 +1,7 @@
 'use strict';
 var userApp = angular.module('userApp');
 
-userApp.controller('availabilityController', function($scope, $location, Availability){
+userApp.controller('availabilityController', function($scope, $location){
     $scope.preferred = true;
     $scope.events = {};
     $scope.setPreferred = function(){

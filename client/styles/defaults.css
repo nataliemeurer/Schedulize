@@ -72,12 +72,14 @@ h3 {
 .left-sidebar-content {
 	width: 70%;
   float: right;
+  color: #191919;
   margin: 1% 5%;
 }
 
 .right-sidebar-content {
   width: 70%;
   float: left;
+  color: #191919;
   margin: 0 5%;
 }
 
