@@ -6,19 +6,33 @@
 			<div class="form-group has-success">
 				<input required type="text" class="form-control floating-label" data-hint="Choose something descriptive and informative" name="scheduleName" placeholder="Name">
 			</div>
-			<h3>Add types of shifts for the schedule</h3>
-			<div class="form-group has-success">
-				<div class="input-group">
-					<input required type="text" class="form-control floating-label" id="roleInput" data-hint="Make sure these names are clear to your employees" placeholder="i.e. Cashier, Manager, etc.">
-					<span class="input-group-btn">
-		            <button class="btn btn-green" type="button" ng-click="addRole($('#roleinput').value())">Add</button>
-		        </div>
-	        </span>
-			</div>
-
-		</div>
-		 <script type="text/javascript">
-	    	$.material.init();
-	  	</script>
-	</form>
+			<h3>Would you like to use a previous schedule as a template?</h3>
+			<div class="radio radio-success">
+       <label>
+         <input type="radio" name="usesTemplate" ng-model="template" ng-value='true'>
+         Yes
+       </label>
+      </div>
+      <div class="radio radio-success">
+        <label>
+          <input type="radio" name="usesTemplate" ng-model="template" ng-value='false' checked>
+          No
+        </label>
+      </div>
+      <div ng-if="template">
+        <h3>Select a template schedule</h3>
+        <div ng-repeat="schedule in schedules" for="{{schedule}}">
+          <div class="radio radio-success">
+            <label>
+              <input type="radio" name="templateSchedule" ng-model="templateSchedule" ng-value="schedule">
+              {{schedule.name}}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <script type="text/javascript">
+    $.material.init();
+  </script>
 </div>

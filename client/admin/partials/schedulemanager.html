@@ -3,24 +3,14 @@
 		<h2>Schedules</h2>
     <button type="button" ui-sref="schedulemanager.newschedule" class="btn btn-default btn-green with-icon">New Schedule<i class="ion ion-plus-circled"></i></button>
 		<ul class="selection-list">
-			<a ui-sref-active="li-active" ui-sref="schedulemanager.scheduleview({scheduleId: '50'})">
-        <li>
-  				<h4>Vital Vittles Fall 2014</h4>
-          <p>Created On: November 21, 2014<br>Total Shifts: 124</p>
-  			</li>
-      </a>
-			<a ui-sref-active="li-active" ui-sref="schedulemanager.scheduleview({scheduleId: '51'})">
-        <li>
-  				<h4>The Hilltoss Falll 2014</h4>
-          <p>Created On: November 21, 2014<br>Total Shifts: 124</p>
-  			</li>
-      </a>
-			<a ui-sref-active="li-active" ui-sref="schedulemanager.scheduleview({scheduleId: '52'})">
-        <li>
-  				<h4>UG Fall 2014</h4>
-          <p>Created On: November 21, 2014<br>Total Shifts: 124</p>
-  			</li>
-      </a>
+      <div ng-repeat="schedule in schedules">
+        <a ui-sref-active="li-active" ui-sref="schedulemanager.scheduleview({scheduleId: {{schedule._id}}})">
+          <li>
+            <h4>{{schedule.name}}</h4>
+            <p>Created On: {{schedule.dateCreated}}<br>Total Shifts: {{schedule.totalShifts}}</p>
+          </li>
+        </a>
+      </div>
 		</ul>
 	</aside>
 

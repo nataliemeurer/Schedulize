@@ -76,6 +76,10 @@ h3 {
   margin: 1% 5%;
 }
 
+.left-sidebar-content input, .right-sidebar-content input {
+  color: #191919;
+}
+
 .right-sidebar-content {
   width: 70%;
   float: left;

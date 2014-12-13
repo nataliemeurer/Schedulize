@@ -37,7 +37,9 @@ var _scheduleSchema = new Schema({
 	Shifts: [{}],
 	createdBy: String,
 	createdAt: { type: Date, default: Date.now },
-	active: Boolean
+	totalShifts: Number,
+	shiftsAssigned: Number,
+	eligibleEmployees: [{type: ObjectId, ref: 'User'}]
 });
 
 var User = mongoose.model('User', _userSchema);
