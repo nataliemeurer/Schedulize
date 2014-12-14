@@ -1,13 +1,40 @@
 'use strict';
 var adminApp = angular.module('adminApp');
 
-adminApp.controller('scheduleManagerCtrl', function($scope, $location){
-	$scope.schedules = [
-	{_id: 51, name: 'Vital Vittles Fall 2014', dateCreated: 'November 21, 2014', totalShifts: 120}, 
-	{_id: 52, name: 'UG Fall 2014', dateCreated: 'November 21, 2014', totalShifts: 135}, 
-	{_id: 53, name: 'The Hilltoss Fall 2014', dateCreated: 'November 30, 2014', totalShifts: 156}];
+adminApp.controller('scheduleManagerCtrl', function($scope, $http, $location){
+	$http.get("/api/schedules")
+    .success(function(data, status){
+      for(var i = 0; i < data.length; i++){
+        data[i].createdAt = moment(data[i].createdAt).format('MMMM Do, YYYY');
+      }
+      console.log(data);
+      $scope.schedules = data;
+    });
+  $scope.activeSchedule = null;
+  var setActiveSchedule = function(schedule){
+    $scope.activeSchedule = schedule;
+  };
 })
-.controller('createScheduleCtrl', function($scope){
+.controller('createScheduleCtrl', function($scope, $http, $location){
 	$scope.template = false;
-	$scope.templateSchedule = "hello";
+	$scope.templateSchedule = null;
+	$scope.newSchedule = {};
+	$scope.newSchedule.template = false;
+  $scope.newSchedule.name = "";
+	$scope.newSchedule.templateSchedule = null;
+	$scope.submitSchedule = function(schedule){
+		// Send to server
+		if($scope.newSchedule.template){
+			$scope.newSchedule.shifts = $scope.newSchedule.templateSchedule.shifts;
+			$scope.newSchedule.totalShifts = $scope.newSchedule.templateSchedule.totalShifts;
+		}
+		$http.post("/api/schedules", $scope.newSchedule)
+			.success(function(data, status){
+        console.log("successful POST", status);
+        data.createdAt = moment(data.createdAt).format('MMMM Do, YYYY');
+        // Prepend to schedules for fast UX
+        $scope.$parent.schedules.unshift(data);
+      });
+	};
+
 });

@@ -1,36 +1,37 @@
 <div ng-controller="createScheduleCtrl">
-	<form action="/api/schedule" method="POST">
+	<form name="createScheduleForm" ng-submit="submitSchedule()">
 		<h2>Create a new Schedule:</h2>
 		<div class="inputs">
 			<h3>Schedule Name</h3>
 			<div class="form-group has-success">
-				<input required type="text" class="form-control floating-label" data-hint="Choose something descriptive and informative" name="scheduleName" placeholder="Name">
+				<input required type="text" class="form-control floating-label" data-hint="Choose something descriptive and informative" ng-model="newSchedule.name" placeholder="Name">
 			</div>
 			<h3>Would you like to use a previous schedule as a template?</h3>
-			<div class="radio radio-success">
+			<div class="radio radio-primary">
        <label>
-         <input type="radio" name="usesTemplate" ng-model="template" ng-value='true'>
+         <input type="radio" name="usesTemplate" ng-model="newSchedule.template" ng-value='true'>
          Yes
        </label>
       </div>
-      <div class="radio radio-success">
+      <div class="radio radio-primary">
         <label>
-          <input type="radio" name="usesTemplate" ng-model="template" ng-value='false' checked>
+          <input type="radio" name="usesTemplate" ng-model="newSchedule.template" ng-value='false' checked>
           No
         </label>
       </div>
-      <div ng-if="template">
+      <div ng-if="newSchedule.template">
         <h3>Select a template schedule</h3>
         <div ng-repeat="schedule in schedules" for="{{schedule}}">
-          <div class="radio radio-success">
+          <div class="radio radio-primary">
             <label>
-              <input type="radio" name="templateSchedule" ng-model="templateSchedule" ng-value="schedule">
+              <input type="radio" name="templateSchedule" ng-model="newSchedule.templateSchedule" ng-value="schedule">
               {{schedule.name}}
             </label>
           </div>
         </div>
       </div>
     </div>
+    <button type="submit" ng-disabled="createScheduleForm.$invalid" class="btn btn-primary btn-lg">Create Schedule</button>
   </form>
   <script type="text/javascript">
     $.material.init();

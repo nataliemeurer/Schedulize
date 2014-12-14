@@ -4,10 +4,10 @@
     <button type="button" ui-sref="schedulemanager.newschedule" class="btn btn-default btn-green with-icon">New Schedule<i class="ion ion-plus-circled"></i></button>
 		<ul class="selection-list">
       <div ng-repeat="schedule in schedules">
-        <a ui-sref-active="li-active" ui-sref="schedulemanager.scheduleview({scheduleId: {{schedule._id}}})">
+        <a ui-sref-active="li-active" ui-sref="schedulemanager.scheduleview({ scheduleId: schedule._id })">
           <li>
             <h4>{{schedule.name}}</h4>
-            <p>Created On: {{schedule.dateCreated}}<br>Total Shifts: {{schedule.totalShifts}}</p>
+            <p>Created On: {{schedule.createdAt}}<br>Total Shifts: {{schedule.totalShifts}}</p>
           </li>
         </a>
       </div>

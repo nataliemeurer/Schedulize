@@ -1,7 +1,8 @@
 var adminApp = angular.module('adminApp', [
   'admin.services',
   'ui.router',
-  'ui.router.stateHelper'
+  'ui.router.stateHelper',
+  'angularMoment'
 ])
   .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     $stateProvider
@@ -41,5 +42,4 @@ var adminApp = angular.module('adminApp', [
   .controller('mainController', function($scope, $state){
     $.material.init();
     $.material.checkbox();
-    $state.transitionTo('schedulemanager.getstarted');
   });

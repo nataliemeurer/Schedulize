@@ -34,12 +34,13 @@ var _companySchema = new Schema({
 
 var _scheduleSchema = new Schema({
 	name: String,
-	Shifts: [{}],
+	companyId: {type: ObjectId, ref: 'Company'},
+	shifts: [{}],
 	createdBy: String,
 	createdAt: { type: Date, default: Date.now },
 	totalShifts: Number,
 	shiftsAssigned: Number,
-	eligibleEmployees: [{type: ObjectId, ref: 'User'}]
+	employees: [{type: ObjectId, ref: 'User'}]
 });
 
 var User = mongoose.model('User', _userSchema);

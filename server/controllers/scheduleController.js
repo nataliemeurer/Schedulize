@@ -1,4 +1,5 @@
 var db = require('../database/dbSchema');
+var mongoose = require('mongoose');
 var User = db.User;
 var Company = db.Company;
 var Schedule = db.Schedule;
@@ -15,5 +16,38 @@ module.exports = {
 		      req.schedule = schedule;
 		      next();
 		    });
+	},
+	
+	getAllSchedules: function(req, res){
+		Schedule
+			.find()
+			.exec(function(err, docs){
+        if(err) {
+					res.status(500);
+				}
+				res.status(200).send(docs);
+			});
+	},
+
+	addNewSchedule: function(req, res){
+		var newSchedule = new Schedule({
+		    name: req.body.name,
+		    companyId: req.body.companyId || "548951472119af472fba5ed0",
+		    shifts: req.body.shifts || [],
+		    createdBy: req.body.username || "test user",
+		    createdAt: new Date(),
+		    totalShifts: req.body.totalShifts || 0,
+		    shiftsAssigned: 0,
+		    employees: req.body.employees || []
+		});
+		newSchedule.save(function(err, doc){
+		  if(err){
+		    console.log(err);
+		    res.status(500).send(err);
+		  }
+		  console.log("Saved");
+		  res.status(201).send(doc);
+		});
 	}
+
 };

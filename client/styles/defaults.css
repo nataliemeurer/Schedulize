@@ -40,11 +40,14 @@ h3 {
   background-color: #37474F;
   height: 1000px;
   position: fixed;
+  bottom: 0;
+  top: 50px;
   margin: 0;
   width: 20%;
   padding: 2% 15px;
   color: #ECEFF1;
-  overflow: auto;
+  /*overflow: auto;*/
+  overflow: scroll;
 }
 
 .sidebar-left p, .sidebar-left h5, .sidebar-left h6, sidebar-right p, .sidebar-right h5, .sidebar-right h6, .sidebar-left input {

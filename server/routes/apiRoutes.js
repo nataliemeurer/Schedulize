@@ -68,8 +68,8 @@ module.exports = function (app) {
 
   // Schedules
   app.route('/schedules')
-      .get(function(req, res){}) // get all schedules
-      .post(function(req, res){}); // add a new schedule
+      .get(scheduleController.getAllSchedules) // get all schedules
+      .post(scheduleController.addNewSchedule); // add a new schedule
 
   app.route('/schedules/:companyId')
       .get(function(req, res){}) // get all schedules for that company
