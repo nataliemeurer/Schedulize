@@ -33,6 +33,13 @@ angular.module('admin.services', ['angularMoment'])
         }
       });
       return deferred.promise;
+    },
+    postNewSchedule: function(schedule){
+      if(schedule.template){
+        schedule.shifts = schedule.templateSchedule.shifts;
+        schedule.totalShifts = schedule.templateSchedule.totalShifts;
+      }
+      return $http.post("/api/schedules", schedule);
     }
   };
 });

@@ -14,20 +14,14 @@ adminApp
     $scope.activeSchedule = schedule;
   });
 })
-.controller('createScheduleCtrl', function($scope, $http, $location){
-	$scope.template = false;
-	$scope.templateSchedule = null;
-	$scope.newSchedule = {};
-	$scope.newSchedule.template = false;
-  $scope.newSchedule.name = "";
-	$scope.newSchedule.templateSchedule = null;
+.controller('createScheduleCtrl', function($scope, $http, $location, Schedule){
+	$scope.newSchedule = {
+    template: false,
+    name: "",
+    templateSchedule: null
+  };
 	$scope.submitSchedule = function(schedule){
-		// Send to server
-		if($scope.newSchedule.template){
-			$scope.newSchedule.shifts = $scope.newSchedule.templateSchedule.shifts;
-			$scope.newSchedule.totalShifts = $scope.newSchedule.templateSchedule.totalShifts;
-		}
-		$http.post("/api/schedules", $scope.newSchedule)
+    Schedule.postNewSchedule()
 			.success(function(data, status){
         console.log("successful POST", status);
         data.createdAt = moment(data.createdAt).format('MMMM Do, YYYY');
