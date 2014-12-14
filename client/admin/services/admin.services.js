@@ -1,5 +1,11 @@
-angular.module('admin.services', ['angularMoment']);
-
+angular.module('admin.services', ['angularMoment'])
+.factory('Schedule', function($http){
+	return {
+		getAllSchedules: function(){
+			return $http.get("/api/schedules");
+		}
+	}
+});
 // .factory('Network', function($http){
 //   var _getEmployees = function($http, companyName){
 //     return $http({

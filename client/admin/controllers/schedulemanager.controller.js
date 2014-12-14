@@ -1,8 +1,9 @@
 'use strict';
 var adminApp = angular.module('adminApp');
 
-adminApp.controller('scheduleManagerCtrl', function($scope, $http, $location){
-	$http.get("/api/schedules")
+adminApp
+.controller('scheduleManagerCtrl', function($scope, $http, $location, Schedule){
+	Schedule.getAllSchedules()
     .success(function(data, status){
       for(var i = 0; i < data.length; i++){
         data[i].createdAt = moment(data[i].createdAt).format('MMMM Do, YYYY');
@@ -10,10 +11,14 @@ adminApp.controller('scheduleManagerCtrl', function($scope, $http, $location){
       console.log(data);
       $scope.schedules = data;
     });
-  $scope.activeSchedule = null;
-  var setActiveSchedule = function(schedule){
-    $scope.activeSchedule = schedule;
-  };
+})
+.controller('scheduleViewCtrl', function($scope, $stateParams){
+  var scheduleId = $stateParams.scheduleId;
+  // for(var i = 0; i < $scope.$parent.schedules.length; i++){
+  //   if($scope.$parent.schedules[i]._id === $scope.scheduleId){
+  //     $scope.activeSchedule = $scope.$parent.schedules[i];
+  //   
+  // }
 })
 .controller('createScheduleCtrl', function($scope, $http, $location){
 	$scope.template = false;
@@ -21,6 +26,7 @@ adminApp.controller('scheduleManagerCtrl', function($scope, $http, $location){
 	$scope.newSchedule = {};
 	$scope.newSchedule.template = false;
   $scope.newSchedule.name = "";
+  console.log($scope);
 	$scope.newSchedule.templateSchedule = null;
 	$scope.submitSchedule = function(schedule){
 		// Send to server
@@ -36,5 +42,4 @@ adminApp.controller('scheduleManagerCtrl', function($scope, $http, $location){
         $scope.$parent.schedules.unshift(data);
       });
 	};
-
 });

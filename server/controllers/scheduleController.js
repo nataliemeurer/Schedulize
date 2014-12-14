@@ -29,6 +29,17 @@ module.exports = {
 			});
 	},
 
+	getScheduleById: function(req, res){
+		Schedule
+      .findOne({_id: req.body.scheduleId})
+      .exec(function(err, schedule){
+        if(err) {
+          res.status(500);
+        }
+        res.status(200).send(schedule);
+      });
+	},
+
 	addNewSchedule: function(req, res){
 		var newSchedule = new Schedule({
 		    name: req.body.name,

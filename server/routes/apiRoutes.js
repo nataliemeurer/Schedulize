@@ -77,6 +77,9 @@ module.exports = function (app) {
       .put(function(req, res){}) // update schedule for that company
       .delete(function(req, res){}); // delete all schedules for a given company
 
+  app.route('/schedules/schedule/:scheduleId')
+      .get(scheduleController.getScheduleById);
+
   app.route('/schedules/:companyId/:scheduleId')
       .get(function(req, res){}) // Get data for that schedule
       .post(function(req, res){}) // Update schedule
