@@ -21,7 +21,7 @@ adminApp
     templateSchedule: null
   };
 	$scope.submitSchedule = function(schedule){
-    Schedule.postNewSchedule()
+    Schedule.postNewSchedule(schedule)
 			.success(function(data, status){
         console.log("successful POST", status);
         data.createdAt = moment(data.createdAt).format('MMMM Do, YYYY');

@@ -44,7 +44,7 @@ h3 {
 .sidebar-left, .sidebar-right {
   box-sizing: border-box;
   background-color: #37474F;
-  height: 1000px;
+  height: 93%;
   position: fixed;
   bottom: 0;
   top: 50px;
@@ -125,7 +125,10 @@ button .ion {
 }
 
 .li-active li {
-  background-color: #546E7A;
+  background-color: #587684 !important;
+  -webkit-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.58);
+  -moz-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.58);
+  box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.58);
 }
 
 .navbar-btn {
