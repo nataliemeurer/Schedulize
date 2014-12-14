@@ -21,6 +21,18 @@ angular.module('admin.services', ['angularMoment'])
         }
         // Return the stored promise with the data
         return schedules;
+    },
+    getOneSchedule: function(scheduleId){
+      var deferred = $q.defer();
+      
+      this.getAllSchedules().then(function(schedules){
+        for(var i = 0; i < schedules.length; i++){
+            if(schedules[i]._id === scheduleId){
+              deferred.resolve(schedules[i]);
+            }
+        }
+      });
+      return deferred.promise;
     }
   };
 });

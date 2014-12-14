@@ -3,17 +3,16 @@ var adminApp = angular.module('adminApp');
 
 adminApp
 .controller('scheduleManagerCtrl', function($scope, $http, $location, Schedule){
+  // Get all Schedules(eventually for logged in company)
   Schedule.getAllSchedules().then(function(data){
     $scope.schedules = data;
   })
 })
-.controller('scheduleViewCtrl', function($scope, $stateParams){
-  var scheduleId = $stateParams.scheduleId;
-  // for(var i = 0; i < $scope.$parent.schedules.length; i++){
-  //   if($scope.$parent.schedules[i]._id === $scope.scheduleId){
-  //     $scope.activeSchedule = $scope.$parent.schedules[i];
-  //   
-  // }
+.controller('scheduleViewCtrl', function($scope, $stateParams, Schedule){
+  // Get current schedule
+  Schedule.getOneSchedule($stateParams.scheduleId).then(function(schedule){
+    $scope.activeSchedule = schedule;
+  });
 })
 .controller('createScheduleCtrl', function($scope, $http, $location){
 	$scope.template = false;
@@ -21,7 +20,6 @@ adminApp
 	$scope.newSchedule = {};
 	$scope.newSchedule.template = false;
   $scope.newSchedule.name = "";
-  console.log($scope);
 	$scope.newSchedule.templateSchedule = null;
 	$scope.submitSchedule = function(schedule){
 		// Send to server
