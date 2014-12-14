@@ -3,14 +3,9 @@ var adminApp = angular.module('adminApp');
 
 adminApp
 .controller('scheduleManagerCtrl', function($scope, $http, $location, Schedule){
-	Schedule.getAllSchedules()
-    .success(function(data, status){
-      for(var i = 0; i < data.length; i++){
-        data[i].createdAt = moment(data[i].createdAt).format('MMMM Do, YYYY');
-      }
-      console.log(data);
-      $scope.schedules = data;
-    });
+  Schedule.getAllSchedules().then(function(data){
+    $scope.schedules = data;
+  })
 })
 .controller('scheduleViewCtrl', function($scope, $stateParams){
   var scheduleId = $stateParams.scheduleId;

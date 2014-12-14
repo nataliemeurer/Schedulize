@@ -1,10 +1,28 @@
 angular.module('admin.services', ['angularMoment'])
-.factory('Schedule', function($http){
-	return {
-		getAllSchedules: function(){
-			return $http.get("/api/schedules");
-		}
-	}
+.factory('Schedule', function($http, $q){
+  // For storage
+  var schedules = null;
+  
+  return {
+    getAllSchedules: function(){
+      // Create a promise to be returned
+      var deferred = $q.defer();
+      // If we have not yet fetched all our schedules..
+      if(!schedules) {
+        // Request has not been made, so make it
+        $http.get('/api/schedules').then(function(res) {
+          for(var i = 0; i < res.data.length; i++){
+            res.data[i].createdAt = moment(res.data[i].createdAt).format('MMMM Do, YYYY');
+          }
+          deferred.resolve(res.data);
+        });
+          // Add the promise to myObject
+          schedules = deferred.promise;
+        }
+        // Return the stored promise with the data
+        return schedules;
+    }
+  };
 });
 // .factory('Network', function($http){
 //   var _getEmployees = function($http, companyName){
