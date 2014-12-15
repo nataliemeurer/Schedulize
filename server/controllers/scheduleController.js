@@ -49,7 +49,8 @@ module.exports = {
 		    createdAt: new Date(),
 		    totalShifts: req.body.totalShifts || 0,
 		    shiftsAssigned: 0,
-		    employees: req.body.employees || []
+		    employees: req.body.employees || [],
+		    roles: req.body.roles || []
 		});
 		newSchedule.save(function(err, doc){
 		  if(err){

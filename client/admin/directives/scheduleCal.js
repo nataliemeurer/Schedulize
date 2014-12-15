@@ -1,18 +1,15 @@
 'use strict';
+var adminApp = angular.module('adminApp');
 
-var userApp = angular.module('userApp');
-
-userApp.directive('scheduleCal', function($http){
+adminApp.directive('scheduleCal', function($http){
   return {
     restrict: 'A',
     template: '<div class="calendar">' +
-                '<div class="cal-toolbar">' +
-                  '<button type="button" class="btn btn-default btn-raised" ng-class="{ \'btn-green\': preferred }" ng-click="setPreferred()">Preferred</button>' +
-                  '<button type="button" class="btn btn-default btn-raised" ng-class="{ \'btn-yellow\': !preferred }" ng-click="setAvailable()">Available</button>' +
-                '</div>' +
-              '<div id="scheduleCal"></div></div>',
+              '<div id="scheduleCal"></div>' +
+              '</div>',
     replace: true,
     link: function(scope, element, attrs) {
+      console.log("HOLA");
       // Get all properties passed in from the DOM
       var properties = scope.$eval(attrs.scheduleCal);
       var eventIdx = 0;

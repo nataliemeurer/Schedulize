@@ -40,7 +40,8 @@ var _scheduleSchema = new Schema({
 	createdAt: { type: Date, default: Date.now },
 	totalShifts: Number,
 	shiftsAssigned: Number,
-	employees: [{type: ObjectId, ref: 'User'}]
+	employees: [{type: ObjectId, ref: 'User'}],
+	roles: [{}]
 });
 
 var User = mongoose.model('User', _userSchema);

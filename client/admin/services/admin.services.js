@@ -36,8 +36,9 @@ angular.module('admin.services', ['angularMoment'])
     },
     postNewSchedule: function(schedule){
       if(schedule.template){
-        schedule.shifts = schedule.templateSchedule.shifts;
+        schedule.shifts = schedule.templateSchedule.shifts.slice(0);
         schedule.totalShifts = schedule.templateSchedule.totalShifts;
+        schedule.roles = schedule.templateSchedule.roles.slice(0);
       }
       return $http.post("/api/schedules", schedule);
     }

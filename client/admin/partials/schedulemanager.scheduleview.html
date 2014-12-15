@@ -1,4 +1,6 @@
 <div ng-controller="scheduleViewCtrl">
 	<h2>{{activeSchedule.name}}</h2>
 	{{activeSchedule}}
+	<div class="scheduleCal" schedule-cal="{ height: 520, eventDurationEditable: true, firstHour: 6, selectable: true, unselectAuto: false}">
+	</div>
 </div>
