@@ -1,3 +1,4 @@
+/* TILE VIEW SELECTION LIST FOR SIDEBAR */
 ul.selection-list {
   list-style: none;
   text-indent: 0;
@@ -41,6 +42,7 @@ ul.selection-list {
   padding: 0px;
   color: #B0BEC5;
 }
+
 
 .title-bar {
   display: block;

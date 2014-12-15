@@ -6,13 +6,27 @@ adminApp
   // Get all Schedules(eventually for logged in company)
   Schedule.getAllSchedules().then(function(data){
     $scope.schedules = data;
-  })
+  });
 })
 .controller('scheduleViewCtrl', function($scope, $stateParams, Schedule){
+  $scope.changed = false;
   // Get current schedule
   Schedule.getOneSchedule($stateParams.scheduleId).then(function(schedule){
     $scope.activeSchedule = schedule;
   });
+  // Save changes when made to the schedule
+  $scope.saveChanges = function(schedule){
+    Schedule.updateSchedule(schedule).then(function(schedule){
+      $scope.activeSchedule = schedule;
+      console.log("Update Schedule");
+    });
+  };
+  $scope.deleteSchedule = function(schedule){
+    Schedule.deleteSchedule(schedule).then(function(schedule){
+      console.log("Schedule Deleted");
+    });
+  };
+
 })
 .controller('createScheduleCtrl', function($scope, $http, $location, Schedule){
 	$scope.newSchedule = {

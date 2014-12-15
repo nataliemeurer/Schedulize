@@ -1,7 +1,7 @@
 <div ng-controller="scheduleManagerCtrl">
 	<aside class='sidebar-left' style="text-align: center">
 		<h2>Schedules</h2>
-    <button type="button" ui-sref="schedulemanager.newschedule" class="btn btn-default btn-green with-icon">New Schedule<i class="ion ion-plus-circled"></i></button>
+    <button type="button" ui-sref="schedulemanager.newschedule" class="btn btn-default btn-green with-icon"><i class="ion ion-plus-circled"></i>New Schedule</button>
 		<ul class="selection-list">
       <div ng-repeat="schedule in schedules">
         <a ui-sref-active="li-active" ui-sref="schedulemanager.scheduleview({ scheduleId: schedule._id })">

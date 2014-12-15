@@ -41,6 +41,9 @@ angular.module('admin.services', ['angularMoment'])
         schedule.roles = schedule.templateSchedule.roles.slice(0);
       }
       return $http.post("/api/schedules", schedule);
+    },
+    updateSchedule: function(schedule){
+      return $http.put("/api/schedules/" + schedule._id, schedule);
     }
   };
 });

@@ -52,8 +52,7 @@ h3 {
   width: 20%;
   padding: 2% 15px;
   color: #ECEFF1;
-  /*overflow: auto;*/
-  overflow: scroll;
+  overflow: auto;
 }
 
 .sidebar-left p, .sidebar-left h5, .sidebar-left h6, sidebar-right p, .sidebar-right h5, .sidebar-right h6, .sidebar-left input {
@@ -102,13 +101,11 @@ h3 {
 }
 
 /* ICON BUTTONS */
-button.with-icon {
-}
 
 button .ion {
   font-size: 23px;
   position: relative;
-  margin-left: 15px;
+  margin-right: 15px;
   line-height: 100%;
   top: 3px;
   padding-bottom: 4px;
@@ -148,6 +145,31 @@ button .ion {
   background-color: #FFEB3B !important;
 }
 
+.btn-red {
+  background-color: #CF000F !important;
+}
+
 .btn-light {
   background-color: #CFD8DC !important;
+}
+
+/* GENERIC BUTTONS WITH ICON */
+.default-with-icon {
+  font-size: 14px;
+  padding: 5px;
+  width: 150px;
+}
+
+.default-with-icon i {
+  color: #E7EBEE;
+  font-size: 18px;
+  padding: 0;
+  position: relative;
+  margin-right: 5px;
+  top: 2px;
+  padding-bottom: 4px;
+}
+
+.default-with-icon:hover {
+  color: #FFF;
 }
