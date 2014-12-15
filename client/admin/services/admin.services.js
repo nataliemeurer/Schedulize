@@ -6,9 +6,9 @@ angular.module('admin.services', ['angularMoment'])
   return {
     getAllSchedules: function(){
       // Create a promise to be returned
-      var deferred = $q.defer();
       // If we have not yet fetched all our schedules..
       if(!schedules) {
+        var deferred = $q.defer();
         // Request has not been made, so make it
         $http.get('/api/schedules').then(function(res) {
           for(var i = 0; i < res.data.length; i++){
@@ -16,9 +16,9 @@ angular.module('admin.services', ['angularMoment'])
           }
           deferred.resolve(res.data);
         });
-          // Add the promise to myObject
-          schedules = deferred.promise;
-        }
+        // Add the promise to myObject
+        schedules = deferred.promise;
+      }
         // Return the stored promise with the data
         return schedules;
     },
