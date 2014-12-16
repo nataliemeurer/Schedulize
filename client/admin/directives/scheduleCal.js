@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 var adminApp = angular.module('adminApp');
 
 adminApp.directive('scheduleCal', function($http){
@@ -23,35 +23,54 @@ adminApp.directive('scheduleCal', function($http){
       properties.eventStartEditable = true;
       properties.selectHelper = true;
       properties.overlap = false;
-      
+      properties.firstHour = 6;
+      properties.unselectAuto = false;
+      if(scope.editableSchedule){
+        properties.editable = true;
+        properties.eventDurationEditable = true;
+        properties.selectable = true;
+      } else {
+        properties.editable = false;
+        properties.eventDurationEditable = false;
+        properties.selectable = false;
+      }
+      // Called in the controller after initial schedule load
+      scope.loadEvents = function(events){
+        properties.events = events;
+      };
+      // properties.events = scope.activeCalendar.shifts;
       // CREATE AND STORE EVENTS
       properties.select = function(start, end) {
-        var eventData;
-        if(scope.preferred === true){
-          eventData = {
-              title: 'Preferred',
-              start: start,
-              end: end,
-              color: '#4CAF50',
-              borderColor: '#7CB342',
-              textColor: 'rgba(0, 0, 0, 0.87)',
-              storageKey: eventIdx
-            };
+        if(scope.scheduleMode){
+          var eventData;
+          if(scope.preferred === true){
+            eventData = {
+                title: 'Preferred',
+                start: start,
+                end: end,
+                color: '#4CAF50',
+                borderColor: '#7CB342',
+                textColor: 'rgba(0, 0, 0, 0.87)',
+                storageKey: eventIdx
+              };
+          } else {
+            eventData = {
+                title: 'Available',
+                start: start,
+                end: end,
+                color: '#FFEB3B',
+                borderColor: '#FDD835',
+                textColor: 'rgba(0, 0, 0, 0.87)',
+                storageKey: eventIdx
+              };
+          }
+          scope.activeSchedule.shifts.push(eventData);
+          eventIdx++;
+          $('#scheduleCal').fullCalendar('renderEvent', eventData, false); // stick? = true
+          $('#scheduleCal').fullCalendar('unselect');
         } else {
-          eventData = {
-              title: 'Available',
-              start: start,
-              end: end,
-              color: '#FFEB3B',
-              borderColor: '#FDD835',
-              textColor: 'rgba(0, 0, 0, 0.87)',
-              storageKey: eventIdx
-            };
+          return;
         }
-        scope.events[eventIdx] = eventData;
-        eventIdx++;
-        $('#scheduleCal').fullCalendar('renderEvent', eventData, false); // stick? = true
-        $('#scheduleCal').fullCalendar('unselect');
       };
       // OVERWRITE EVENT
       properties.eventResize = function(event){

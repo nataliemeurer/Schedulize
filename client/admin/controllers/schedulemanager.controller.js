@@ -10,18 +10,37 @@ adminApp
 })
 .controller('scheduleViewCtrl', function($scope, $stateParams, Schedule){
   $scope.changed = false;
+  $scope.editableSchedule = true;
+
+  // Called after finding the schedule
+  $scope.renderEvents = function(events){
+    console.log($scope.loadEvents)
+    $scope.loadEvents(events);
+  }
 
   // Get current schedule
   Schedule.getOneSchedule($stateParams.scheduleId).then(function(schedule){
     $scope.activeSchedule = schedule;
+    $scope.renderEvents($scope.activeSchedule.shifts);
+    $scope.scheduleMode = $scope.activeSchedule.roles.length ? $scope.activeSchedule.roles[0].name : null;
+    console.log($scope.scheduleMode);
   });
+
+  $scope.setScheduleMode = function(mode){
+    $scope.scheduleMode = mode;
+    console.log($scope.scheduleMode);
+  }
 
   // Add a Role to the Schedule
   $scope.addRole = function(){
     var role = $('#role-input').val();
     $('#role-input').val('');
-    $scope.activeSchedule.roles.push(role);
-    $scope.changed = true
+    if(!$scope.activeSchedule.roles.length){
+      $scope.scheduleMode = role;
+    }
+    $scope.activeSchedule.roles.push({name: role});
+    $scope.changed = true;
+    console.log($scope.scheduleMode);
   }
 
   // Save changes when made to the schedule
