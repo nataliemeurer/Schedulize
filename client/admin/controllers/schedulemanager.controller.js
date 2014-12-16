@@ -10,13 +10,24 @@ adminApp
 })
 .controller('scheduleViewCtrl', function($scope, $stateParams, Schedule){
   $scope.changed = false;
+
   // Get current schedule
   Schedule.getOneSchedule($stateParams.scheduleId).then(function(schedule){
     $scope.activeSchedule = schedule;
   });
+
+  // Add a Role to the Schedule
+  $scope.addRole = function(){
+    var role = $('#role-input').val();
+    $('#role-input').val('');
+    $scope.activeSchedule.roles.push(role);
+    $scope.changed = true
+  }
+
   // Save changes when made to the schedule
   $scope.saveChanges = function(schedule){
     Schedule.updateSchedule(schedule).then(function(schedule){
+      $scope.changed = false;
       $scope.activeSchedule = schedule;
       console.log("Update Schedule");
     });

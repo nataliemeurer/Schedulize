@@ -57,6 +57,11 @@ ul.selection-list {
   margin-left: 40px;
 }
 
+.icon-btn{
+  width: 20px;
+  height: 30px;
+}
+
 .table{
   width:85%;
   margin: auto;

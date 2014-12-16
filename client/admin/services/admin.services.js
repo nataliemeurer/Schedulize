@@ -44,6 +44,9 @@ angular.module('admin.services', ['angularMoment'])
     },
     updateSchedule: function(schedule){
       return $http.put("/api/schedules/" + schedule._id, schedule);
+    },
+    deleteSchedule: function(schedule){
+      return $http.delete("/api/schedules/" + schedule._id);
     }
   };
 });
