@@ -50,25 +50,32 @@ adminApp.directive('scheduleCal', function($http){
             color: scope.scheduleRole.color,
             borderColor: scope.scheduleRole.color,
             textColor: 'rgba(255, 255, 255, 0.87)',
-            storageKey: eventIdx
+            storageKey: eventIdx,
+            shiftType: scope.scheduleRole.name,
+            assignedTo: null
           };
-          scope.activeSchedule.shifts.push(eventData);
-          console.log(scope.activeSchedule);
           eventIdx++;
           $('#scheduleCal').fullCalendar('renderEvent', eventData, false); // stick? = true
           $('#scheduleCal').fullCalendar('unselect');
-          scope.changed = true;
+          scope.$apply(function(){
+            scope.activeSchedule.shifts.push(eventData);
+            scope.changed = true;
+          });
         } else {
           return;
         }
       };
       // OVERWRITE EVENT
       properties.eventResize = function(event){
-        scope.activeSchedule.shifts[event.storageKey] = event;
+        scope.$apply(function(){
+          scope.activeSchedule.shifts[event.storageKey] = event;
+        });
       };
       // EVENT DRAGGING
       properties.eventDrop = function(event){
-        scope.activeSchedule.shifts[event.storageKey] = event;
+        scope.$apply(function(){
+          scope.activeSchedule.shifts[event.storageKey] = event;
+        });
       };
 
       $('#scheduleCal').fullCalendar(properties);

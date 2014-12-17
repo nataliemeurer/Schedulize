@@ -17,7 +17,7 @@
         </span>
       </div>
     </div>
-    <button ng-repeat="role in activeSchedule.roles" type="button" ng-style="{background: role.color}" style="color: white" ng-click="setScheduleMode(role)" class="btn btn-default btn-raised">{{role.name}}</button>
+    <button ng-repeat="role in activeSchedule.roles" type="button" ng-style="{color: scheduleRole.name === role.name ? '#FFFFFF' : '#1C262B', background: scheduleRole.name === role.name ? role.color : transparent}" ng-click="setScheduleMode(role)" class="btn btn-default">{{role.name}}</button>
   </div>
   <!-- {{activeSchedule}} -->
 	<div class="scheduleCal" schedule-cal="{ height: 500 }">

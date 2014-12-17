@@ -48,7 +48,7 @@ adminApp
     Schedule.updateSchedule(schedule).then(function(schedule){
       $scope.changed = false;
       $scope.activeSchedule = schedule;
-      console.log("Update Schedule");
+      console.log("Updated Schedule");
     });
   };
   $scope.deleteSchedule = function(schedule){

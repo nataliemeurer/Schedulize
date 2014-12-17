@@ -43,7 +43,12 @@ angular.module('admin.services', ['angularMoment'])
       return $http.post("/api/schedules", schedule);
     },
     updateSchedule: function(schedule){
-      return $http.put("/api/schedules/" + schedule._id, schedule);
+      var deferred = $q.defer();
+      $http.put("/api/schedules/schedule/" + schedule._id, schedule)
+        .then(function(res){
+          deferred.resolve(res.data);
+        });
+      return deferred.promise;
     },
     deleteSchedule: function(schedule){
       return $http.delete("/api/schedules/" + schedule._id);

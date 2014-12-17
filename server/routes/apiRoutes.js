@@ -78,7 +78,8 @@ module.exports = function (app) {
       .delete(function(req, res){}); // delete all schedules for a given company
 
   app.route('/schedules/schedule/:scheduleId')
-      .get(scheduleController.getScheduleById);
+      .get(scheduleController.getScheduleById)
+      .put(scheduleController.updateScheduleById);
 
   app.route('/schedules/:companyId/:scheduleId')
       .get(function(req, res){}) // Get data for that schedule
