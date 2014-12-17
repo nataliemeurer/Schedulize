@@ -11,7 +11,7 @@ adminApp
 .controller('scheduleViewCtrl', function($scope, $stateParams, Schedule){
   $scope.changed = false;
   $scope.editableSchedule = true;
-
+  var colors = ['#26A65B', '#466272', '#009688', '#C40000', '#FF9800', '#673AB7', '#1C262B'];// [dark blue, orange, teal, red, purple, green] green, red, purple, teal, orange]
   // Called after finding the schedule
   $scope.renderEvents = function(events){
     console.log($scope.loadEvents)
@@ -22,13 +22,13 @@ adminApp
   Schedule.getOneSchedule($stateParams.scheduleId).then(function(schedule){
     $scope.activeSchedule = schedule;
     $scope.renderEvents($scope.activeSchedule.shifts);
-    $scope.scheduleMode = $scope.activeSchedule.roles.length ? $scope.activeSchedule.roles[0].name : null;
-    console.log($scope.scheduleMode);
+    $scope.scheduleRole = $scope.activeSchedule.roles.length ? $scope.activeSchedule.roles[0] : null;
+    console.log($scope.scheduleRole);
   });
 
-  $scope.setScheduleMode = function(mode){
-    $scope.scheduleMode = mode;
-    console.log($scope.scheduleMode);
+  $scope.setScheduleMode = function(role){
+    $scope.scheduleRole = role;
+    console.log($scope.scheduleRole);
   }
 
   // Add a Role to the Schedule
@@ -36,11 +36,11 @@ adminApp
     var role = $('#role-input').val();
     $('#role-input').val('');
     if(!$scope.activeSchedule.roles.length){
-      $scope.scheduleMode = role;
+      $scope.scheduleRole = role;
     }
-    $scope.activeSchedule.roles.push({name: role});
+    $scope.activeSchedule.roles.push({name: role, color: colors[$scope.activeSchedule.roles.length] });
     $scope.changed = true;
-    console.log($scope.scheduleMode);
+    console.log($scope.scheduleRole);
   }
 
   // Save changes when made to the schedule

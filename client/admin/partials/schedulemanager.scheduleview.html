@@ -8,19 +8,19 @@
     <button type="button" ui-sref="schedulemanager.assignshifts" class="btn btn-info default-with-icon"><i class="mdi-action-event"></i>Assign Shifts</button>
   </div>
   <div class="shift-manager">
-    <h3>Shift Creator</h3>
-    <div class="form-group has-success">
+    <h3 style="margin-bottom: 0">Shift Creator</h3>
+    <div style="margin-bottom: 0" class="form-group has-success">
       <div class="input-group">
-        <input required type="text" id="role-input" class="form-control floating-label" ng-model="newRole" data-hint="i.e. Cashier, Manager, etc." ng-model="newSchedule.name" placeholder="Add a shift type or select an option below...">
+        <input required type="text" id="role-input" class="form-control floating-label" ng-model="newRole" data-hint="i.e. Cashing, Managing, etc." ng-model="newSchedule.name" placeholder="Add a shift type...">
         <span class="input-group-btn">
         <button type="button" ng-click="addRole()"class="btn btn-default btn-green">Add</button>
         </span>
       </div>
     </div>
+    <button ng-repeat="role in activeSchedule.roles" type="button" ng-style="{background: role.color}" style="color: white" ng-click="setScheduleMode(role)" class="btn btn-default btn-raised">{{role.name}}</button>
   </div>
-  <button ng-repeat="role in activeSchedule.roles" type="button" ng-click="setScheduleMode(role.name)" class="btn btn-default btn-raised">{{role.name}}</button>
   <!-- {{activeSchedule}} -->
-	<div class="scheduleCal" schedule-cal="{ height: 520 }">
+	<div class="scheduleCal" schedule-cal="{ height: 500 }">
 	</div>
   <script type="text/javascript">
     $.material.init();

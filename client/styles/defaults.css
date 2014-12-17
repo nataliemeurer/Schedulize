@@ -79,10 +79,10 @@ h3 {
 }
 
 .left-sidebar-content {
-	width: 70%;
+	width: 76%;
   float: right;
   color: #191919;
-  margin: 1% 5%;
+  margin: 1% 2%;
   overflow: auto;
 }
 
@@ -91,10 +91,10 @@ h3 {
 }
 
 .right-sidebar-content {
-  width: 70%;
+  width: 76%;
   float: left;
   color: #191919;
-  margin: 0 5%;
+  margin: 1% 2%;
   overflow: auto;
 }
 

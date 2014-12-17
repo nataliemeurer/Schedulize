@@ -12,7 +12,6 @@ adminApp.directive('scheduleCal', function($http){
       console.log("HOLA");
       // Get all properties passed in from the DOM
       var properties = scope.$eval(attrs.scheduleCal);
-      var eventIdx = 0;
       // Create a select Function to handle adding availability to the calendar
       properties.defaultDate = moment(1396310400000).utc();
       properties.header = {left: '', right: ''};
@@ -41,44 +40,35 @@ adminApp.directive('scheduleCal', function($http){
       // properties.events = scope.activeCalendar.shifts;
       // CREATE AND STORE EVENTS
       properties.select = function(start, end) {
-        if(scope.scheduleMode){
+        var eventIdx = properties.events.length;
+        if(scope.scheduleRole){
           var eventData;
-          if(scope.preferred === true){
-            eventData = {
-                title: 'Preferred',
-                start: start,
-                end: end,
-                color: '#4CAF50',
-                borderColor: '#7CB342',
-                textColor: 'rgba(0, 0, 0, 0.87)',
-                storageKey: eventIdx
-              };
-          } else {
-            eventData = {
-                title: 'Available',
-                start: start,
-                end: end,
-                color: '#FFEB3B',
-                borderColor: '#FDD835',
-                textColor: 'rgba(0, 0, 0, 0.87)',
-                storageKey: eventIdx
-              };
-          }
+          eventData = {
+            title: scope.scheduleRole.name,
+            start: start,
+            end: end,
+            color: scope.scheduleRole.color,
+            borderColor: scope.scheduleRole.color,
+            textColor: 'rgba(255, 255, 255, 0.87)',
+            storageKey: eventIdx
+          };
           scope.activeSchedule.shifts.push(eventData);
+          console.log(scope.activeSchedule);
           eventIdx++;
           $('#scheduleCal').fullCalendar('renderEvent', eventData, false); // stick? = true
           $('#scheduleCal').fullCalendar('unselect');
+          scope.changed = true;
         } else {
           return;
         }
       };
       // OVERWRITE EVENT
       properties.eventResize = function(event){
-        scope.events[event.storageKey] = event;
+        scope.activeSchedule.shifts[event.storageKey] = event;
       };
       // EVENT DRAGGING
       properties.eventDrop = function(event){
-        scope.events[event.storageKey] = event;
+        scope.activeSchedule.shifts[event.storageKey] = event;
       };
 
       $('#scheduleCal').fullCalendar(properties);
