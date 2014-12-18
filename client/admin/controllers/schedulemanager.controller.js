@@ -15,12 +15,12 @@ adminApp
   // Called after finding the schedule
   $scope.renderEvents = function(events){
     console.log($scope.loadEvents)
-    $scope.loadEvents(events);
+    $scope.loadEvents();
   }
 
   // Get current schedule
   Schedule.getOneSchedule($stateParams.scheduleId).then(function(schedule){
-    $scope.activeSchedule = schedule;
+    $scope.activeSchedule = JSON.parse(JSON.stringify(schedule));
     $scope.renderEvents($scope.activeSchedule.shifts);
     $scope.scheduleRole = $scope.activeSchedule.roles.length ? $scope.activeSchedule.roles[0] : null;
     console.log($scope.scheduleRole);
@@ -47,8 +47,7 @@ adminApp
   $scope.saveChanges = function(schedule){
     Schedule.updateSchedule(schedule).then(function(schedule){
       $scope.changed = false;
-      $scope.activeSchedule = null;
-      $scope.activeSchedule = schedule;
+      $scope.activeSchedule = JSON.parse(JSON.stringify(schedule));
       console.log("Updated Schedule");
     });
   };

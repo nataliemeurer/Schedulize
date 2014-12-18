@@ -19,7 +19,7 @@
     </div>
     <button ng-repeat="role in activeSchedule.roles" type="button" ng-style="{color: scheduleRole.name === role.name ? '#FFFFFF' : '#1C262B', background: scheduleRole.name === role.name ? role.color : transparent}" ng-click="setScheduleMode(role)" class="btn btn-default">{{role.name}}</button>
   </div>
-  <!-- {{activeSchedule}} -->
+  <!-- {{activeSchedule.shifts}} -->
 	<div class="scheduleCal" schedule-cal="{ height: 500 }">
 	</div>
   <script type="text/javascript">

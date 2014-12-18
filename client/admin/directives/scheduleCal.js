@@ -36,7 +36,7 @@ adminApp.directive('scheduleCal', function($http){
       // properties.events = scope.activeCalendar.shifts;
       // CREATE AND STORE EVENTS
       properties.select = function(start, end) {
-        var eventIdx = properties.events.length;
+        var eventIdx = scope.activeSchedule.shifts.length;
         if(scope.scheduleRole){
           var eventData;
           eventData = {
@@ -61,10 +61,12 @@ adminApp.directive('scheduleCal', function($http){
           return;
         }
       };
+
       // OVERWRITE EVENT
       properties.eventResize = function(event){
+        $('#calendar').fullCalendar('updateEvent', event);
         scope.$apply(function(){
-          console.log(scope.activeSchedule.shifts[event.storageKey]);
+          console.log("RESIZE", event);
           scope.activeSchedule.shifts[event.storageKey] = event;
           scope.changed = true;
         });
@@ -72,15 +74,20 @@ adminApp.directive('scheduleCal', function($http){
 
       // EVENT DRAGGING
       properties.eventDrop = function(event){
-        console.log(event);
-        // scope.activeSchedule.shifts[event.storageKey] = null;
-        scope.activeSchedule.shifts[event.storageKey] = event;
+        $('#calendar').fullCalendar('updateEvent', event);
+        console.log("DROP", event);
         scope.$apply(function(){
+          scope.activeSchedule.shifts[event.storageKey] = event;
           scope.changed = true;
         });
       };
-      scope.loadEvents = function(events){
-        properties.events = events;
+      // LOAD SHIFTS AFTER PAGE HAS LOADED
+      scope.loadEvents = function(){
+        var shifts = scope.activeSchedule.shifts;
+        for(var i = 0; i < scope.activeSchedule.shifts.length; i++){
+          shifts[i]._id = null; // remove fc _id property which ruins everything.
+        }
+        properties.events = shifts;
         $('#scheduleCal').fullCalendar(properties);
       };
     }

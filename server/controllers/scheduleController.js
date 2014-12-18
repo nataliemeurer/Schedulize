@@ -31,13 +31,23 @@ module.exports = {
 
   getScheduleById: function(req, res){
     Schedule
-      .findOne({_id: req.body.scheduleId})
+      .findOne({_id: req.scheduleId})
       .exec(function(err, schedule){
         if(err) {
           res.status(500);
         }
         res.status(200).send(schedule);
       });
+  },
+
+  getScheduleShifts: function(req, res){
+    Schedule.findOne({_id: req.scheduleId})
+      .exec(function(err, schedule){
+        if(err) {
+          res.status(500);
+        }
+        res.status(200).send(schedule.shifts);
+      })
   },
 
   updateScheduleById: function(req, res){

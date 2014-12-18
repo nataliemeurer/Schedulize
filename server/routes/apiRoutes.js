@@ -81,6 +81,9 @@ module.exports = function (app) {
       .get(scheduleController.getScheduleById)
       .put(scheduleController.updateScheduleById);
 
+  app.route('/schedules/schedule/:scheduleId/shifts')
+      .get(scheduleController.getScheduleShifts);
+
   app.route('/schedules/:companyId/:scheduleId')
       .get(function(req, res){}) // Get data for that schedule
       .post(function(req, res){}) // Update schedule
