@@ -65,17 +65,17 @@ adminApp.directive('scheduleCal', function($http){
       properties.eventResize = function(event){
         scope.$apply(function(){
           console.log(scope.activeSchedule.shifts[event.storageKey]);
-          scope.activeSchedule.shifts[event.storageKey] = null;
           scope.activeSchedule.shifts[event.storageKey] = event;
           scope.changed = true;
         });
       };
+
       // EVENT DRAGGING
       properties.eventDrop = function(event){
         console.log(event);
+        // scope.activeSchedule.shifts[event.storageKey] = null;
+        scope.activeSchedule.shifts[event.storageKey] = event;
         scope.$apply(function(){
-          scope.activeSchedule.shifts[event.storageKey] = null;
-          scope.activeSchedule.shifts[event.storageKey] = event;
           scope.changed = true;
         });
       };
