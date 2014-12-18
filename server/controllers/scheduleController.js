@@ -47,7 +47,7 @@ module.exports = {
     Schedule
       .findOne({ _id: req.body._id }, function(err, doc){ 
         doc.roles = schedule.roles.slice(0);
-        doc.shifts = schedule.shifts.slice(0);
+        doc.shifts = JSON.parse(JSON.stringify(schedule.shifts)); //used to create a pseudo deep copy
         doc.employees = schedule.employees.slice(0);
         doc.shiftsAssigned = schedule.shiftsAssigned;
         doc.totalShifts = schedule.totalShifts;

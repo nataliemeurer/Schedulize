@@ -19,7 +19,7 @@ adminApp.directive('scheduleCal', function($http){
       properties.defaultView = 'agendaWeek';
       properties.columnFormat = {week: 'dddd'};
       properties.allDaySlot = false;
-      properties.eventStartEditable = true;
+      // properties.eventStartEditable = true;
       properties.selectHelper = true;
       properties.overlap = false;
       properties.firstHour = 6;
@@ -33,10 +33,6 @@ adminApp.directive('scheduleCal', function($http){
         properties.eventDurationEditable = false;
         properties.selectable = false;
       }
-      // Called in the controller after initial schedule load
-      scope.loadEvents = function(events){
-        properties.events = events;
-      };
       // properties.events = scope.activeCalendar.shifts;
       // CREATE AND STORE EVENTS
       properties.select = function(start, end) {
@@ -68,17 +64,25 @@ adminApp.directive('scheduleCal', function($http){
       // OVERWRITE EVENT
       properties.eventResize = function(event){
         scope.$apply(function(){
+          console.log(scope.activeSchedule.shifts[event.storageKey]);
+          scope.activeSchedule.shifts[event.storageKey] = null;
           scope.activeSchedule.shifts[event.storageKey] = event;
+          scope.changed = true;
         });
       };
       // EVENT DRAGGING
       properties.eventDrop = function(event){
+        console.log(event);
         scope.$apply(function(){
+          scope.activeSchedule.shifts[event.storageKey] = null;
           scope.activeSchedule.shifts[event.storageKey] = event;
+          scope.changed = true;
         });
       };
-
-      $('#scheduleCal').fullCalendar(properties);
+      scope.loadEvents = function(events){
+        properties.events = events;
+        $('#scheduleCal').fullCalendar(properties);
+      };
     }
   };
 });

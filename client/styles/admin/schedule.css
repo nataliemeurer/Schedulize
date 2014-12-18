@@ -14,3 +14,18 @@ div.fc-toolbar {
 tbody, table, thead, th, tr, td{
 	border-color: #CECECE !important;
 }
+
+h2.view-header {
+	float: left;
+	font-size: 2.8rem;
+}
+
+div.header-buttons {
+	float: left;
+	margin-top: 1%;
+	margin-left: 15px;
+}
+
+div.shift-manager {
+	clear: both;
+}

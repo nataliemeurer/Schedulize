@@ -38,7 +38,7 @@ adminApp
     if(!$scope.activeSchedule.roles.length){
       $scope.scheduleRole = role;
     }
-    $scope.activeSchedule.roles.push({name: role, color: colors[$scope.activeSchedule.roles.length] });
+    $scope.activeSchedule.roles.push({ name: role, color: colors[$scope.activeSchedule.roles.length] });
     $scope.changed = true;
     console.log($scope.scheduleRole);
   }
@@ -47,6 +47,7 @@ adminApp
   $scope.saveChanges = function(schedule){
     Schedule.updateSchedule(schedule).then(function(schedule){
       $scope.changed = false;
+      $scope.activeSchedule = null;
       $scope.activeSchedule = schedule;
       console.log("Updated Schedule");
     });

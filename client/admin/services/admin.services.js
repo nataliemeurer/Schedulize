@@ -44,6 +44,10 @@ angular.module('admin.services', ['angularMoment'])
     },
     updateSchedule: function(schedule){
       var deferred = $q.defer();
+      console.log(schedule);
+      for(var i = 0; i < schedule.shifts.length; i++){
+        schedule.shifts[i].source = null;
+      }
       $http.put("/api/schedules/schedule/" + schedule._id, schedule)
         .then(function(res){
           deferred.resolve(res.data);

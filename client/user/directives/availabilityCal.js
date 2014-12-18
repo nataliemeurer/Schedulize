@@ -30,6 +30,7 @@ userApp.directive('availabilityCal', function($http){
       // CREATE AND STORE EVENTS
       properties.select = function(start, end) {
         var eventData;
+        // create different events based on mode
         if(scope.preferred === true){
           eventData = {
               title: 'Preferred',

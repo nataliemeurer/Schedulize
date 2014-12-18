@@ -1,5 +1,5 @@
 <div ng-controller="scheduleViewCtrl">
-	<h2>{{activeSchedule.name}}</h2>
+	<h2 class="view-header">{{activeSchedule.name | limitTo: 23}}</h2>
 	<!-- {{activeSchedule}} -->
   <div class="header-buttons">
     <button ng-if="changed" type="button" ng-click="saveChanges(activeSchedule)" class="btn btn-primary btn-green default-with-icon"><i class="mdi-content-save"></i>Save Changes</button>
@@ -8,7 +8,7 @@
     <button type="button" ui-sref="schedulemanager.assignshifts" class="btn btn-info default-with-icon"><i class="mdi-action-event"></i>Assign Shifts</button>
   </div>
   <div class="shift-manager">
-    <h3 style="margin-bottom: 0">Shift Creator</h3>
+    <h3 style="margin-bottom: 0; margin-top: 5px">Shift Creator</h3>
     <div style="margin-bottom: 0" class="form-group has-success">
       <div class="input-group">
         <input required type="text" id="role-input" class="form-control floating-label" ng-model="newRole" data-hint="i.e. Cashing, Managing, etc." ng-model="newSchedule.name" placeholder="Add a shift type...">
