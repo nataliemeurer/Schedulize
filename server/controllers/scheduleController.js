@@ -1,4 +1,4 @@
-var db = require('../database/dbSchema');
+var db = require('../config/dbSchema');
 var mongoose = require('mongoose');
 var User = db.User;
 var Company = db.Company;

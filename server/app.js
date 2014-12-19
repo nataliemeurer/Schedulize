@@ -4,9 +4,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var passport = require('passport')
 
-var db = require('./database/dbSchema');
+// Require database file
+var db = require('./config/dbSchema');
 
+// pass passport for configuration
+require('./config/passport')(passport); 
+
+// Create App
 var app = express();
 
 // Declare routers
