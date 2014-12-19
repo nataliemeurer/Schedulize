@@ -1,4 +1,5 @@
 var authController = require('../controllers/authController.js');
+var passport = require('passport');
 
 module.exports = function (app) {
 	// RENDERING ROUTES
@@ -10,12 +11,15 @@ module.exports = function (app) {
 	/* GET New User page. */
 	app.route('/signup')
 		.get(function(req, res) {
-	  		res.render('public/newuser', { title: 'Sign Up for Schedulize' });
+	  	res.render('public/newuser', { title: 'Sign Up for Schedulize' });
 		  });
 
-	app.route('/signin')
+	app.route('/login')
     .get(function(req, res){})
-    .post(function(req, res){});
+    .post(passport.authenticate('local', { 
+      successRedirect: '/user',
+      failureRedirect: '/login',
+      failureFlash: true }));
 
   app.route('/logout')
     .post(function(req, res){});
