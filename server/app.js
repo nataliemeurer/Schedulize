@@ -15,12 +15,6 @@ require('./config/passport')(passport);
 // Create App
 var app = express();
 
-// Declare routers
-var authRouter = express.Router();
-var apiRouter = express.Router();
-var userRouter = express.Router();
-var publicRouter = express.Router();
-var adminRouter = express.Router();
 
 // view engine setup
 app.set('views', __dirname + '/views');
@@ -46,6 +40,13 @@ app.use(function(req,res,next){
     req.db = db;
     next();
 });
+
+// Declare routers
+var authRouter = express.Router();
+var apiRouter = express.Router();
+var userRouter = express.Router();
+var publicRouter = express.Router();
+var adminRouter = express.Router();
 
 // Set Basic routing paths
 app.use('/', publicRouter);

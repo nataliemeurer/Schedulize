@@ -8,10 +8,10 @@ module.exports = function (passport) {
   });
 
   passport.deserializeUser(function (id, done) {
-    db.User.find(id).complete(function(error, user) {
-      if (error)
+    User.findOne({_id: id}, function(error, user) {
+      if (error){
         done(error);
-
+      }
       done(null, user);
     });
   });
