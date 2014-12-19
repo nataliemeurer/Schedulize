@@ -38,6 +38,8 @@ app.use(session({
   saveUninitialized: true,
   resave: false
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
