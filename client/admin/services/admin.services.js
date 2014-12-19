@@ -22,9 +22,25 @@ angular.module('admin.services', ['angularMoment'])
         // Return the stored promise with the data
         return schedules;
     },
-    getOneSchedule: function(scheduleId){
+    
+    // new GET request to overwrite the prior promise
+    reloadAllSchedules: function(){
       var deferred = $q.defer();
-      
+      // Request has not been made, so make it
+      $http.get('/api/schedules').then(function(res) {
+        for(var i = 0; i < res.data.length; i++){
+          res.data[i].createdAt = moment(res.data[i].createdAt).format('MMMM Do, YYYY');
+        }
+        deferred.resolve(res.data);
+      });
+      // Add the promise to myObject
+      schedules = deferred.promise;
+      return schedules;
+    },
+
+    getOneSchedule: function(scheduleId){
+      console.log("SCHEDULES IS: ", schedules);
+      var deferred = $q.defer();
       this.getAllSchedules().then(function(schedules){
         for(var i = 0; i < schedules.length; i++){
             if(schedules[i]._id === scheduleId){
@@ -57,7 +73,7 @@ angular.module('admin.services', ['angularMoment'])
       var deferred = $q.defer();
       $http.delete("/api/schedules/schedule/" + schedule._id)
         .then(function(res){
-          console.log("resolved")
+          console.log("resolved");
           deferred.resolve(res.data);
         });
       return deferred.promise;

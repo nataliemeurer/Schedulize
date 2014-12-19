@@ -16,10 +16,9 @@ adminApp
   
   // Get current schedule on itialization
   Schedule.getOneSchedule($stateParams.scheduleId).then(function(schedule){
-    $scope.activeSchedule = JSON.parse(JSON.stringify(schedule));
+    $scope.activeSchedule = schedule;
     $scope.renderEvents($scope.activeSchedule.shifts);
     $scope.scheduleRole = $scope.activeSchedule.roles.length ? $scope.activeSchedule.roles[0] : null;
-    console.log($scope.scheduleRole);
   });
 
   // Called after finding the schedule
@@ -30,7 +29,6 @@ adminApp
 
   $scope.setScheduleMode = function(role){
     $scope.scheduleRole = role;
-    console.log($scope.scheduleRole);
   }
 
   // Add a Role to the Schedule
@@ -50,12 +48,17 @@ adminApp
     Schedule.updateSchedule(schedule).then(function(schedule){
       $scope.changed = false;
       $scope.activeSchedule = JSON.parse(JSON.stringify(schedule));
-      console.log("Updated Schedule");
     });
   };
   $scope.deleteSchedule = function(schedule){
-    Schedule.deleteSchedule(schedule).then(function(schedule){
-      console.log("schedule deleted");
+    Schedule.deleteSchedule(schedule).then(function(deletedCount){
+      Schedule.getAllSchedules().then(function(schedules){
+        for(var i = 0; i < schedules.length; i++){
+          if(schedules[i]._id === schedule._id){
+            schedules.splice(i, 1);
+          }
+        }
+      });
       $state.go('schedulemanager.getstarted');
     });
   };
