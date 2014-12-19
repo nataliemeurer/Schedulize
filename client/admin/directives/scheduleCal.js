@@ -9,7 +9,6 @@ adminApp.directive('scheduleCal', function($http){
               '</div>',
     replace: true,
     link: function(scope, element, attrs) {
-      console.log("HOLA");
       // Get all properties passed in from the DOM
       var properties = scope.$eval(attrs.scheduleCal);
       // Create a select Function to handle adding availability to the calendar
@@ -66,7 +65,6 @@ adminApp.directive('scheduleCal', function($http){
       properties.eventResize = function(event){
         $('#calendar').fullCalendar('updateEvent', event);
         scope.$apply(function(){
-          console.log("RESIZE", event);
           scope.activeSchedule.shifts[event.storageKey] = event;
           scope.changed = true;
         });
@@ -75,7 +73,6 @@ adminApp.directive('scheduleCal', function($http){
       // EVENT DRAGGING
       properties.eventDrop = function(event){
         $('#calendar').fullCalendar('updateEvent', event);
-        console.log("DROP", event);
         scope.$apply(function(){
           scope.activeSchedule.shifts[event.storageKey] = event;
           scope.changed = true;

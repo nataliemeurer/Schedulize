@@ -44,7 +44,6 @@ angular.module('admin.services', ['angularMoment'])
     },
     updateSchedule: function(schedule){
       var deferred = $q.defer();
-      console.log(schedule);
       for(var i = 0; i < schedule.shifts.length; i++){
         schedule.shifts[i].source = null;
       }
@@ -55,7 +54,13 @@ angular.module('admin.services', ['angularMoment'])
       return deferred.promise;
     },
     deleteSchedule: function(schedule){
-      return $http.delete("/api/schedules/" + schedule._id);
+      var deferred = $q.defer();
+      $http.delete("/api/schedules/schedule/" + schedule._id)
+        .then(function(res){
+          console.log("resolved")
+          deferred.resolve(res.data);
+        });
+      return deferred.promise;
     }
   };
 });

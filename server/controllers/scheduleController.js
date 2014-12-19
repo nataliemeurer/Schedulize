@@ -51,8 +51,6 @@ module.exports = {
   },
 
   updateScheduleById: function(req, res){
-    console.log("HOLA");
-    console.log(req.body);
     var schedule = req.body;
     Schedule
       .findOne({ _id: req.body._id }, function(err, doc){ 
@@ -90,6 +88,16 @@ module.exports = {
       console.log("Saved");
       res.status(201).send(doc);
     });
-  }
+  },
 
+  deleteSchedule: function(req, res){
+    Schedule.findOne({_id: req.scheduleId})
+      .remove()
+      .exec(function(err, data){
+        if(err){
+          res.status(500).send(err);
+        }
+        res.status(200).send(data);
+      });
+  }
 };

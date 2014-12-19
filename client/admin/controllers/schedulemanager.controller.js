@@ -8,23 +8,25 @@ adminApp
     $scope.schedules = data;
   });
 })
-.controller('scheduleViewCtrl', function($scope, $stateParams, Schedule){
+.controller('scheduleViewCtrl', function($scope, $stateParams, $state, Schedule){
+  // Scope Variables
   $scope.changed = false;
   $scope.editableSchedule = true;
   var colors = ['#26A65B', '#466272', '#009688', '#C40000', '#FF9800', '#673AB7', '#1C262B'];// [dark blue, orange, teal, red, purple, green] green, red, purple, teal, orange]
-  // Called after finding the schedule
-  $scope.renderEvents = function(events){
-    console.log($scope.loadEvents)
-    $scope.loadEvents();
-  }
-
-  // Get current schedule
+  
+  // Get current schedule on itialization
   Schedule.getOneSchedule($stateParams.scheduleId).then(function(schedule){
     $scope.activeSchedule = JSON.parse(JSON.stringify(schedule));
     $scope.renderEvents($scope.activeSchedule.shifts);
     $scope.scheduleRole = $scope.activeSchedule.roles.length ? $scope.activeSchedule.roles[0] : null;
     console.log($scope.scheduleRole);
   });
+
+  // Called after finding the schedule
+  $scope.renderEvents = function(events){
+    console.log($scope.loadEvents)
+    $scope.loadEvents();
+  }
 
   $scope.setScheduleMode = function(role){
     $scope.scheduleRole = role;
@@ -53,7 +55,8 @@ adminApp
   };
   $scope.deleteSchedule = function(schedule){
     Schedule.deleteSchedule(schedule).then(function(schedule){
-      console.log("Schedule Deleted");
+      console.log("schedule deleted");
+      $state.go('schedulemanager.getstarted');
     });
   };
 

@@ -79,7 +79,8 @@ module.exports = function (app) {
 
   app.route('/schedules/schedule/:scheduleId')
       .get(scheduleController.getScheduleById)
-      .put(scheduleController.updateScheduleById);
+      .put(scheduleController.updateScheduleById)
+      .delete(scheduleController.deleteSchedule);
 
   app.route('/schedules/schedule/:scheduleId/shifts')
       .get(scheduleController.getScheduleShifts);
