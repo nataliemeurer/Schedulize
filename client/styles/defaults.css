@@ -17,6 +17,14 @@ a {
   color: #ECEFF1;
 }
 
+a.dark {
+  color: #1C262B;
+}
+
+a.dark:hover {
+  color: #2A373E;
+}
+
 a:hover{
   color: #7f8c8d;
 }
@@ -39,6 +47,10 @@ h2 {
 
 h3 {
   font-size: 2rem;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+  color: black;
 }
 
 /* Default Sidebar Settings */
@@ -140,6 +152,14 @@ button .ion {
 }
 
 /* GENERIC COLORED BUTTONS */
+.btn {
+  color: #E7EBEE;
+}
+
+.btn:hover {
+  color: white;
+}
+
 .btn-green {
   background-color: #4CAF50 !important;
 }

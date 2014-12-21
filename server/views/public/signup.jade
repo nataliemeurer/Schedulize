@@ -3,14 +3,46 @@ extends layout
 block content
   div.container
     br
-    div.authContainer
-      div.col-md-6
-        h2 Employee Sign Up
-        p Has your employer given you a username and password?  Sign up here!
-        form(action="/signup/employee" method="POST")
-      div.col-md-6
-        h2 Company Sign Up
-        p Ready to make scheduling easy?  Register your company here.
-        form(action="/signup/employer" method="POST")
+    br
+    div.col-md-5.authContainer
+      h2 Employee Sign Up
+      p Have a company name and password?  Sign up here!
+      form(action="/signup/employee" method="POST")
+        div.inputs
+          h3 Personal Information
+          input.form-control.floating-label(type="text" placeholder="Name")
+          //- h3 Email Address
+          br
+          input.form-control.floating-label(type="email" placeholder="Email")
+          br
+          input.form-control.floating-label(type="password" placeholder="Password")
+          input.form-control(type="password" placeholder="Reenter your Password")
+          h3 Company Information
+          input.form-control.floating-label(type="text" placeholder="Company Name")
+          br
+          input.form-control.floating-label(type="password" placeholder="Company Access Key")
+          input.btn.btn-default.btn-lg.btn-block.btn-primary(type="submit" value="Get Started")
+    div.col-md-6.authContainer.col-md-offset-1
+      h2 Company Sign Up
+      p Ready to make scheduling easy?  Register your company.
+      form(action="/signup/company" method="POST")
+        div.inputs
+          h3 Company Information
+          input.form-control.floating-label(type="text" placeholder="Company Name")
+          br
+          input.form-control.floating-label(type="password" placeholder="Company Access Key")
+          input.form-control(type="password" placeholder="Reenter your Company Access Key")
+          h3 Personal Information
+          input.form-control.floating-label(type="text" placeholder="Name")
+          //- h3 Email Address
+          br
+          input.form-control.floating-label(type="email" placeholder="Email")
+          br
+          input.form-control.floating-label(type="password" placeholder="Password")
+          input.btn.btn-default.btn-lg.btn-block.btn-primary(type="submit" value="Register Company")
+      form(action="/signup/employer" method="POST")
+    div.col-md-6.col-md-offset-3
+      h3 Already have an account?  
+        a.dark(href="/login") Log in here.
   script(type="text/javascript").
       $.material.init();

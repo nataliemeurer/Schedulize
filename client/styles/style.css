@@ -46,7 +46,7 @@ ul.selection-list {
 /* AUTHENTICATION PAGES */
 div.authContainer {
   display: inline-block;
-  width: 100%;
+  height: 20%;
   background: white;
   border-radius: 10px;
 }
@@ -54,6 +54,7 @@ div.authContainer {
 div.authContainer:first-child {
   border-right: 2px solid black;
 }
+
 
 .title-bar {
   display: block;
