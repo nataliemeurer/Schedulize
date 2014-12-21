@@ -2,13 +2,35 @@ doctype html
 html
   head
     title= title
+    title= 'Schedulize Admin'
+    link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet' href='/bower_components/bootstrap-material-design/dist/css/material-wfont.min.css')
+    link(rel='stylesheet' href='/bower_components/bootstrap-material-design/dist/css/ripples.min.css')
+    link(rel='stylesheet' href='/bower_components/fullcalendar/dist/fullcalendar.css')
     link(rel='stylesheet' href='/styles/normalize.css')
-    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/styles/style.css')
+    link(rel='stylesheet' href='/styles/defaults.css')
+    link(rel='stylesheet' href='/styles/style.css')   
+    link(rel='stylesheet' href='/styles/admin/schedule.css')   
     link(href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css')
-    script(src='bower_components/angular/angular.min.js')
-    script(src='bower_components/ui-router/release/angular-ui-router.min.js')
-    script(src='public/app.js')
-    script(src='public/services/services.js')
+    link(rel='stylesheet' href='/bower_components/ionicons/css/ionicons.css')
+    script(src='/bower_components/jquery/dist/jquery.min.js')
+    script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+    script(src='/bower_components/bootstrap-material-design/dist/js/material.min.js')
+    script(src='/bower_components/bootstrap-material-design/dist/js/ripples.min.js')
   body
+    nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
+      div.navbar-header
+        button.navbar-toggle(type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse")
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href='/') Schedulize
+      div.navbar-collapse.collapse.navbar-responsive-collapse
+        ul.nav.navbar-nav
+          li
+            a(href='dashboard') About Schedulize
+          li
+            a(href='companydata') Get Started
+          li
+            a(href='schedulemanager') Contact
     block content
