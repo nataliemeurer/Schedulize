@@ -3,9 +3,14 @@ extends layout
 block content
   div.container
     br
-    div.col-md-6
-      h2 Employee Sign Up
-      p Has your employer given you a username and password?  Sign up here!
-    div.col-md-6
-      h2 Company Sign Up
-      p Ready to make scheduling easy?  Register your company here.
+    div.authContainer
+      div.col-md-6
+        h2 Employee Sign Up
+        p Has your employer given you a username and password?  Sign up here!
+        form(action="/signup/employee" method="POST")
+      div.col-md-6
+        h2 Company Sign Up
+        p Ready to make scheduling easy?  Register your company here.
+        form(action="/signup/employer" method="POST")
+  script(type="text/javascript").
+      $.material.init();

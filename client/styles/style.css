@@ -43,6 +43,17 @@ ul.selection-list {
   color: #B0BEC5;
 }
 
+/* AUTHENTICATION PAGES */
+div.authContainer {
+  display: inline-block;
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+}
+
+div.authContainer:first-child {
+  border-right: 2px solid black;
+}
 
 .title-bar {
   display: block;
