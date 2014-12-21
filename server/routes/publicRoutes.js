@@ -1,4 +1,5 @@
 var authController = require('../controllers/authController.js');
+var renderingController = require('../controllers/renderingController.js')
 var passport = require('passport');
 
 module.exports = function (app) {
@@ -10,12 +11,10 @@ module.exports = function (app) {
 		});
 	/* GET New User page. */
 	app.route('/signup')
-		.get(function(req, res) {
-	  	res.render('public/newuser', { title: 'Sign Up for Schedulize' });
-		  });
+		.get(renderingController.getSignupPage);
 
 	app.route('/login')
-    .get(function(req, res){})
+    .get(renderingController.getLoginPage)
     .post(passport.authenticate('local', { 
       successRedirect: '/user',
       failureRedirect: '/login',
