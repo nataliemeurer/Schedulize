@@ -5,7 +5,19 @@ var bcrypt = require('bcrypt');
 var passport = require('passport');
 
 module.exports = {
-	createNewEmployee: function(req, res){
+	isLoggedInUser: function(req, res){
+    if (req.isAuthenticated()) {
+      console.log('logged in');
+      return next();
+    } else {
+
+    // if they aren't redirect them to the login page
+    console.log('not logged in');
+    res.redirect('/login');
+    }
+  },
+
+  createNewEmployee: function(req, res){
 		if(req.body.password !== req.body.password2){
 			res.render('public/signup', {error: "Passwords do not match"});
 		} else {
