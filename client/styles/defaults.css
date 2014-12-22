@@ -152,14 +152,6 @@ button .ion {
 }
 
 /* GENERIC COLORED BUTTONS */
-.btn {
-  color: #E7EBEE;
-}
-
-.btn:hover {
-  color: white;
-}
-
 .btn-green {
   background-color: #4CAF50 !important;
 }
