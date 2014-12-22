@@ -29,7 +29,7 @@ var _companySchema = new Schema({
 	employees: [{type: ObjectId, ref: 'User'}],
 	admins: [{type: ObjectId, ref: 'User'}],
 	schedules: [{type: ObjectId, ref: 'Schedule'}],
-	employeePassword: String
+	accessKey: String
 });
 
 var _scheduleSchema = new Schema({

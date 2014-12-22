@@ -47,6 +47,7 @@ ul.selection-list {
 div.authContainer {
   display: inline-block;
   height: 20%;
+
   background: white;
   border-radius: 10px;
 }
