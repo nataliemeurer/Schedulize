@@ -37,11 +37,18 @@ module.exports = {
               joinDate: new Date()
             });
             // Save the new user
-            newUser.save(function (err) {
+            newUser.save(function (err, user) {
               if (err) {
                 res.status(500).send(err);
               }
-              res.redirect('/user');
+              // Add user to list of company employees
+              company.employees.push(user._id);
+              company.save(function(err, updatedCompany){
+                // log this user in
+                passport.authenticate('local')(req, res, function () {
+                  res.redirect('/user');
+                });
+              });
             });
           });
         });      
@@ -50,6 +57,12 @@ module.exports = {
 	},
 
 	createNewCompany: function(req, res){
-
+    var newCompany = new Company({
+      name: String,
+      employees: [{type: ObjectId, ref: 'User'}],
+      admins: [{type: ObjectId, ref: 'User'}],
+      schedules: [{type: ObjectId, ref: 'Schedule'}],
+      accessKey: String
+    });
 	}
 }
