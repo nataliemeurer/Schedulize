@@ -5,7 +5,7 @@ module.exports = function (app) {
     .post(authController.createNewEmployee);
 
   app.route('/signup/company')
-    .post(authController.createNewCompany)
+    .post(authController.createNewCompany);
 
   app.post('/signin', function(req, res){
 

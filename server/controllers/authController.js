@@ -57,12 +57,33 @@ module.exports = {
 	},
 
 	createNewCompany: function(req, res){
-    var newCompany = new Company({
-      name: String,
-      employees: [{type: ObjectId, ref: 'User'}],
-      admins: [{type: ObjectId, ref: 'User'}],
-      schedules: [{type: ObjectId, ref: 'Schedule'}],
-      accessKey: String
+    bcrypt.hash(req.body.password, null, null, function(err, hash) {
+      if(err){
+        console.log('Failed to hash password');
+        res.status(500).send(err);
+      }
+      // create a new user
+      var newUser = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: hash,
+        companies: [company._id],
+        shiftsDesired: null,
+        shiftsAssigned: 0,
+        availability: null,
+        isAdmin: false,
+        joinDate: new Date()
+      });
+      // Save new user
+      newUser.save(function(err, user){
+        var newCompany = new Company({
+          name: req.body.companyName,
+          employees: [],
+          admins: [{type: ObjectId, ref: 'User'}],
+          schedules: [{type: ObjectId, ref: 'Schedule'}],
+          accessKey: String
+        });
+      });
     });
 	}
 }
