@@ -50,9 +50,9 @@ var adminRouter = express.Router();
 
 // Set Basic routing paths
 app.use('/', publicRouter);
+app.use('/', authRouter);
 app.use('/user', userRouter);
 app.use('/api', apiRouter);
-app.use('/auth', authRouter);
 app.use('/admin', adminRouter);
 
 // // Include Router files
