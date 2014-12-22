@@ -6,9 +6,7 @@ module.exports = function (app) {
 	// RENDERING ROUTES
 	/* GET home page. */
 	app.route('/')
-		.get(function(req, res) {
-	  		res.render('public/index', {title: 'Schedulize'});
-		});
+		.get(renderingController.renderHomePage);
 	/* GET New User page. */
 	app.route('/signup')
 		.get(renderingController.getSignupPage);
