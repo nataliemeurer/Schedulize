@@ -20,7 +20,7 @@ module.exports = {
               res.render('public/signup', {error: "Invalid Access Key for " + company.name});
             }
           // Hash the given password
-          bcryp.genSalt(10, function(err, salt){
+          bcrypt.genSalt(10, function(err, salt){
             bcrypt.hash(req.body.password, salt, function(err, hash) {
               if(err){
                 console.log('Failed to hash password');
