@@ -20,6 +20,9 @@ module.exports = function (app) {
       .get(companyController.getAllCompanies) // Get all company names
       .post(companyController.addNewCompany); // Add new company
 
+  app.route('/companies/current')
+      .get(companyController.getUserCompanies);
+
   app.route('/companies/:companyId')
       .get(function(req, res){}) // Get company data
       .post(function(req, res){}) // Update company

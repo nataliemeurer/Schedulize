@@ -17,6 +17,17 @@ module.exports = {
       });
   },
 
+  getUserCompanies: function(req, res){
+    User.find({_id: req.user._id})
+        .populate('companies')
+        .exec(function(err, user){
+          if(err){
+            res.status(500).send(err);
+          }
+          res.status(200).send(user.companies);
+        });
+  },
+
   getAllCompanies: function(req, res){
 		Company
 			.find()

@@ -42,24 +42,24 @@ userApp
     	}
     };
 })
-.factory('Company', function($http, $location){
-	var companies = null;
+.factory('Schedules', function($http, $location){
+	var schedules = null;
 
 	return {
-		getUserCompanies: function(){
+		getUserSchedules: function(companyId){
 		  // Create a promise to be returned
 		  // If we have not yet fetched our schedules..
-		  if(!companies) {
+		  if(!schedules) {
 		    var deferred = $q.defer();
 		    // Request has not been made, so make it
-		    $http.get('/api/users/companies').then(function(res) {
+		    $http.get('/api/schedules/' + companyId).then(function(res) {
 		      deferred.resolve(res.data);
 		    });
 		    // Add the promise to myObject
-		    companies = deferred.promise;
+		    schedules = deferred.promise;
 		  }
 		    // Return the stored promise with the data
-		    return companies;
+		    return schedules;
 		}
 	};
 });
