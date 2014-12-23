@@ -6,4 +6,3 @@ module.exports = function (app) {
   app.route('/')
     .get(authController.isLoggedInUser, renderingController.renderUserApp);
 };
-

@@ -46,6 +46,12 @@ module.exports = function (app) {
       })
       .post(userController.createNewUser); // add new user
 
+  app.route('/users/availability')
+      .get(availabilityController.getUserAvailability)
+      .post(function(req, res){})
+      .put(function(req, res){})
+      .delete(function(req, res){});
+  
   app.route('/users/:userId')
       .get(function(req, res){ // get user data
         res.send(req.user);
@@ -53,12 +59,6 @@ module.exports = function (app) {
       .post(function(req, res){}) // add new values to user data
       .put(function(req, res){}) // update user data
       .delete(function(req, res){}); // delete user
-
-  app.route('/users/availability')
-      .get(function(req, res){})
-      .post(function(req, res){})
-      .put(function(req, res){})
-      .delete(function(req, res){});
 
   app.route('/users/availability/:userId')
       .get(function(req, res){})
@@ -94,16 +94,4 @@ module.exports = function (app) {
   app.route('/schedules/:companyId/:scheduleId/populate')
       .post(function(req, res){}); // populate the schedule for a given company
 
-  // To be deleted when Ids are set up
-  app.post('/users/availability', function(req, res){
-    // console.log(req.body);
-    // var availability = req.body.availability;
-    // var name = req.body.name;
-    // var eligibility = req.body.eligibility;
-    // var shiftsDesired = req.body.desiredShifts;
-    // users.findOne({ name: name, availability: availability, shiftsDesired: shiftsDesired, eligibility: eligibility }).on('success', function(doc, err){
-    // 	if (err) throw err;
-    //   res.send(201, doc);
-    // });
-  });
 };
