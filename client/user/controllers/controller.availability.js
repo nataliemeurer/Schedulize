@@ -9,12 +9,17 @@ userApp.controller('availabilityController', function($scope, $location, Availab
     $scope.setAvailable = function(){
         $scope.preferred = false;
     };
+	$scope.renderEvents = function(events){
+	  $scope.loadEvents();
+	}
     Availability.getAvailability().then(function(availability){
     	if(availability){
     		$scope.availability = availability;
+    		$scope.renderEvents();
    			$scope.availabilitySubmitted = true;
     	} else {
     		$scope.availability = {};
+    		$scope.renderEvents();
    			$scope.availabilitySubmitted = false;
     	}
     });

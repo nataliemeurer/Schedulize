@@ -52,21 +52,32 @@ userApp.directive('availabilityCal', function($http){
               storageKey: eventIdx
             };
         }
-        scope.events[eventIdx] = eventData;
+        scope.availability[eventIdx] = eventData;
         eventIdx++;
         $('#availabilityCal').fullCalendar('renderEvent', eventData, false); // stick? = true
         $('#availabilityCal').fullCalendar('unselect');
       };
       // OVERWRITE EVENT
       properties.eventResize = function(event){
-        scope.events[event.storageKey] = event;
+        scope.$apply(function(){
+          scope.availability[event.storageKey] = event;
+        });
       };
       // EVENT DRAGGING
       properties.eventDrop = function(event){
-        scope.events[event.storageKey] = event;
+        scope.$apply(function(){
+          scope.availability[event.storageKey] = event;
+        });
       };
 
-      $('#availabilityCal').fullCalendar(properties);
+      scope.loadEvents = function(){
+        var availability = scope.availability;
+        for(var i = 0; i < availability.length; i++){
+          availability[i]._id = null; // remove fc _id property which ruins everything.
+        }
+        properties.events = availability;
+        $('#availabilityCal').fullCalendar(properties);
+      };
     }
   };
 });
