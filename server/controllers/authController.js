@@ -16,6 +16,11 @@ module.exports = {
     }
   },
 
+  logoutUser: function(req, res){
+    req.logout();
+    res.redirect('/');
+  },
+
   isLoggedInAdmin: function(req, res, next){
     if( req.isAuthenticated()) {
       if(req.user.isAdmin){
@@ -24,12 +29,8 @@ module.exports = {
         res.render('public/insufficientPrivileges');
       }
     } else {
-      
+      res.redirect('/login');
     }
-  },
-
-  isLoggedInAdmin: function(req, res){
-
   },
 
   createNewEmployee: function(req, res){

@@ -10,8 +10,5 @@ module.exports = function (app) {
 	/* GET New User page. */
 	app.route('/signup')
 		.get(renderingController.getSignupPage);
-
-  app.route('/logout')
-    .post(function(req, res){});
 };
 

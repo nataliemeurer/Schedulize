@@ -15,4 +15,6 @@ module.exports = function (app) {
       successRedirect: '/user',
       failureRedirect: '/login'})
     );
+  app.route('/logout')
+    .get(authController.logoutUser);
 };

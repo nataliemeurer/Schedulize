@@ -34,8 +34,12 @@ html
           li
             a(href='/admin') Administrators
         ul.nav.navbar-nav.navbar-right(style="margin-right: 20px")
-          li
-            a(href='/signup') Sign up
-          li
-            a(href='/login') Login
+          if loggedIn
+            li
+              a(href='/logout') Logout
+          else
+            li
+              a(href='/signup') Sign up
+            li
+              a(href='/login') Login
     block content
