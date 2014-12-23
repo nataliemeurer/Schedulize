@@ -5,7 +5,8 @@ var User = db.User;
 
 module.exports = function (passport) {
   passport.serializeUser(function (user, done) {
-    done(null, user.id);
+    console.log("serialize");
+    done(null, user._id);
   });
 
   passport.deserializeUser(function (id, done) {

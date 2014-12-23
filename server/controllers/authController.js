@@ -5,7 +5,8 @@ var bcrypt = require('bcrypt');
 var passport = require('passport');
 
 module.exports = {
-	isLoggedInUser: function(req, res){
+	isLoggedInUser: function(req, res, next){
+    console.log(req.user);
     if (req.isAuthenticated()) {
       console.log('logged in');
       return next();
@@ -15,6 +16,10 @@ module.exports = {
     console.log('not logged in');
     res.redirect('/login');
     }
+  },
+
+  isLoggedInAdmin: function(req, res){
+
   },
 
   createNewEmployee: function(req, res){
