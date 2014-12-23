@@ -6,10 +6,8 @@ module.exports = {
 	getUserAvailability: function(req, res){
 		console.log("hello");
 		var user = req.user;
-		console.log(user);
 		User.find({_id: user._id}, function(err, user){
 			if(err){
-
 				res.status(500);
 			}
 			res.status(200).send(user.availability);

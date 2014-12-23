@@ -1,7 +1,7 @@
 'use strict';
 var userApp = angular.module('userApp');
 
-userApp.controller('availabilityController', function($scope, $location, Availability){
+userApp.controller('availabilityController', function($scope, $location, User){
     $scope.preferred = true;
     $scope.setPreferred = function(){
         $scope.preferred = true;
@@ -12,9 +12,9 @@ userApp.controller('availabilityController', function($scope, $location, Availab
 	$scope.renderEvents = function(events){
 	  $scope.loadEvents();
 	}
-    Availability.getAvailability().then(function(availability){
-    	if(availability){
-    		$scope.availability = availability;
+    User.getUser().then(function(user){
+    	if(user.availability){
+    		$scope.availability = useravailability;
     		$scope.renderEvents();
    			$scope.availabilitySubmitted = true;
     	} else {

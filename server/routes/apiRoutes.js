@@ -43,8 +43,10 @@ module.exports = function (app) {
             }
             res.status(200).send(users);
           });
-      })
-      .post(userController.createNewUser); // add new user
+      });
+
+  app.route('/users/current')
+    .get(userController.getCurrentUser);
 
   app.route('/users/availability')
       .get(availabilityController.getUserAvailability)
