@@ -62,13 +62,6 @@ require('./routes/authRoutes.js')(authRouter);
 require('./routes/userRoutes.js')(userRouter);
 require('./routes/adminRoutes.js')(adminRouter);
 
-
-// app.use('/', routes);
-// app.use('/auth', auth);
-// app.use('/api', api);
-// app.use('/admin', admin);
-// app.use('/user', users);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
