@@ -15,8 +15,9 @@ block content
           a(ui-sref='dashboard') Dashboard
         li(ui-sref-active="active")
           a(ui-sref='availability') Availability
-        li
-          a(href='../admin') Admin View
+        if user.isAdmin
+          li
+            a(href='../admin') Admin View
       ul.nav.navbar-nav.navbar-right(style="margin-right: 20px")
         if loggedIn
           li
