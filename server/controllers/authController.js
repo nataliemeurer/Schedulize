@@ -6,15 +6,25 @@ var passport = require('passport');
 
 module.exports = {
 	isLoggedInUser: function(req, res, next){
-    console.log(req.user);
     if (req.isAuthenticated()) {
-      console.log('logged in');
       return next();
     } else {
 
     // if they aren't redirect them to the login page
     console.log('not logged in');
     res.redirect('/login');
+    }
+  },
+
+  isLoggedInAdmin: function(req, res, next){
+    if( req.isAuthenticated()) {
+      if(req.user.isAdmin){
+        return next();
+      } else {
+        res.render('public/insufficientPrivileges');
+      }
+    } else {
+      
     }
   },
 
