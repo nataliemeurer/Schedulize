@@ -11,13 +11,6 @@ module.exports = function (app) {
 	app.route('/signup')
 		.get(renderingController.getSignupPage);
 
-	app.route('/login')
-    .get(renderingController.getLoginPage)
-    .post(passport.authenticate('local', { 
-      successRedirect: '/user',
-      failureRedirect: '/login',
-      failureFlash: true }));
-
   app.route('/logout')
     .post(function(req, res){});
 };

@@ -8,9 +8,9 @@ block content
       form(action="/login" method="POST")
         div.inputs
           br
-          input.form-control.floating-label(type="email" placeholder="Email")
+          input.form-control.floating-label(type="email" name="email" placeholder="Email")
           br
-          input.form-control.floating-label(type="password" placeholder="Password")
+          input.form-control.floating-label(type="password" name="password" placeholder="Password")
           input.btn.btn-default.btn-lg.btn-block.btn-primary(type="submit" value="Login")
   script(type="text/javascript").
       $.material.init();
