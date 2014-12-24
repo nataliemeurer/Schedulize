@@ -21,14 +21,14 @@ adminApp
   
   Company.getCompanyData().then(function(company){
     $scope.company = company;
+    // Get current schedule on initialization
+    Schedule.getOneSchedule($stateParams.scheduleId, company._id).then(function(schedule){
+      $scope.activeSchedule = schedule;
+      $scope.renderEvents($scope.activeSchedule.shifts);
+      $scope.scheduleRole = $scope.activeSchedule.roles.length ? $scope.activeSchedule.roles[0] : null;
+    });
   });
 
-  // Get current schedule on initialization
-  Schedule.getOneSchedule($stateParams.scheduleId).then(function(schedule){
-    $scope.activeSchedule = schedule;
-    $scope.renderEvents($scope.activeSchedule.shifts);
-    $scope.scheduleRole = $scope.activeSchedule.roles.length ? $scope.activeSchedule.roles[0] : null;
-  });
 
   // Called after finding the schedule
   $scope.renderEvents = function(events){
