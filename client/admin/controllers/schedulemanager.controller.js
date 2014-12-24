@@ -2,19 +2,28 @@
 var adminApp = angular.module('adminApp');
 
 adminApp
-.controller('scheduleManagerCtrl', function($scope, $http, $location, Schedule){
+.controller('scheduleManagerCtrl', function($scope, $http, $location, Company, Schedule){
   // Get all Schedules(eventually for logged in company)
-  Schedule.getAllSchedules().then(function(data){
-    $scope.schedules = data;
+  Company.getCompanyData().then(function(company){
+    $scope.company = company;
+    console.log(company);
+    Schedule.getCompanySchedules(company._id).then(function(schedules){
+      console.log(schedules);
+      $scope.schedules = schedules;
+    });
   });
 })
-.controller('scheduleViewCtrl', function($scope, $stateParams, $state, Schedule){
+.controller('scheduleViewCtrl', function($scope, $stateParams, $state, Company, Schedule){
   // Scope Variables
   $scope.changed = false;
   $scope.editableSchedule = true;
   var colors = ['#26A65B', '#466272', '#009688', '#C40000', '#FF9800', '#673AB7', '#1C262B'];// [dark blue, orange, teal, red, purple, green] green, red, purple, teal, orange]
   
-  // Get current schedule on itialization
+  Company.getCompanyData().then(function(company){
+    $scope.company = company;
+  });
+
+  // Get current schedule on initialization
   Schedule.getOneSchedule($stateParams.scheduleId).then(function(schedule){
     $scope.activeSchedule = schedule;
     $scope.renderEvents($scope.activeSchedule.shifts);
@@ -52,7 +61,7 @@ adminApp
   };
   $scope.deleteSchedule = function(schedule){
     Schedule.deleteSchedule(schedule).then(function(deletedCount){
-      Schedule.getAllSchedules().then(function(schedules){
+      Schedule.getCompanySchedules($scope.company._id).then(function(schedules){
         for(var i = 0; i < schedules.length; i++){
           if(schedules[i]._id === schedule._id){
             schedules.splice(i, 1);

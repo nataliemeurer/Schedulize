@@ -80,11 +80,12 @@ module.exports = {
   },
 
   addNewSchedule: function(req, res){
+    var companyId = req.body.companyId || req.user.companies[0];
     var newSchedule = new Schedule({
         name: req.body.name,
-        companyId: req.body.companyId || "548951472119af472fba5ed0",
+        companyId: companyId,
         shifts: req.body.shifts || [],
-        createdBy: req.body.username || "test user",
+        createdBy: req.user.name,
         createdAt: new Date(),
         totalShifts: req.body.totalShifts || 0,
         shiftsAssigned: 0,
@@ -96,8 +97,14 @@ module.exports = {
         console.log(err);
         res.status(500).send(err);
       }
-      console.log("Saved");
-      res.status(201).send(doc);
+      Company.findOne({_id: companyId}, function(err, company){
+        company.schedules.push(doc._id);
+        company.save(function(err, newCompany){
+          console.log("Saved");
+          res.status(201).send(doc);
+        });
+
+      });
     });
   },
 
