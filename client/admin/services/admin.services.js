@@ -60,7 +60,7 @@ angular.module('admin.services', ['angularMoment'])
     getOneSchedule: function(scheduleId){
       console.log("SCHEDULES IS: ", schedules);
       var deferred = $q.defer();
-      this.getAllSchedules().then(function(schedules){
+      this.getCompanySchedules().then(function(schedules){
         for(var i = 0; i < schedules.length; i++){
             if(schedules[i]._id === scheduleId){
               deferred.resolve(schedules[i]);
@@ -69,6 +69,7 @@ angular.module('admin.services', ['angularMoment'])
       });
       return deferred.promise;
     },
+
     postNewSchedule: function(schedule){
       if(schedule.template){
         schedule.shifts = schedule.templateSchedule.shifts.slice(0);
@@ -77,6 +78,7 @@ angular.module('admin.services', ['angularMoment'])
       }
       return $http.post("/api/schedules", schedule);
     },
+
     updateSchedule: function(schedule){
       var deferred = $q.defer();
       for(var i = 0; i < schedule.shifts.length; i++){
@@ -88,6 +90,7 @@ angular.module('admin.services', ['angularMoment'])
         });
       return deferred.promise;
     },
+    
     deleteSchedule: function(schedule){
       var deferred = $q.defer();
       $http.delete("/api/schedules/schedule/" + schedule._id)
