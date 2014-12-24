@@ -29,6 +29,17 @@ module.exports = {
       });
   },
 
+  getCompanySchedules: function(req, res){
+    Schedule
+    .find({companyId: req.companyId}, "name shifts createdBy totalShifts shiftsAssigned roles")
+    .exec(function(err, schedules){
+      if(err){
+        res.status(500).send(err);
+      }
+      res.status(200).send(schedules);
+    });
+  },
+
   getScheduleById: function(req, res){
     Schedule
       .findOne({_id: req.scheduleId})

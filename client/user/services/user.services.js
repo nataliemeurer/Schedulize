@@ -42,7 +42,7 @@ userApp
     	}
     };
 })
-.factory('Schedules', function($http, $location){
+.factory('Schedule', function($http, $location, $q){
 	var schedules = null;
 
 	return {
