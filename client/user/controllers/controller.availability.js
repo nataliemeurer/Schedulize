@@ -2,6 +2,10 @@
 var userApp = angular.module('userApp');
 
 userApp.controller('availabilityController', function($scope, $location, User, Schedule){
+  $scope.changed = false;
+  $scope.update = function(){
+    $scope.changed = true
+  };
   $scope.preferred = true;
   $scope.setPreferred = function(){
       $scope.preferred = true;
@@ -30,7 +34,7 @@ userApp.controller('availabilityController', function($scope, $location, User, S
       console.log("SCHEDULES ", schedules);
       $scope.schedules = schedules;
       $scope.roles = [];
-      $scope.userRoles = user.eligibleRoles;
+      $scope.userRoles = user.eligibleRoles || [];
       $scope.userRoles_ = angular.copy($scope.userRoles);
       for(var i = 0; i < $scope.schedules.length; i++){
         var sched = $scope.schedules[i];
