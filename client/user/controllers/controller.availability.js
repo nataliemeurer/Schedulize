@@ -22,7 +22,8 @@ userApp.controller('availabilityController', function($scope, $location, User, S
     		$scope.renderEvents();
    			$scope.availabilitySubmitted = false;
     	}
-    	console.log(user);
+    	$scope.user = user;
+    	console.log($scope.user);
     	$scope.company = user.companies[0];
     	console.log("COMPANY ", $scope.company);
     	Schedule.getUserSchedules($scope.company._id).then(function(schedules){
