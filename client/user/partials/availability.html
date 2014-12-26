@@ -8,24 +8,9 @@
 					<input required type="number" name="desiredShifts" data-hint="Enter a number" class="form-control floating-label" placeholder="Desired Shifts">
 				</div>
 				<h4>2. Indicate the shifts you are eligible to work:</h4>
-				<div class="checkbox">
+				<div ng-repeat="role in roles" class="checkbox">
 					<label>
-						<input type="checkbox" name="eligibility[]" value="Cashier"/> Cashier
-					</label>
-				</div>
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" name="eligibility[]" value="Manager"/> Manager
-					</label>
-				</div>
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" name="eligibility[]" value="Stocker"/> Stocker
-					</label>
-				</div>
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" name="eligibility[]" value="Tosser"/> Tosser
+						<input type="checkbox" name="eligibility[]" ng-value="role"/> {{role}}
 					</label>
 				</div>
 				<h4>3. Drag on the calendar to indicate times you could work:</h4>

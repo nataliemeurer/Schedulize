@@ -28,6 +28,15 @@ userApp.controller('availabilityController', function($scope, $location, User, S
     	Schedule.getUserSchedules($scope.company._id).then(function(schedules){
     		console.log("SCHEDULES ", schedules);
     		$scope.schedules = schedules;
+    		$scope.roles = [];
+    		for(var i = 0; i < $scope.schedules.length; i++){
+    			var sched = $scope.schedules[i];
+    			for(var j = 0; j < sched.roles.length; j++){
+    				if($scope.roles.indexOf(sched.roles[j].name) === -1){
+    					$scope.roles.push(sched.roles[j].name);
+    				}
+    			}
+    		}
     	})
     });
 

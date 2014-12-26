@@ -80,6 +80,9 @@ angular.module('admin.services', ['angularMoment'])
 
     updateSchedule: function(schedule){
       var deferred = $q.defer();
+      if(!schedule.employees){
+        schedule.employees = [];
+      }
       for(var i = 0; i < schedule.shifts.length; i++){
         schedule.shifts[i].source = null;
       }
