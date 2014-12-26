@@ -12,11 +12,9 @@
           <input type="checkbox" checkbox-group ng-value="role"/> {{role}}
         </label>
       </div>
-      ROLES: {{roles}}
-      USER ROLES: {{ userRoles }}
       <h4>Drag on the calendar to indicate times you could work:</h4>
       <!-- insert fancy right arrow here -->
-      <button type="submit" class="btn btn-default btn-raised btn-light">Update Availability</button>
+      <button type="button" ng-click="updateAvailability()" class="btn btn-default btn-raised btn-light">Update Availability</button>
     </div>
   </aside>
   <div class="left-sidebar-content">

@@ -15,7 +15,6 @@ userApp.directive('availabilityCal', function($http){
     link: function(scope, element, attrs) {
       // Get all properties passed in from the DOM
       var properties = scope.$eval(attrs.availabilityCal);
-      var eventIdx = 0;
       // Create a select Function to handle adding availability to the calendar
       properties.defaultDate = moment(1396310400000).utc();
       properties.header = {left: '', right: ''};
@@ -30,6 +29,7 @@ userApp.directive('availabilityCal', function($http){
       // CREATE AND STORE EVENTS
       properties.select = function(start, end) {
         var eventData;
+        var eventIdx = scope.availability.length;
         // create different events based on mode
         if(scope.preferred === true){
           eventData = {
@@ -52,10 +52,12 @@ userApp.directive('availabilityCal', function($http){
               storageKey: eventIdx
             };
         }
-        scope.availability[eventIdx] = eventData;
-        eventIdx++;
-        $('#availabilityCal').fullCalendar('renderEvent', eventData, false); // stick? = true
-        $('#availabilityCal').fullCalendar('unselect');
+        console.log(scope.availability);
+        scope.$apply(function(){
+          scope.availability.push(eventData);
+          $('#availabilityCal').fullCalendar('renderEvent', eventData, false); // stick? = true
+          $('#availabilityCal').fullCalendar('unselect');
+        });
       };
       // OVERWRITE EVENT
       properties.eventResize = function(event){
@@ -72,8 +74,10 @@ userApp.directive('availabilityCal', function($http){
 
       scope.loadEvents = function(){
         var availability = scope.availability;
+        console.log(availability);
         for(var i = 0; i < availability.length; i++){
           availability[i]._id = null; // remove fc _id property which ruins everything.
+          availability[i].source = null;
         }
         properties.events = availability;
         $('#availabilityCal').fullCalendar(properties);

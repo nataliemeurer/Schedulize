@@ -54,7 +54,7 @@ module.exports = function (app) {
   app.route('/users/availability')
       .get(availabilityController.getUserAvailability)
       .post(function(req, res){})
-      .put(function(req, res){})
+      .put(availabilityController.updateUserAvailability)
       .delete(function(req, res){});
   
   app.route('/users/:userId')

@@ -18,6 +18,10 @@ userApp
 		  }
 		    // Return the stored promise with the data
 		    return user;
+		},
+
+		updateUserAvailability: function(user){
+			return $http.put('/api/users/availability', user);
 		}
 	};
 })
