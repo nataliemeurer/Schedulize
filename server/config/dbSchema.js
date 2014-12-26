@@ -20,6 +20,7 @@ var _userSchema = new Schema({
 	shiftsDesired: Number,
 	shiftsAssigned: Number,
 	availability: [{}],
+	eligibleRoles: [String],
 	isAdmin: Boolean,
 	joinDate: { type: Date, default: Date.now }
 });

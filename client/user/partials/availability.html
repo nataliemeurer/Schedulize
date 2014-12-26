@@ -1,32 +1,30 @@
 <div id="availabilityTable" ng-controller="availabilityController">
-	<form role="form" method="POST" action="/api/users/availability">
-		<aside class="sidebar-left">
-			<h2 style="margin-top: 0px">Availability:</h2>
-			<div class="inputs">
-				<h4>Total Shifts Desired</h4>
-				<div class="form-group has-success">
-					<input required type="number" ng-model="user.shiftsDesired" name="desiredShifts" data-hint="Enter a number" ng-value="user.shiftsDesired" class="form-control floating-label" placeholder="Desired Shifts">
-				</div>
-				<h4>Indicate the shifts you are eligible to work:</h4>
-				<div ng-repeat="role in roles" class="checkbox">
-					<label>
-						<input type="checkbox" name="eligibility[]" ng-value="role"/> {{role}}
-					</label>
-				</div>
-				<h4>Drag on the calendar to indicate times you could work:</h4>
-				<!-- insert fancy right arrow here -->
-				<button type="submit" class="btn btn-default btn-raised btn-light">Update Availability</button>
-			</div>
-		</aside>
-		<div class="left-sidebar-content">
-			<div class="sidebar-header">
-				<h2>Calendar View:</h2>
-			</div>
-			<div class="availabilityCal" availability-cal="{ height: 520, eventDurationEditable: true, firstHour: 6, selectable: true, unselectAuto: false}">
-			</div>
-			<input type="hidden" value={{events}} name="availability"/>
-		</form>
-		<script>
-			$.material.init();
-		</script>
-	</div>
+  <aside class="sidebar-left">
+    <h2 style="margin-top: 0px">Availability:</h2>
+    <div class="inputs">
+      <h4>Total Shifts Desired</h4>
+      <div class="form-group has-success">
+        <input required type="number" ng-model="user.shiftsDesired" name="desiredShifts" data-hint="Enter a number" ng-value="user.shiftsDesired" class="form-control floating-label" placeholder="Desired Shifts">
+      </div>
+      <h4>Indicate the shifts you are eligible to work:</h4>
+      <div ng-repeat="role in roles" class="checkbox">
+        <label>
+          <input type="checkbox" ng-value="role"/> {{role}}
+        </label>
+      </div>
+      <h4>Drag on the calendar to indicate times you could work:</h4>
+      <!-- insert fancy right arrow here -->
+      <button type="submit" class="btn btn-default btn-raised btn-light">Update Availability</button>
+    </div>
+  </aside>
+  <div class="left-sidebar-content">
+    <div class="sidebar-header">
+      <h2>Calendar View:</h2>
+    </div>
+    <div class="availabilityCal" availability-cal="{ height: 520, eventDurationEditable: true, firstHour: 6, selectable: true, unselectAuto: false}">
+    </div>
+  </div>
+  <script>
+    $.material.init();
+  </script>
+</div>

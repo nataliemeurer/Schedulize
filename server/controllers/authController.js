@@ -63,6 +63,7 @@ module.exports = {
                 shiftsDesired: null,
                 shiftsAssigned: 0,
                 availability: null,
+                eligibleRoles: [],
                 isAdmin: false,
                 joinDate: new Date()
               });
@@ -104,6 +105,7 @@ module.exports = {
           shiftsDesired: null,
           shiftsAssigned: 0,
           availability: null,
+          eligibleRoles: [],
           isAdmin: true,
           joinDate: new Date()
         });
