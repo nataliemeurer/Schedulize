@@ -50,7 +50,7 @@ adminApp.directive('scheduleCal', function($http){
             assignedTo: null
           };
           eventIdx++;
-          $('#scheduleCal').fullCalendar('renderEvent', eventData, false); // stick? = true
+          $('#scheduleCal').fullCalendar('renderEvent', eventData, false);
           $('#scheduleCal').fullCalendar('unselect');
           scope.$apply(function(){
             scope.activeSchedule.shifts.push(eventData);
@@ -64,6 +64,7 @@ adminApp.directive('scheduleCal', function($http){
       // OVERWRITE EVENT
       properties.eventResize = function(event){
         $('#calendar').fullCalendar('updateEvent', event);
+        event.source = null;
         scope.$apply(function(){
           scope.activeSchedule.shifts[event.storageKey] = event;
           scope.changed = true;
@@ -73,6 +74,7 @@ adminApp.directive('scheduleCal', function($http){
       // EVENT DRAGGING
       properties.eventDrop = function(event){
         $('#calendar').fullCalendar('updateEvent', event);
+        event.source = null;
         scope.$apply(function(){
           scope.activeSchedule.shifts[event.storageKey] = event;
           scope.changed = true;

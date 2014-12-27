@@ -25,8 +25,9 @@ userApp.controller('availabilityController', function($scope, $location, User, S
       eligibleRoles: $scope.userRoles,
       shiftsDesired: $scope.user.shiftsDesired
     }
+    console.log(data);
     User.updateUserAvailability(data).then(function(updatedUser){
-      $scope.user = updatedUser;
+      console.log("successful update");
     });
   }
 

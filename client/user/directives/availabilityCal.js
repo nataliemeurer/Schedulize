@@ -61,12 +61,14 @@ userApp.directive('availabilityCal', function($http){
       };
       // OVERWRITE EVENT
       properties.eventResize = function(event){
+        event.source = null; // remove source property which ruins everything
         scope.$apply(function(){
           scope.availability[event.storageKey] = event;
         });
       };
       // EVENT DRAGGING
       properties.eventDrop = function(event){
+        event.source = null; // remove source property which ruins everything
         scope.$apply(function(){
           scope.availability[event.storageKey] = event;
         });
@@ -77,7 +79,7 @@ userApp.directive('availabilityCal', function($http){
         console.log(availability);
         for(var i = 0; i < availability.length; i++){
           availability[i]._id = null; // remove fc _id property which ruins everything.
-          availability[i].source = null;
+          availability[i].source = null; // remove source property which ruins everything
           console.log("IIII", availability[i]);
         }
         properties.events = availability;
