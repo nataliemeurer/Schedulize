@@ -78,6 +78,7 @@ userApp.directive('availabilityCal', function($http){
         for(var i = 0; i < availability.length; i++){
           availability[i]._id = null; // remove fc _id property which ruins everything.
           availability[i].source = null;
+          console.log(availability[i]);
         }
         properties.events = availability;
         $('#availabilityCal').fullCalendar(properties);
