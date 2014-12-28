@@ -19,7 +19,7 @@ module.exports = {
   getCurrentUser: function(req, res){
     var user = req.user;
     User
-    .findOne({_id: user._id}, "name email shiftsDesired shiftsAssigned isAdmin availability companies")
+    .findOne({_id: user._id}, "name email shiftsDesired shiftsAssigned eligibleRoles isAdmin availability companies")
     .populate('companies')
     .exec(function (err, user) {
       if (err) {

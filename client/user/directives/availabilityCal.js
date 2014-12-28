@@ -79,11 +79,9 @@ userApp.directive('availabilityCal', function($http){
 
       scope.loadEvents = function(){
         var availability = scope.availability;
-        console.log(availability);
         for(var i = 0; i < availability.length; i++){
           availability[i]._id = null; // remove fc _id property which ruins everything.
           availability[i].source = null; // remove source property which ruins everything
-          console.log("IIII", availability[i]);
         }
         properties.events = availability;
         $('#availabilityCal').fullCalendar(properties);

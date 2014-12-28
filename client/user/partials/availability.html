@@ -1,10 +1,10 @@
 <div id="availabilityTable" ng-controller="availabilityController">
   <aside class="sidebar-left">
-    <h2 style="margin-top: 0px">Availability:</h2>
+    <h2 style="margin-top: 0px">Personal Data</h2>
     <div class="inputs">
       <h4>Total Shifts Desired</h4>
       <div class="form-group has-success">
-        <input required type="number" ng-model="user.shiftsDesired" name="desiredShifts" data-hint="Enter a number" ng-value="user.shiftsDesired" class="form-control floating-label" placeholder="Desired Shifts">
+        <input required type="number" ng-model="user.shiftsDesired" name="desiredShifts" data-hint="Enter a number" ng-value="user.shiftsDesired" class="form-control input-jumbo">
       </div>
       <h4>Indicate the shifts you are eligible to work:</h4>
       <div ng-repeat="role in roles" class="checkbox">
@@ -12,16 +12,18 @@
           <input type="checkbox" checkbox-group ng-value="role"/> {{role}}
         </label>
       </div>
-      <h4>Drag on the calendar to indicate times you could work:</h4>
-      <!-- insert fancy right arrow here -->
-      <button type="button" ng-if="changed" ng-click="updateAvailability()" class="btn btn-default btn-raised btn-light">Update Availability</button>
     </div>
   </aside>
   <div class="left-sidebar-content">
-    <div class="sidebar-header">
-      <h2>Calendar View:</h2>
+    <div>
+      <h2 class="view-header">Availability for {{ user.name }}</h2>
+      <div class="header-buttons">
+        <button ng-if="changed" type="button" ng-click="updateAvailability()" class="btn btn-primary btn-green default-with-icon"><i class="mdi-content-save"></i>Save Changes</button>
+        <button type="button" ng-click="deleteSchedule(activeSchedule)" class="btn btn-red btn-danger default-with-icon"><i class="mdi-action-delete"></i>Clear</button>
+      </div>
     </div>
-    <div class="availabilityCal" availability-cal="{ height: 520, eventDurationEditable: true, firstHour: 6, selectable: true, unselectAuto: false}">
+    <br/>
+    <div style="clear: both"class="availabilityCal" availability-cal="{ height: 520, eventDurationEditable: true, firstHour: 6, selectable: true, unselectAuto: false}">
     </div>
   </div>
   <script>

@@ -7,9 +7,10 @@ userApp.directive("checkboxGroup", function() {
     restrict: "A",
     link: function(scope, elem, attrs) {
       // Determine initial checked boxes
-      if (scope.roles.indexOf(scope.userRoles) !== -1) {
+      if (scope.userRoles.indexOf(scope.role) !== -1) {
         elem[0].checked = true;
       }
+
       // Update array on click
       elem.bind('click', function() {
         var index = scope.userRoles.indexOf(scope.role);
@@ -18,12 +19,14 @@ userApp.directive("checkboxGroup", function() {
           if (index === -1) {
             scope.$apply(function(){
               scope.userRoles.push(scope.role);
+              scope.changed = true;
             });
           }
         } else {
           if (index !== -1) {
             scope.$apply(function(){
               scope.userRoles.splice(index, 1);
+              scope.changed = true;
             })
           }
         }

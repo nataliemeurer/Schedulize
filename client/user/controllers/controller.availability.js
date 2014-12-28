@@ -17,7 +17,7 @@ userApp.controller('availabilityController', function($scope, $location, User, S
   
   $scope.renderEvents = function(events){
     $scope.loadEvents();
-  }
+  };
 
   $scope.updateAvailability = function(){
     var data = {
@@ -44,7 +44,8 @@ userApp.controller('availabilityController', function($scope, $location, User, S
     $scope.user = user;
     Schedule.getUserSchedules($scope.user.companies[0]._id).then(function(schedules){
       $scope.roles = [];
-      $scope.userRoles = user.eligibleRoles || [];
+      console.log($scope.user);
+      $scope.userRoles = $scope.user.eligibleRoles;
       for(var i = 0; i < schedules.length; i++){
         var sched = schedules[i];
         for(var j = 0; j < sched.roles.length; j++){
