@@ -4,7 +4,7 @@
     <div class="inputs">
       <h4>Total Shifts Desired</h4>
       <div class="form-group has-success">
-        <input required type="number" ng-model="user.shiftsDesired" name="desiredShifts" data-hint="Enter a number" ng-value="user.shiftsDesired" class="form-control input-jumbo">
+        <input required type="number" ng-model="user.shiftsDesired" ng-change="changed=true" name="desiredShifts" data-hint="Enter a number" ng-value="user.shiftsDesired" class="form-control input-jumbo">
       </div>
       <h4>Indicate the shifts you are eligible to work:</h4>
       <div ng-repeat="role in roles" class="checkbox">
