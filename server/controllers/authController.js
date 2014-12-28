@@ -12,7 +12,7 @@ module.exports = {
 
     // if they aren't redirect them to the login page
     console.log('not logged in');
-    res.redirect('/login');
+    res.render('public/login', {error: "Please log in to continue."});
     }
   },
 
@@ -29,7 +29,7 @@ module.exports = {
         res.render('public/insufficientPrivileges');
       }
     } else {
-      res.redirect('/login');
+      res.render('public/login', {error: "Please log in to continue."});
     }
   },
 
