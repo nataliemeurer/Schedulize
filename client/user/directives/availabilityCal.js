@@ -55,6 +55,7 @@ userApp.directive('availabilityCal', function($http){
         console.log(scope.availability);
         scope.$apply(function(){
           scope.availability.push(eventData);
+          scope.changed = true;
           $('#availabilityCal').fullCalendar('renderEvent', eventData, false); // stick? = true
           $('#availabilityCal').fullCalendar('unselect');
         });
@@ -64,6 +65,7 @@ userApp.directive('availabilityCal', function($http){
         event.source = null; // remove source property which ruins everything
         scope.$apply(function(){
           scope.availability[event.storageKey] = event;
+          scope.changed = true;
         });
       };
       // EVENT DRAGGING
@@ -71,6 +73,7 @@ userApp.directive('availabilityCal', function($http){
         event.source = null; // remove source property which ruins everything
         scope.$apply(function(){
           scope.availability[event.storageKey] = event;
+          scope.changed = true;
         });
       };
 

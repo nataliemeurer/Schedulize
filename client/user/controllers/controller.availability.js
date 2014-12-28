@@ -8,11 +8,11 @@ userApp.controller('availabilityController', function($scope, $location, User, S
   };
   $scope.preferred = true;
   $scope.setPreferred = function(){
-      $scope.preferred = true;
+    $scope.preferred = true;
   };
   
   $scope.setAvailable = function(){
-      $scope.preferred = false;
+    $scope.preferred = false;
   };
   
   $scope.renderEvents = function(events){
@@ -25,8 +25,8 @@ userApp.controller('availabilityController', function($scope, $location, User, S
       eligibleRoles: $scope.userRoles,
       shiftsDesired: $scope.user.shiftsDesired
     }
-    console.log(data);
     User.updateUserAvailability(data).then(function(updatedUser){
+      $scope.changed = false;
       console.log("successful update");
     });
   }
