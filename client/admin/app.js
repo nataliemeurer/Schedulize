@@ -16,6 +16,18 @@ var adminApp = angular.module('adminApp', [
         url: "/employees",
         templateUrl: "/admin/partials/employeemanager.html"
       })
+        .state('employeemanager.availabilityview', {
+          url: "/employees/:employeeId",
+          templateUrl: "/admin/partials/employeemanager.availabilityview.html"
+        })
+        .state('employeemanager.overview', {
+          url: "/employees/overview",
+          templateUrl: "/admin/partials/employeemanager.overview.html"
+        })
+        .state('employeemanager.userview', {
+          url: "/employees/userview",
+          templateUrl: "/admin/partials/employeemanager.userview.html"
+        })
       // SCHEDULE MANAGER
       .state('schedulemanager', {
         templateUrl: "/admin/partials/schedulemanager.html"
