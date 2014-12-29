@@ -19,12 +19,15 @@ module.exports = {
 
   getUserCompanies: function(req, res){
     User.findOne({_id: req.user._id})
-        .populate('companies')
         .exec(function(err, user){
           if(err){
             res.status(500).send(err);
           }
-          res.status(200).send(user.companies[0]);
+          Company.findOne({_id: user.companies[0]})
+            .populate('employees admins')
+            .exec(function(err, company){
+              res.status(200).send(company);
+            })
         });
   },
 
