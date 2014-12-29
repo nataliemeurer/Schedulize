@@ -18,7 +18,7 @@
     <div>
       <h2 class="view-header">Availability for {{ user.name }}</h2>
       <div class="header-buttons">
-        <button ng-if="changed" type="button" ng-click="updateAvailability()" class="btn btn-primary btn-green default-with-icon"><i class="mdi-content-save"></i>Save Changes</button>
+        <button type="button" ng-if="changed===true" ng-click="updateAvailability()" class="btn btn-primary btn-green default-with-icon"><i class="mdi-content-save"></i>Save Changes</button>
         <button type="button" ng-click="deleteSchedule(activeSchedule)" class="btn btn-red btn-danger default-with-icon"><i class="mdi-action-delete"></i>Clear</button>
       </div>
     </div>

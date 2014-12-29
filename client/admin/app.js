@@ -12,9 +12,9 @@ var adminApp = angular.module('adminApp', [
         templateUrl: "/admin/partials/dashboard.html"
       })
       // MANAGE EMPLOYEES
-      .state('companydata', {
-        url: "/companydata",
-        templateUrl: "/admin/partials/companydata.html"
+      .state('employeemanager', {
+        url: "/employeemanager",
+        templateUrl: "/admin/partials/employeemanager.html"
       })
       // SCHEDULE MANAGER
       .state('schedulemanager', {

@@ -55,11 +55,6 @@ adminApp
   // Save changes when made to the schedule
   $scope.saveChanges = function(schedule){
     Schedule.updateSchedule(schedule).then(function(schedule){
-      swal({ 
-        title: "Successfully updated schedule!", 
-        type: "success",
-        closeOnConfirm: true
-      });
       $scope.changed = false;
       $scope.activeSchedule = JSON.parse(JSON.stringify(schedule));
     });
