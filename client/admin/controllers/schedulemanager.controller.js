@@ -55,20 +55,36 @@ adminApp
   // Save changes when made to the schedule
   $scope.saveChanges = function(schedule){
     Schedule.updateSchedule(schedule).then(function(schedule){
+      swal({ 
+        title: "Successfully updated schedule!", 
+        type: "success",
+        closeOnConfirm: true
+      });
       $scope.changed = false;
       $scope.activeSchedule = JSON.parse(JSON.stringify(schedule));
     });
   };
   $scope.deleteSchedule = function(schedule){
-    Schedule.deleteSchedule(schedule).then(function(deletedCount){
-      Schedule.getCompanySchedules($scope.company._id).then(function(schedules){
-        for(var i = 0; i < schedules.length; i++){
-          if(schedules[i]._id === schedule._id){
-            schedules.splice(i, 1);
+    swal({ 
+      title: "Are you sure?", 
+      text: "You will not be able to recover this schedule once deleted!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, delete it!",
+      closeOnConfirm: false 
+    }, function(){
+      swal("Deleted!", "Your schedule has been deleted.", "success");
+      Schedule.deleteSchedule(schedule).then(function(deletedCount){
+        Schedule.getCompanySchedules($scope.company._id).then(function(schedules){
+          for(var i = 0; i < schedules.length; i++){
+            if(schedules[i]._id === schedule._id){
+              schedules.splice(i, 1);
+            }
           }
-        }
+        });
+        $state.go('schedulemanager.getstarted');
       });
-      $state.go('schedulemanager.getstarted');
     });
   };
 
