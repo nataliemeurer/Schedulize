@@ -1,3 +1,19 @@
 <div ng-controller="employeeManagerCtrl" class="container">
 	<h2>Manage Employees</h2>
+	<div class="col-md-4 list-group-module">
+    <h3>Employee List</h3>
+    <input type="text" class="form-control floating-label" ng-model="searchText" placeholder="Search"/>
+    <div class="list-group">
+		  <br>
+      <div ng-repeat="employee in company.employees | filter:searchText | orderBy:'name'" class="list-group-item">
+		    <div class="row-picture">
+		      <img class="circle" src="http://lorempixel.com/56/56/people/" alt="icon">
+		    </div>
+		    <div class="row-content">
+	        <h4 class="list-group-item-heading">{{employee.name}}</h4>
+          <p class="list-group-item-text">Desired Shifts: {{employee.shiftsDesired}}</p>
+		    </div>
+		  </div>
+		</div>
+	</div>
 </div>

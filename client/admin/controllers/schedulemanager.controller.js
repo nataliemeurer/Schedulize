@@ -6,9 +6,7 @@ adminApp
   // Get all Schedules(eventually for logged in company)
   Company.getCompanyData().then(function(company){
     $scope.company = company;
-    console.log(company);
     Schedule.getCompanySchedules(company._id).then(function(schedules){
-      console.log(schedules);
       $scope.schedules = schedules;
     });
   });
@@ -17,8 +15,25 @@ adminApp
   // Scope Variables
   $scope.changed = false;
   $scope.editableSchedule = true;
+  $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
+    console.log(event);
+    if($scope.changed){
+      event.preventDefault();
+      swal({
+        title: "Unsaved Changes!", 
+        text: "Are you sure you want to leave without saving your changes?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, I want to leave",
+        closeOnConfirm: false 
+      }, function(){
+        
+      });
+    }
+  });
   var colors = ['#26A65B', '#466272', '#009688', '#C40000', '#FF9800', '#673AB7', '#1C262B'];// [dark blue, orange, teal, red, purple, green] green, red, purple, teal, orange]
-  
+
   Company.getCompanyData().then(function(company){
     $scope.company = company;
     // Get current schedule on initialization
@@ -32,7 +47,6 @@ adminApp
 
   // Called after finding the schedule
   $scope.renderEvents = function(events){
-    console.log($scope.loadEvents)
     $scope.loadEvents();
   }
 

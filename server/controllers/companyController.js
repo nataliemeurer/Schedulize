@@ -24,10 +24,10 @@ module.exports = {
             res.status(500).send(err);
           }
           Company.findOne({_id: user.companies[0]})
-            .populate('employees admins')
+            .populate('employees', 'name email shiftsDesired shiftsAssigned availability eligibleRoles')
             .exec(function(err, company){
               res.status(200).send(company);
-            })
+            });
         });
   },
 

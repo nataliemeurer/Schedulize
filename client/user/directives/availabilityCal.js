@@ -52,7 +52,6 @@ userApp.directive('availabilityCal', function($http){
               storageKey: eventIdx
             };
         }
-        console.log(scope.availability);
         scope.$apply(function(){
           scope.availability.push(eventData);
           scope.changed = true;
