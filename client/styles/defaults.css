@@ -7,7 +7,7 @@ html {
 body {
 	background-color: #ECEFF1;
 	margin: 0;
-  margin-top: 10px;
+  margin-top: 15px;
   padding-top: 3%;
   overflow: auto;
 }
@@ -93,7 +93,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 	width: 76%;
   float: right;
   color: #191919;
-  margin: 1% 2%;
+  margin: 5px 2%;
   overflow: auto;
 }
 
@@ -105,7 +105,7 @@ input[type="text"], input[type="password"], input[type="email"] {
   width: 76%;
   float: left;
   color: #191919;
-  margin: 1% 2%;
+  margin: 0 2%;
   overflow: auto;
 }
 

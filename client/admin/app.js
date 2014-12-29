@@ -13,7 +13,7 @@ var adminApp = angular.module('adminApp', [
       })
       // MANAGE EMPLOYEES
       .state('employeemanager', {
-        url: "/employeemanager",
+        url: "/employees",
         templateUrl: "/admin/partials/employeemanager.html"
       })
       // SCHEDULE MANAGER
