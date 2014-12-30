@@ -19,14 +19,14 @@ userApp.directive("checkboxGroup", function() {
           if (index === -1) {
             scope.$apply(function(){
               scope.userRoles.push(scope.role);
-              scope.changed = true;
+              scope.updateChanged();
             });
           }
         } else {
           if (index !== -1) {
             scope.$apply(function(){
               scope.userRoles.splice(index, 1);
-              scope.changed = true;
+              scope.updateChanged();
             })
           }
         }

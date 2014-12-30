@@ -3,6 +3,9 @@ var userApp = angular.module('userApp');
 
 userApp.controller('availabilityController', function($scope, $location, User, Schedule){
   $scope.changed = false;
+  $scope.updateChanged = function(){
+    $scope.changed = true;
+  };
   $scope.update = function(){
     $scope.changed = true
   };
