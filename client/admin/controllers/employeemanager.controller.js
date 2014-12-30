@@ -7,8 +7,11 @@ adminApp
 		$scope.company = company;
 	});
 })
-.controller('employeeManagerOverviewCtrl', function($scope, $http, $location, Company, Schedule){
+.controller('employeeOverviewCtrl', function($scope, $http, $location, Company, Schedule){
 	Company.getCompanyData().then(function(company){
 		$scope.company = company;
 	});
+})
+.controller('employeeViewCtrl', function($scope, $http, $location, Company, Schedule){
+	
 });

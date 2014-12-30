@@ -18,6 +18,33 @@ angular.module('admin.services', ['angularMoment'])
     },
   }
 })
+.factory('Employee', function($http, $q, Company){
+  var employees = null;
+
+  return {
+    getEmployees: function(){
+      var deferred = $q.defer();
+      if(!employees){
+        Company.getCompanyData().then(function(company){
+          deferred.resolve(company.employees);
+        });
+        employees = deferred.promise;
+      }
+        return employees;
+    },
+
+    getOneEmployee: function(employeeId){
+      getEmployees().then(function(users){
+        for(var i = 0; i < users.length; i++){
+          if(users[i]._id === employeeId){
+            return users[i];
+          }
+        }
+        return null;
+      });
+    }
+  }
+})
 .factory('Schedule', function($http, $q){
   // For storage
   var schedules = null;

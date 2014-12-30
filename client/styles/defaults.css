@@ -135,6 +135,13 @@ button .ion {
   background-color: #546E7A;
 }
 
+.li-active-light {
+  background-color: #CFD8DC !important;
+  -webkit-box-shadow: 1px 1px 2px 0px #37474F;
+  -moz-box-shadow: 1px 1px 2px 0px #37474F;
+  box-shadow: 1px 1px 2px 0px #37474F;
+}
+
 .li-active li {
   background-color: #587684 !important;
   -webkit-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.58);
