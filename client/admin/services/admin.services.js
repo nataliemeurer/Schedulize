@@ -34,14 +34,15 @@ angular.module('admin.services', ['angularMoment'])
     },
 
     getOneEmployee: function(employeeId){
-      getEmployees().then(function(users){
+      var deferred = $q.defer();
+      this.getEmployees().then(function(users){
         for(var i = 0; i < users.length; i++){
           if(users[i]._id === employeeId){
-            return users[i];
+            deferred.resolve(users[i]);
           }
         }
-        return null;
       });
+      return deferred.promise;
     }
   }
 })

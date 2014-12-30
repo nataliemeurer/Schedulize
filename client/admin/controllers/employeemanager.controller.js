@@ -12,6 +12,8 @@ adminApp
 		$scope.company = company;
 	});
 })
-.controller('employeeViewCtrl', function($scope, $http, $location, Company, Schedule){
-	
+.controller('employeeViewCtrl', function($scope, $http, $stateParams, $location, Employee){
+	Employee.getOneEmployee($stateParams.employeeId).then(function(employee){
+		$scope.employee = employee;
+	});
 });

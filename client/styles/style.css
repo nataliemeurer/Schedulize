@@ -63,7 +63,7 @@ ul.selection-list {
 }
 
 .list-group-module .list-group-item {
-  background-color: #ECEFF1;
+  background-color: #CFD8DC;
   border-radius: 5px;
   padding-top: 5px;
   padding-bottom: 0px;
@@ -72,7 +72,7 @@ ul.selection-list {
 }
 
 .list-group-module .list-group-item:hover {
-  background-color: #CFD8DC;
+  background-color: #BFC9CD;
 }
 
 /* AUTHENTICATION PAGES */
