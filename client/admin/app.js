@@ -13,7 +13,6 @@ var adminApp = angular.module('adminApp', [
       })
       // MANAGE EMPLOYEES
       .state('employeemanager', {
-        url: "/employees",
         templateUrl: "/admin/partials/employeemanager.html"
       })
         .state('employeemanager.availabilityview', {
@@ -21,7 +20,7 @@ var adminApp = angular.module('adminApp', [
           templateUrl: "/admin/partials/employeemanager.availabilityview.html"
         })
         .state('employeemanager.overview', {
-          url: "/employees/overview",
+          url: "/employees",
           templateUrl: "/admin/partials/employeemanager.overview.html"
         })
         .state('employeemanager.userview', {
