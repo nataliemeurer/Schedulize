@@ -48,7 +48,7 @@ ul.selection-list {
   background-color: white;
   border-radius: 10px;
   max-height: 500px;
-  padding: 0 15px;
+  padding: 0 20px;
   border: 2px solid #e9eaed;
   overflow-y: scroll;
 }

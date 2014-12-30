@@ -1,5 +1,11 @@
 <div class="col-md-8">
 	<div class="content-group-module" ng-controller="employeeViewCtrl">
 		<h1>{{employee.name}}</h1>
+		<p>Email: {{employee.email}}</p>
+		<p>Shifts Desired: {{employee.shiftsDesired}}</p>
+		<p>Shifts Assigned: {{employee.shiftsAssigned}}</p>
+		<p>Eligible to work as: <span ng-repeat="role in employee.eligibleRoles">{{role}}-</span></p>
+		<button class="btn btn-primary btn-red">Remove Employee</button>
+		<button class="btn btn-primary btn-red">Remove Employee</button>
 	</div>
 </div>
