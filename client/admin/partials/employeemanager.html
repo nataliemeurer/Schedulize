@@ -6,12 +6,13 @@
     <div class="list-group">
 		  <br>
       <div ng-repeat="employee in company.employees | filter:searchText | orderBy:'name'" class="list-group-item">
+      		<!-- UNCOMMENT ONCE PROFILE PICTURES SET UP -->
 		    <!-- <div class="row-picture">
 		      <img class="circle" src="http://lorempixel.com/56/56/people/" alt="icon">
 		    </div> -->
 		    <div class="row-content">
 	        <h4 class="list-group-item-heading">{{employee.name}}</h4>
-          <p class="list-group-item-text">Desired Shifts: {{employee.shiftsDesired}}</p>
+          <p class="list-group-item-text">Desired Shifts: {{employee.shiftsDesired}}, Assigned Shifts: {{employee.shiftsAssigned}}</p>
 		    </div>
 		  </div>
 		</div>

@@ -6,4 +6,9 @@ adminApp
 	Company.getCompanyData().then(function(company){
 		$scope.company = company;
 	});
+})
+.controller('employeeManagerOverviewCtrl', function($scope, $http, $location, Company, Schedule){
+	Company.getCompanyData().then(function(company){
+		$scope.company = company;
+	});
 });
