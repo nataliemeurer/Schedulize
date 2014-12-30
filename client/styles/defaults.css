@@ -170,8 +170,24 @@ button .ion {
   background-color: #CF000F !important;
 }
 
+
+.btn-theme-dark {
+  background-color: #455A64 !important;
+  color: #CFD8DC !important;
+}
+
 .btn-light {
   background-color: #CFD8DC !important;
+  color: #263238 !important;
+}
+
+.btn-theme-light {
+  background-color: #CFD8DC !important;
+  color: #263238 !important;
+}
+
+.btn-theme-light i {
+  color: #263238 !important;
 }
 
 /* GENERIC BUTTONS WITH ICON */
@@ -182,6 +198,16 @@ button .ion {
 }
 
 .default-with-icon i {
+  color: #E7EBEE;
+  font-size: 18px;
+  padding: 0;
+  position: relative;
+  margin-right: 5px;
+  top: 2px;
+  padding-bottom: 4px;
+}
+
+.default-with-icon-md i{
   color: #E7EBEE;
   font-size: 18px;
   padding: 0;

@@ -1,11 +1,12 @@
 <div class="col-md-8">
 	<div class="content-group-module" ng-controller="employeeViewCtrl">
 		<h1>{{employee.name}}</h1>
-		<p>Email: {{employee.email}}</p>
-		<p>Shifts Desired: {{employee.shiftsDesired}}</p>
-		<p>Shifts Assigned: {{employee.shiftsAssigned}}</p>
-		<p>Eligible to work as: <span ng-repeat="role in employee.eligibleRoles">{{role}}-</span></p>
-		<button class="btn btn-primary btn-red">Remove Employee</button>
-		<button class="btn btn-primary btn-red">Remove Employee</button>
+		<h4>Email: {{employee.email}}</h4>
+		<h4>Shifts Desired: {{employee.shiftsDesired}}</h4>
+		<h4>Shifts Assigned: {{employee.shiftsAssigned}}</h4>
+		<h4>Eligible to work as: <span ng-repeat="role in employee.eligibleRoles">{{role}}-</span></h4>
+		<button class="btn btn-primary btn-theme-dark default-with-icon-md"><i class="mdi-action-event"></i>View Availability</button>
+		<button class="btn btn-primary btn-red default-with-icon-md"><i class="ion ion-close"></i>Remove Employee</button>
+		<button class="btn btn-primary btn-theme-light default-with-icon-md"><i class="ion ion-person-add"></i>Make Admin</button>
 	</div>
 </div>
