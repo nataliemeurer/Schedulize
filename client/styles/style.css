@@ -43,6 +43,23 @@ ul.selection-list {
   color: #B0BEC5;
 }
 
+/* BUTTON WITH TITLE */
+.button-with-title {
+  display: inline-block;
+
+}
+
+.button-with-title button{
+  margin-top: 10px;
+}
+
+.button-with-title h1, .button-with-title h2{
+  display: inline-block;
+  margin-left: 15px;
+  position: relative;
+  top: 5px;
+}
+
 /* CONTENT GROUP MODULE */
 .content-group-module {
   background-color: white;

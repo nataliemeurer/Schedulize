@@ -15,5 +15,9 @@ adminApp
 .controller('employeeViewCtrl', function($scope, $http, $stateParams, $location, Employee){
 	Employee.getOneEmployee($stateParams.employeeId).then(function(employee){
 		$scope.employee = employee;
+		$scope.viewMode = "overview";
+		$scope.setMode = function(mode){
+			$scope.viewMode = mode;
+		}
 	});
 });
