@@ -19,8 +19,9 @@
 			<div class="button-with-title">
 				<button ng-click="setMode('overview')" class="btn btn-primary btn-theme-dark btn-fab mdi-navigation-arrow-back"></button>
 				<h1>Availability for {{employee.name}}</h1>
-				<p>Desired shifts: {{employee.shiftsDesired}}, Can work as: <span ng-repeat="role in employee.eligibleRoles">{{role}} </span></p>
-				
+			</div>
+			<p>Desired shifts: {{employee.shiftsDesired}}, Can work as: <span ng-repeat="role in employee.eligibleRoles">{{role}} </span></p>
+			<div class="scheduleCal" availability-cal-static="{ height: 500 }">
 			</div>
 		</div>
 	</div>

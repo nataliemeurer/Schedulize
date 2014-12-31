@@ -19,5 +19,6 @@ adminApp
 		$scope.setMode = function(mode){
 			$scope.viewMode = mode;
 		}
+		$scope.loadEvents();
 	});
 });

@@ -25,14 +25,11 @@ adminApp.directive('availabilityCalStatic', function($http){
       properties.editable = false;
       properties.eventDurationEditable = false;
       properties.selectable = false;
-      
+
       // LOAD SHIFTS AFTER PAGE HAS LOADED
       scope.loadEvents = function(){
-        var shifts = scope.activeSchedule.shifts;
-        for(var i = 0; i < scope.activeSchedule.shifts.length; i++){
-          shifts[i]._id = null; // remove fc _id property which ruins everything.
-        }
-        properties.events = shifts;
+        var availability = scope.employee.availability;
+        properties.events = availability;
         $('#availabilityCalStatic').fullCalendar(properties);
       };
     }
