@@ -18,7 +18,9 @@
 		<div ng-show="viewMode==='availability'">
 			<div class="button-with-title">
 				<button ng-click="setMode('overview')" class="btn btn-primary btn-theme-dark btn-fab mdi-navigation-arrow-back"></button>
-				<h1>Availability for {{employee.name}}</h3>
+				<h1>Availability for {{employee.name}}</h1>
+				<p>Desired shifts: {{employee.shiftsDesired}}, Can work as: <span ng-repeat="role in employee.eligibleRoles">{{role}} </span></p>
+				
 			</div>
 		</div>
 	</div>
