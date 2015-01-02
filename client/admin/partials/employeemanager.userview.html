@@ -11,8 +11,8 @@
 				<li ng-repeat="role in employee.eligibleRoles">{{role}}</li>
 			</ul>
 			<button ng-click="setMode('availability')" class="btn btn-primary btn-theme-dark default-with-icon-md"><i class="mdi-action-event"></i>View Availability</button>
-			<button class="btn btn-primary btn-red default-with-icon-md"><i class="ion ion-close"></i>Remove Employee</button>
-			<button class="btn btn-primary btn-theme-light default-with-icon-md"><i class="ion ion-person-add"></i>Make Admin</button>
+			<button ng-click="removeEmployee()" class="btn btn-primary btn-red default-with-icon-md"><i class="ion ion-close"></i>Remove Employee</button>
+			<button ng-if="!employee.isAdmin" ng-click="makeAdmin()" class="btn btn-primary btn-theme-light default-with-icon-md"><i class="ion ion-person-add"></i>Make Admin</button>
 		</div>
 		<!-- AVAILABILITY VIEW -->
 		<div ng-show="viewMode==='availability'">
