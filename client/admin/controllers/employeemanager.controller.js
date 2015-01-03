@@ -9,6 +9,7 @@ adminApp
 })
 .controller('employeeOverviewCtrl', function($scope, $http, $location, Company, Schedule){
 	Company.getCompanyData().then(function(company){
+		// Get logged in company
 		$scope.company = company;
 	});
 })
