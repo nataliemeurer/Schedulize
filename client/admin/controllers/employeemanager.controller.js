@@ -44,7 +44,7 @@ adminApp
 	$scope.removeAdmin = function(){
 		swal({ 
 		  title: "Are you sure?", 
-		  text: "This action will remove all administrative priileges for this user.",
+		  text: "This action will remove all administrative privileges for this user.",
 		  type: "warning",
 		  showCancelButton: true,
 		  confirmButtonColor: "#DD6B55",
