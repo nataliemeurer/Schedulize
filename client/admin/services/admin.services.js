@@ -43,8 +43,11 @@ angular.module('admin.services', ['angularMoment'])
         }
       });
       return deferred.promise;
+    },
+    makeAdmin: function(employeeId){
+
     }
-  }
+  };
 })
 .factory('Schedule', function($http, $q){
   // For storage

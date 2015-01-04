@@ -34,7 +34,9 @@ adminApp
 		  confirmButtonText: "Yes, give them the power!",
 		  closeOnConfirm: false 
 		}, function(){
-		  swal("Success!", $scope.employee.name + " is now an administrator.", "success");
+		  Employee.makeAdmin().then(function(){
+		  	swal("Success!", $scope.employee.name + " is now an administrator.", "success");
+		  })
 		});
 	};
 
