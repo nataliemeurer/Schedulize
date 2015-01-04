@@ -25,7 +25,6 @@ module.exports = {
       if (err) {
         res.status(500).send(err);
       }
-      console.log("USER IS: " + user);
       res.status(200).send(user);
     });
   },
@@ -38,10 +37,8 @@ module.exports = {
       if (err) {
         res.status(500).send(err);
       }
-      console.log("USER IS ", user);
       user.isAdmin = user.isAdmin ? false : true;
       user.save(function(err, updatedUser){
-        console.log(updatedUser);
         res.status(200).send(updatedUser);
       });
     });
