@@ -34,8 +34,26 @@ adminApp
 		  confirmButtonText: "Yes, give them the power!",
 		  closeOnConfirm: false 
 		}, function(){
-		  Employee.makeAdmin().then(function(){
+		  Employee.toggleAdmin($scope.employee._id).then(function(user){
+		  	$scope.employee = user;
 		  	swal("Success!", $scope.employee.name + " is now an administrator.", "success");
+		  })
+		});
+	};
+
+	$scope.removeAdmin = function(){
+		swal({ 
+		  title: "Are you sure?", 
+		  text: "This action will remove all administrative priileges for this user.",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#DD6B55",
+		  confirmButtonText: "Yes",
+		  closeOnConfirm: false 
+		}, function(){
+		  Employee.toggleAdmin($scope.employee._id).then(function(user){
+		  	$scope.employee = user;
+		  	swal("Success", $scope.employee.name + " is no longer an administrator.", "success");
 		  })
 		});
 	};

@@ -27,6 +27,23 @@ module.exports = {
       }
       console.log("USER IS: " + user);
       res.status(200).send(user);
-    })
+    });
+  },
+
+  toggleAdmin: function(req, res){
+    var code = req.userId;
+    User
+    .findOne({_id: code})
+    .exec(function(err, user){
+      if (err) {
+        res.status(500).send(err);
+      }
+      console.log("USER IS ", user);
+      user.isAdmin = user.isAdmin ? false : true;
+      user.save(function(err, updatedUser){
+        console.log(updatedUser);
+        res.status(200).send(updatedUser);
+      });
+    });
   }
 };

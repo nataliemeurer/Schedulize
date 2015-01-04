@@ -44,8 +44,12 @@ angular.module('admin.services', ['angularMoment'])
       });
       return deferred.promise;
     },
-    makeAdmin: function(employeeId){
-
+    toggleAdmin: function(employeeId){
+      var deferred = $q.defer();
+      $http.post('/api/users/' + employeeId + '/admin').then(function(res){
+        deferred.resolve(res.data);
+      })
+      return deferred.promise;
     }
   };
 })

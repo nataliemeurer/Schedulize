@@ -65,6 +65,9 @@ module.exports = function (app) {
       .put(function(req, res){}) // update user data
       .delete(function(req, res){}); // delete user
 
+  app.route('/users/:userId/admin')
+      .post(userController.toggleAdmin);
+
   app.route('/users/availability/:userId')
       .get(function(req, res){})
       .post(function(req, res){})
