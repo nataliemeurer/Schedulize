@@ -144,6 +144,7 @@ module.exports = function(grunt) {
     }
   });
 
+  // Need to update
   grunt.registerTask('deploy', [
     'test',
     'upload'
