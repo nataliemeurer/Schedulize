@@ -1,7 +1,6 @@
 var adminApp = angular.module('adminApp', [
   'admin.services',
   'ui.router',
-  'ui.router.stateHelper',
   'angularMoment'
 ])
   .config(function($stateProvider, $urlRouterProvider, $httpProvider) {

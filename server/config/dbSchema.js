@@ -6,7 +6,7 @@ var uriUtil = require('mongodb-uri');
 var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }, 
                 replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
 
-var mongodbUri = "mongodb://heroku_app33075218:djmbhvr2buad4iidve6e05cdml@ds031631.mongolab.com:31631/heroku_app33075218" || 'mongodb://localhost/schedulize';
+var mongodbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/schedulize';
 var mongooseUri = uriUtil.formatMongoose(mongodbUri);
 
 mongoose.connect(mongooseUri, options);
