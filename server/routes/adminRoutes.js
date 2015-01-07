@@ -1,9 +1,3 @@
-var express = require('express');
-var router = express.Router();
-var monk = require('monk');
-var db = monk('localhost:27017/schedulize');
-var companies = db.get('companies');
-var users = db.get('users');
 var authController = require('../controllers/authController');
 
 module.exports = function (app) {

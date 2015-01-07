@@ -1,8 +1,8 @@
 //DATABASE DECLARATIONS
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-var url = "mongodb://heroku_app33075218:djmbhvr2buad4iidve6e05cdml@ds031631.mongolab.com:31631/heroku_app33075218" || 'mongodb://localhost/schedulize';
-mongoose.connect(url);
+var uri = "mongodb://heroku_app33075218:djmbhvr2buad4iidve6e05cdml@ds031631.mongolab.com:31631/heroku_app33075218" || 'mongodb://localhost/schedulize';
+mongoose.connect(uri);
 var db = mongoose.connection;
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
