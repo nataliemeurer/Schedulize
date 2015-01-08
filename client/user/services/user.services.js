@@ -22,6 +22,21 @@ userApp
 
 		updateUserAvailability: function(user){
 			return $http.put('/api/users/availability', user);
+		},
+
+		clearUserAvailability: function(data){
+			var deferred = $q.defer();
+			this.getUser().then(function(user){
+				console.log("USER IS ", user);
+				user.availability = [];
+				user.eligibleRoles = [];
+				user.shiftsDesired = 0;
+			});
+			this.updateUserAvailability(data).success(function(res){
+				console.log("updated user");
+				deferred.resolve(res);
+			});
+			return deferred.promise;
 		}
 	};
 })

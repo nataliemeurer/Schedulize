@@ -48,7 +48,7 @@ angular.module('admin.services', ['angularMoment'])
       var deferred = $q.defer();
       $http.post('/api/users/' + employeeId + '/admin').then(function(res){
         deferred.resolve(res.data);
-      })
+      });
       return deferred.promise;
     }
   };

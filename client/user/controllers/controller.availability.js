@@ -32,7 +32,30 @@ userApp.controller('availabilityController', function($scope, $location, User, S
       $scope.changed = false;
       console.log("successful update");
     });
-  }
+  };
+
+  $scope.clearAvailability = function(){
+    swal({ 
+      title: "Are you sure?", 
+      text: "You will not be able to undo this action.",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes",
+      closeOnConfirm: false 
+    }, function(){
+      var data = {
+        availability: [],
+        eligibleRoles: [],
+        shiftsDesired: 0
+      }
+      User.clearUserAvailability(data).then(function(updatedUser){
+        $scope.changed = true;
+        swal("Availability Cleared", "You have successfully cleared your availability.", "success")
+      });
+    });  
+
+  };
 
   User.getUser().then(function(user){
     if(user.availability){
