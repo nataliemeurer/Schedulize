@@ -1,8 +1,99 @@
 extends layout
 
 block content
-  div.container
-    h1= title
-    p Welcome to #{title}
-    div(ui-view)
+    //- div.container
+    //-     h1 Schedulize
+    //-     p A new way to schedule hourly employees
+    div.laptop
+        div.upper
+        div.lower
+    style.
+        body {
+          background: #89d0d7;
+        }
+
+        .laptop {
+          width: 100rem;
+          margin: 5% auto 0;
+          position: relative;
+        }
+        .laptop:before {
+          background: #222;
+          display: block;
+          content: "";
+          position: absolute;
+          width: 1.6rem;
+          height: 1.6rem;
+          border-radius: 50%;
+          top: 1.4rem;
+          left: 49rem;
+          z-index: 1000;
+        }
+        .laptop:after {
+          display: block;
+          content: "";
+          position: absolute;
+          width: 95%;
+          margin-left: 2.5%;
+          height: 1.5rem;
+          box-shadow: 0 0.5rem 10rem 0 rgba(0, 0, 0, 0.1);
+          border-radius: 5rem;
+        }
+
+        .upper {
+          width: 80rem;
+          height: 46rem;
+          background: #3d4144;
+          border: 2px solid #eaeaea;
+          border-bottom: none;
+          border-radius: 1.5rem 1.5rem 0 0;
+          margin-left: 10rem;
+          box-shadow: inset 0 0 2px 2px #222;
+          position: relative;
+        }
+        .upper:before {
+          width: 72rem;
+          height: 40rem;
+          background-image: url('./assets/comp_sample2.png');
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+          display: block;
+          content: "";
+          top: 4rem;
+          left: 4rem;
+          position: absolute;
+        }
+
+        .lower {
+          width: 95rem;
+          height: 2rem;
+          background: #eaeaea;
+          margin-left: 2.5rem;
+          border-radius: 2px;
+          position: relative;
+        }
+        .lower:before {
+          display: block;
+          content: "";
+          position: absolute;
+          width: 15rem;
+          height: 1.6rem;
+          background: #a1a1a1;
+          left: 40rem;
+          top: 0;
+          border-radius: 0 0 2rem 2rem;
+        }
+        .lower:after {
+          display: block;
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 1.5rem;
+          background: #bababa;
+          top: 2rem;
+          border-bottom-right-radius: 15rem 5rem;
+          border-bottom-left-radius: 15rem 5rem;
+        }
 
