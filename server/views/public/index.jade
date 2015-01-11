@@ -1,20 +1,23 @@
 extends layout
 
 block content
-    //- div.container
-    //-     h1 Schedulize
-    //-     p A new way to schedule hourly employees
-    div.laptop
-        div.upper
-        div.lower
+    div.container
+        div.landing-heading
+            h1 SCHEDULIZE
+            p A new way to schedule hourly employees
+        div.dark-module
+            div.laptop
+                div.upper
+                div.lower
     style.
         body {
-          background: #89d0d7;
+          background: #CFD8DC;
         }
 
         .laptop {
           width: 100rem;
           margin: 5% auto 0;
+          margin-top: 5px;
           position: relative;
         }
         .laptop:before {
@@ -95,5 +98,22 @@ block content
           top: 2rem;
           border-bottom-right-radius: 15rem 5rem;
           border-bottom-left-radius: 15rem 5rem;
+        }
+
+        .landing-heading {
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .landing-heading h1 {
+            font-family: "Roboto Slab", "Lucida Grande", Helvetica, Arial, sans-serif;
+            margin-bottom: 10px;
+            font-size: 5rem
+        }
+
+        .landing-heading p {
+            font-style: italic;
+            margin-top: 5px;
+            margin-left: 20px;
         }
 
