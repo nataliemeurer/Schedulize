@@ -31,15 +31,21 @@ userApp.directive('availabilityCal', function($http){
         element.css("z-index", "1");
         element.find(".closon").css("z-index", "2");
         element.find(".closon").click(function(){
-          $('#availabilityCal').fullCalendar('removeEvents', event._id);
           scope.$apply(function(){
+            console.log(event.storageKey);
             scope.availability[event.storageKey] = null;
             for(var i = event.storageKey + 1; i < scope.availability.length; i++){
               scope.availability[i - 1] = scope.availability[i];
+              scope.availability[i - 1].storageKey = i - 1;
             }
-            scope.changed = true;
+            scope.availability.length
             scope.availability.pop();
+            console.log(scope.availability);
+            scope.changed = true;
+
           })
+          $('#availabilityCal').fullCalendar( 'removeEvents' );
+          $('#availabilityCal').fullCalendar( 'addEventSource', scope.availability );
           console.log("updated that shit");
         });
       }
@@ -87,20 +93,22 @@ userApp.directive('availabilityCal', function($http){
       };
       // EVENT DRAGGING
       properties.eventDrop = function(event){
+        console.log(event);
         event.source = null; // remove source property which ruins everything
+        event._id = null;
         scope.$apply(function(){
           scope.availability[event.storageKey] = event;
           scope.changed = true;
+          console.log(scope.availability);
         });
       };
 
       scope.loadEvents = function(){
-        var availability = scope.availability;
-        for(var i = 0; i < availability.length; i++){
-          availability[i]._id = null; // remove fc _id property which ruins everything.
-          availability[i].source = null; // remove source property which ruins everything
+        for(var i = 0; i < scope.availability.length; i++){
+          scope.availability[i]._id = null; // remove fc _id property which ruins everything.
+          scope.availability[i].source = null; // remove source property which ruins everything
         }
-        properties.events = availability;
+        properties.events = scope.availability;
         $('#availabilityCal').fullCalendar(properties);
       };
     }
