@@ -84,18 +84,20 @@ userApp.directive('availabilityCal', function($http){
         });
       };
       // OVERWRITE EVENT
-      properties.eventResize = function(event){
-        event.source = null; // remove source property which ruins everything
+      properties.eventResizeStop = function(event){
+        // event.source = null; // remove source property which ruins everything
+        // event._id = null;
         scope.$apply(function(){
           scope.availability[event.storageKey] = event;
           scope.changed = true;
+          console.log(scope.availability);
         });
       };
       // EVENT DRAGGING
       properties.eventDrop = function(event){
         console.log(event);
-        event.source = null; // remove source property which ruins everything
-        event._id = null;
+        // event.source = null; // remove source property which ruins everything
+        // event._id = null;
         scope.$apply(function(){
           scope.availability[event.storageKey] = event;
           scope.changed = true;
