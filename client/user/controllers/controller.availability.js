@@ -51,7 +51,10 @@ userApp.controller('availabilityController', function($scope, $location, User, S
       }
       User.clearUserAvailability(data).then(function(updatedUser){
         $scope.changed = true;
-        swal("Availability Cleared", "You have successfully cleared your availability.", "success")
+        $scope.availability = [];
+        $scope.userRoles = [];
+        $scope.user.shiftsDesired = null;
+        swal("Availability Cleared", "Please refresh the page to see changes take effect.", "success")
       });
     });  
 

@@ -26,6 +26,21 @@ userApp.directive('availabilityCal', function($http){
       properties.eventStartEditable = true;
       properties.selectHelper = true;
       properties.overlap = false;
+      properties.eventRender = function(event, element) {
+        element.append( "<button class='closon btn btn-fab'>X</button>" );
+        element.css("z-index", "1");
+        element.find(".closon").css("z-index", "2");
+        element.find(".closon").click(function(){
+          $('#availabilityCal').fullCalendar('removeEvents', event._id);
+          scope.availability[event.storageKey] = null;
+          for(var i = event.storageKey + 1; i < scope.availability.length; i++){
+            scope.availability[i - 1] = scope.availability[i];
+          }
+          scope.changed = true;
+          scope.availability.pop();
+          console.log("updated that shit");
+        });
+      }
       
       // CREATE AND STORE EVENTS
       properties.select = function(start, end) {
