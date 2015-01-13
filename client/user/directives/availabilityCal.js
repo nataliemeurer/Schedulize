@@ -21,6 +21,7 @@ userApp.directive('availabilityCal', function($http){
       properties.timezone = 'UTC';
       properties.defaultView = 'agendaWeek';
       properties.columnFormat = {week: 'dddd'};
+      properties.slotDuration = '00:15:00';
       properties.allDaySlot = false;
       properties.eventStartEditable = true;
       properties.selectHelper = true;

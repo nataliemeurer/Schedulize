@@ -16,6 +16,7 @@ adminApp.directive('scheduleCal', function($http){
       properties.header = {left: '', right: ''};
       properties.timezone = 'UTC';
       properties.defaultView = 'agendaWeek';
+      properties.slotDuration = '00:15:00';
       properties.columnFormat = {week: 'dddd'};
       properties.allDaySlot = false;
       // properties.eventStartEditable = true;
