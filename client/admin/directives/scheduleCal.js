@@ -72,6 +72,11 @@ adminApp.directive('scheduleCal', function($http){
         });
       };
 
+      properties.eventDragStart = function(event){
+        event.source = null;
+        event._id = null;
+      };
+
       // EVENT DRAGGING
       properties.eventDrop = function(event){
         $('#calendar').fullCalendar('updateEvent', event);

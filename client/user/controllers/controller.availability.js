@@ -24,17 +24,17 @@ userApp.controller('availabilityController', function($scope, $location, User, S
 
   $scope.updateAvailability = function(){
     var data = {
-      availability: $scope.availability,
-      eligibleRoles: $scope.userRoles,
+      availability: Array.prototype.slice.call($scope.availability),
+      eligibleRoles: Array.prototype.slice.call($scope.userRoles),
       shiftsDesired: $scope.user.shiftsDesired
     }
+    console.log(data);
     for( var i = 0; i < data.availability.length; i++ ){
       data.availability[i].source = null;
-      data.availability[i]._id = null;
     }
     User.updateUserAvailability(data).then(function(updatedUser){
       $scope.changed = false;
-      console.log("successful update");
+      console.log("updated User");
     });
   };
 
@@ -54,13 +54,12 @@ userApp.controller('availabilityController', function($scope, $location, User, S
         shiftsDesired: 0
       }
       User.clearUserAvailability(data).then(function(updatedUser){
-        $scope.changed = true;
         $scope.availability = [];
         $scope.userRoles = [];
         $scope.user.shiftsDesired = null;
         $('#availabilityCal').fullCalendar( 'removeEvents' );
         console.log('done');
-        swal("Availability Cleared", "Please refresh the page to see changes take effect.", "success")
+        swal("Availability Cleared", "", "success")
       });
     });  
 

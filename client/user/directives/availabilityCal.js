@@ -26,6 +26,7 @@ userApp.directive('availabilityCal', function($http){
       properties.eventStartEditable = true;
       properties.selectHelper = true;
       properties.overlap = false;
+      
       properties.eventRender = function(event, element) {
         element.append( "<button class='closon btn mdi-content-clear'></button>" );
         element.css("z-index", "1");
@@ -85,8 +86,6 @@ userApp.directive('availabilityCal', function($http){
       };
       // OVERWRITE EVENT
       properties.eventResizeStop = function(event){
-        // event.source = null; // remove source property which ruins everything
-        // event._id = null;
         scope.$apply(function(){
           scope.availability[event.storageKey] = event;
           scope.changed = true;
@@ -96,8 +95,6 @@ userApp.directive('availabilityCal', function($http){
       // EVENT DRAGGING
       properties.eventDrop = function(event){
         console.log(event);
-        // event.source = null; // remove source property which ruins everything
-        // event._id = null;
         scope.$apply(function(){
           scope.availability[event.storageKey] = event;
           scope.changed = true;
