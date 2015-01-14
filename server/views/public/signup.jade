@@ -21,6 +21,12 @@ block content
           input.form-control.floating-label(required type="text" name="companyName" placeholder="Company Name")
           br
           input.form-control.floating-label(required type="password" name="companyAccessKey" placeholder="Company Access Key")
+          if error
+            br
+            div.alert.alert-dismissable.alert-danger
+              button.close(type="button" data-dismiss="alert") ×
+              p(style="color: white")
+                strong #{error}
           input.btn.btn-default.btn-lg.btn-block.btn-primary(type="submit" value="Get Started")
     div.col-md-6.authContainer.col-md-offset-1
       h2 Company Sign Up

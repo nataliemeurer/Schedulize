@@ -7,8 +7,9 @@ userApp.directive('availabilityCal', function($http){
     restrict: 'A',
     template: '<div class="calendar">' +
                 '<div class="cal-toolbar">' +
-                  '<button type="button" class="btn btn-default btn-raised" ng-class="{ \'btn-green\': preferred }" ng-click="setPreferred()">Preferred</button>' +
-                  '<button type="button" class="btn btn-default btn-raised" ng-class="{ \'btn-yellow\': !preferred }" ng-click="setAvailable()">Available</button>' +
+                  '<button type="button" class="btn btn-default btn-raised" ng-class="{ \'btn-green\': renderMode === \'preferred\' }" ng-click="setRenderMode(\'preferred\')">Preferred</button>' +
+                  '<button type="button" class="btn btn-default btn-raised" ng-class="{ \'btn-yellow\': renderMode === \'available\' }" ng-click="setRenderMode(\'available\')">Available</button>' +
+                  '<button type="button" class="btn btn-default btn-raised" ng-class="{ \'btn-red\': renderMode === \'avoid\' }" ng-click="setRenderMode(\'avoid\')">Avoid</button>' +
                 '</div>' +
               '<div id="availabilityCal"></div></div>',
     replace: true,
@@ -56,7 +57,7 @@ userApp.directive('availabilityCal', function($http){
         var eventData;
         var eventIdx = scope.availability.length;
         // create different events based on mode
-        if(scope.preferred === true){
+        if(scope.renderMode === 'preferred'){
           eventData = {
               title: 'Preferred',
               start: start,
@@ -66,13 +67,23 @@ userApp.directive('availabilityCal', function($http){
               textColor: 'rgba(0, 0, 0, 0.87)',
               storageKey: eventIdx
             };
-        } else {
+        } else if(scope.renderMode === 'available'){
           eventData = {
               title: 'Available',
               start: start,
               end: end,
               color: '#FFEB3B',
               borderColor: '#FDD835',
+              textColor: 'rgba(0, 0, 0, 0.87)',
+              storageKey: eventIdx
+            };
+        } else if(scope.renderMode === 'avoid'){
+          eventData = {
+              title: 'Avoid',
+              start: start,
+              end: end,
+              color: '#e74c3c',
+              borderColor: '#e74c3c',
               textColor: 'rgba(0, 0, 0, 0.87)',
               storageKey: eventIdx
             };

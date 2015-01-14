@@ -44,9 +44,9 @@ module.exports = {
         }
         // check company access key
         bcrypt.compare(req.body.companyAccessKey, company.accessKey, function(err, result) {
-            if(err){
-              res.render('public/signup', {error: "Invalid Access Key for " + company.name});
-            }
+          if(!result){
+            res.render('public/signup', {error: "Invalid Access Key for " + company.name});
+          }
           // Hash the given password
           bcrypt.genSalt(10, function(err, salt){
             bcrypt.hash(req.body.password, salt, function(err, hash) {

@@ -3,19 +3,16 @@ var userApp = angular.module('userApp');
 
 userApp.controller('availabilityController', function($scope, $location, User, Schedule){
   $scope.changed = false;
+  $scope.renderMode = 'preferred';
+  
   $scope.updateChanged = function(){
     $scope.changed = true;
   };
   $scope.update = function(){
     $scope.changed = true
   };
-  $scope.preferred = true;
-  $scope.setPreferred = function(){
-    $scope.preferred = true;
-  };
-  
-  $scope.setAvailable = function(){
-    $scope.preferred = false;
+  $scope.setRenderMode = function(mode){
+    $scope.renderMode = mode;
   };
   
   $scope.renderEvents = function(events){
