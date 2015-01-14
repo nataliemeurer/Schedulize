@@ -6,9 +6,9 @@ var Schedule = db.Schedule;
 module.exports = {
   renderHomePage: function(req, res){
     if(req.isAuthenticated()){
-    	res.render('public/index', {title: 'Schedulize', user: req.user, loggedIn: true})
+    	res.render('public/index', {title: 'Schedulize', user: req.user, loggedIn: true});
     } else {
-    	res.render('public/index', {title: 'Schedulize', loggedIn: false})
+    	res.render('public/index', {title: 'Schedulize', loggedIn: false});
     }
   },
 
@@ -18,9 +18,9 @@ module.exports = {
 
   getSignupPage: function(req, res){
     if(req.isAuthenticated()){
-    	res.render('public/signup', {title: 'Schedulize', loggedIn: true})
+    	res.render('public/signup', {title: 'Schedulize', loggedIn: true});
     } else {
-    	res.render('public/signup', {title: 'Schedulize', loggedIn: false})
+    	res.render('public/signup', {title: 'Schedulize', loggedIn: false});
     }
   },
 

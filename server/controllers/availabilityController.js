@@ -18,7 +18,7 @@ module.exports = {
 			if(err){
 				res.status(500);
 			}
-			console.log(req.body.eligibleRoles)
+			console.log(req.body.eligibleRoles);
 			user.availability = req.body.availability;
 			user.eligibleRoles = req.body.eligibleRoles;
 			user.shiftsDesired = req.body.shiftsDesired;
@@ -27,4 +27,4 @@ module.exports = {
 			});
 		});
 	}
-}
+};

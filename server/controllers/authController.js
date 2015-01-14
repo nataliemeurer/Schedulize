@@ -39,7 +39,7 @@ module.exports = {
 		} else {
       // Determine if company exists
       Company.findOne({name: req.body.companyName}, function(err, company){
-        if(err){ 
+        if(!company){ 
           res.render('public/signup', {error: "The company you specified does not exist."});
         }
         // check company access key
@@ -111,10 +111,10 @@ module.exports = {
         });
         // Save new user
         newUser.save(function(err, user){
-          console.log("new user saved")
+          console.log("new user saved");
           bcrypt.genSalt(10, function(err, salt2) {
             bcrypt.hash(req.body.companyAccessKey, salt2, function(err, accessHash) {
-              console.log("user password hashed")
+              console.log("user password hashed");
               var newCompany = new Company({
                 name: req.body.companyName,
                 employees: [user._id],

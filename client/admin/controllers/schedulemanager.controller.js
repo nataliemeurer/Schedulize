@@ -48,11 +48,11 @@ adminApp
   // Called after finding the schedule
   $scope.renderEvents = function(events){
     $scope.loadEvents();
-  }
+  };
 
   $scope.setScheduleMode = function(role){
     $scope.scheduleRole = role;
-  }
+  };
 
   // Add a Role to the Schedule
   $scope.addRole = function(){
@@ -64,7 +64,7 @@ adminApp
     $scope.activeSchedule.roles.push({ name: role, color: colors[$scope.activeSchedule.roles.length] });
     $scope.changed = true;
     console.log($scope.scheduleRole);
-  }
+  };
 
   // Save changes when made to the schedule
   $scope.saveChanges = function(schedule){

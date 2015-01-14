@@ -20,7 +20,7 @@ adminApp
 		$scope.viewMode = "overview";
 		$scope.setMode = function(mode){
 			$scope.viewMode = mode; 
-		}
+		};
 		$scope.loadEvents();
 	});
 
@@ -37,7 +37,7 @@ adminApp
 		  Employee.toggleAdmin($scope.employee._id).then(function(user){
 		  	$scope.employee = user;
 		  	swal("Success!", $scope.employee.name + " is now an administrator.", "success");
-		  })
+		  });
 		});
 	};
 
@@ -54,7 +54,7 @@ adminApp
 		  Employee.toggleAdmin($scope.employee._id).then(function(user){
 		  	$scope.employee = user;
 		  	swal("Success", $scope.employee.name + " is no longer an administrator.", "success");
-		  })
+		  });
 		});
 	};
 

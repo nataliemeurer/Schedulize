@@ -58,7 +58,7 @@ module.exports = {
           res.status(500);
         }
         res.status(200).send(schedule.shifts);
-      })
+      });
   },
 
   updateScheduleById: function(req, res){
