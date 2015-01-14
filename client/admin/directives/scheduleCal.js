@@ -34,6 +34,31 @@ adminApp.directive('scheduleCal', function($http){
         properties.selectable = false;
       }
       // properties.events = scope.activeCalendar.shifts;
+      properties.eventRender = function(event, element) {
+        element.append( "<button class='closon btn mdi-content-clear'></button>" );
+        element.css("z-index", "1");
+        element.find(".closon").css("z-index", "2");
+        element.find(".closon").click(function(){
+          scope.$apply(function(){
+            console.log(event.storageKey);
+            scope.activeSchedule.shifts[event.storageKey] = null;
+            for(var i = event.storageKey + 1; i < scope.activeSchedule.shifts.length; i++){
+              scope.activeSchedule.shifts[i - 1] = scope.activeSchedule.shifts[i];
+              scope.activeSchedule.shifts[i - 1].storageKey = i - 1;
+            }
+            scope.activeSchedule.shifts.length
+            scope.activeSchedule.shifts.pop();
+            console.log(scope.activeSchedule.shifts);
+            scope.changed = true;
+
+          })
+          $('#scheduleCal').fullCalendar( 'removeEvents' );
+          $('#scheduleCal').fullCalendar( 'addEventSource', scope.activeSchedule.shifts );
+          console.log("updated that shit");
+        });
+      }
+
+
       // CREATE AND STORE EVENTS
       properties.select = function(start, end) {
         var eventIdx = scope.activeSchedule.shifts.length;
@@ -64,7 +89,7 @@ adminApp.directive('scheduleCal', function($http){
 
       // OVERWRITE EVENT
       properties.eventResize = function(event){
-        $('#calendar').fullCalendar('updateEvent', event);
+        $('#scheduleCal').fullCalendar('updateEvent', event);
         event.source = null;
         scope.$apply(function(){
           scope.activeSchedule.shifts[event.storageKey] = event;
@@ -72,14 +97,9 @@ adminApp.directive('scheduleCal', function($http){
         });
       };
 
-      properties.eventDragStart = function(event){
-        event.source = null;
-        event._id = null;
-      };
-
       // EVENT DRAGGING
       properties.eventDrop = function(event){
-        $('#calendar').fullCalendar('updateEvent', event);
+        $('#scheduleCal').fullCalendar('updateEvent', event);
         event.source = null;
         scope.$apply(function(){
           scope.activeSchedule.shifts[event.storageKey] = event;
@@ -91,6 +111,7 @@ adminApp.directive('scheduleCal', function($http){
         var shifts = scope.activeSchedule.shifts;
         for(var i = 0; i < scope.activeSchedule.shifts.length; i++){
           shifts[i]._id = null; // remove fc _id property which ruins everything.
+          shifts[i].source = null;
         }
         properties.events = shifts;
         $('#scheduleCal').fullCalendar(properties);
