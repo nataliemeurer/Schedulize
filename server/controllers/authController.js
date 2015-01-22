@@ -89,47 +89,50 @@ module.exports = {
 	},
 
 	createNewCompany: function(req, res){
-    console.log(req.body);
-    bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(req.body.password, salt, function(err, hash) {
-        if(err){
-          console.log('Failed to hash password');
-          res.status(500).send(err);
-        }
-        // create a new user
-        var newUser = new User({
-          name: req.body.name,
-          email: req.body.email,
-          password: hash,
-          companies: [],
-          shiftsDesired: null,
-          shiftsAssigned: 0,
-          availability: null,
-          eligibleRoles: [],
-          isAdmin: true,
-          joinDate: new Date()
-        });
-        // Save new user
-        newUser.save(function(err, user){
-          console.log("new user saved");
-          bcrypt.genSalt(10, function(err, salt2) {
-            bcrypt.hash(req.body.companyAccessKey, salt2, function(err, accessHash) {
-              console.log("user password hashed");
-              var newCompany = new Company({
-                name: req.body.companyName,
-                employees: [user._id],
-                admins: [user._id],
-                schedules: [],
-                accessKey: accessHash
-              });
-              newCompany.save(function(err, company){
-                if (err) {
-                  res.status(500).send(err);
-                }
-                user.companies.push(company._id);
-                user.save(function(err, updatedUser){
-                  passport.authenticate('local')(req, res, function(){
-                    res.redirect('/admin');
+    if(req.body.companyAccessKey !== req.body.companyAccessKey2){
+      res.render('public/signup', {error2: "Access keys do not match"});
+    } else {
+      bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(req.body.password, salt, function(err, hash) {
+          if(err){
+            console.log('Failed to hash password');
+            res.status(500).send(err);
+          }
+          // create a new user
+          var newUser = new User({
+            name: req.body.name,
+            email: req.body.email,
+            password: hash,
+            companies: [],
+            shiftsDesired: null,
+            shiftsAssigned: 0,
+            availability: null,
+            eligibleRoles: [],
+            isAdmin: true,
+            joinDate: new Date()
+          });
+          // Save new user
+          newUser.save(function(err, user){
+            console.log("new user saved");
+            bcrypt.genSalt(10, function(err, salt2) {
+              bcrypt.hash(req.body.companyAccessKey, salt2, function(err, accessHash) {
+                console.log("user password hashed");
+                var newCompany = new Company({
+                  name: req.body.companyName,
+                  employees: [user._id],
+                  admins: [user._id],
+                  schedules: [],
+                  accessKey: accessHash
+                });
+                newCompany.save(function(err, company){
+                  if (err) {
+                    res.status(500).send(err);
+                  }
+                  user.companies.push(company._id);
+                  user.save(function(err, updatedUser){
+                    passport.authenticate('local')(req, res, function(){
+                      res.redirect('/admin');
+                    });
                   });
                 });
               });
@@ -137,6 +140,6 @@ module.exports = {
           });
         });
       });
-    });
+    } // end of else statement
 	}
 };
