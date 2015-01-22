@@ -10,6 +10,11 @@ var adminApp = angular.module('adminApp', [
         url: "/companydashboard",
         templateUrl: "/admin/partials/dashboard.html"
       })
+      // Edit account information
+      .state('account', {
+        url: "/account",
+        templateUrl: "/admin/partials/account.html"
+      })
       // MANAGE EMPLOYEES
       .state('employeemanager', {
         templateUrl: "/admin/partials/employeemanager.html"

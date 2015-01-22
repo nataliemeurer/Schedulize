@@ -19,6 +19,8 @@ block content
         li
           a(href='../user') User View
       ul.nav.navbar-nav.navbar-right(style="margin-right: 20px")
+        li(ui-sref-active="active")
+          a(ui-sref='account') Account
         li
           a(href='/logout') Logout
   div(ui-view)
