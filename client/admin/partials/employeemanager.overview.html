@@ -2,5 +2,13 @@
 	<div class="content-group-module" ng-controller="employeeOverviewCtrl">
 		<h3>Employee Overview for {{company.name}}</h3>
 		<h4>Total Employees: {{company.employees.length}}</h4>
+		<h4>Employees With Completed Availability</h4>
+		<ul>
+			<li ng-repeat="emp in completeList">{{emp}}</li>
+		</ul>
+		<h4>Employees With incomplete Availability</h4>
+		<ul>
+			<li ng-repeat="emp in incompleteList">{{emp}}</li>
+		</ul>
 	</div>
 </div>

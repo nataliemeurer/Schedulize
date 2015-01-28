@@ -11,6 +11,15 @@ adminApp
 	Company.getCompanyData().then(function(company){
 		// Get logged in company
 		$scope.company = company;
+		$scope.completeList = [];
+		$scope.incompleteList = [];
+		for(var i =0; i < company.employees.length; i++){
+			if(company.employees[i].availability.length){
+				$scope.completeList.push(company.employees[i].name);
+			} else {
+				$scope.incompleteList.push(company.employees[i].name);
+			}
+		}
 	});
 })
 .controller('employeeViewCtrl', function($scope, $http, $stateParams, $location, Employee){
