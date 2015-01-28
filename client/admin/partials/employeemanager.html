@@ -12,8 +12,8 @@
         </div> -->
         <div class="row-content">
           <h4 class="list-group-item-heading">{{employee.name}}</h4>
-          <p ng-if="employee.shiftsDesired" class="list-group-item-text">Desired Shifts: {{employee.shiftsDesired}}, Assigned Shifts: {{employee.shiftsAssigned}}</p>
-          <p ng-if="!employee.shiftsDesired" class="list-group-item-text">Availability not completed</p>
+          <p ng-if="employee.availability" class="list-group-item-text">Desired Shifts: {{employee.shiftsDesired}}, Assigned Shifts: {{employee.shiftsAssigned}}</p>
+          <p ng-if="!employee.availability" class="list-group-item-text">Availability not completed</p>
         </div>
       </div>
     </div>
