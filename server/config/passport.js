@@ -19,7 +19,8 @@ module.exports = function (passport) {
   });
 
   passport.use(new LocalStrategy({
-    usernameField: 'email'
+    usernameField: 'email',
+    stateless: true
   },
     function(username, password, done) {
       User.findOne({ email: username }, function (err, user) {
