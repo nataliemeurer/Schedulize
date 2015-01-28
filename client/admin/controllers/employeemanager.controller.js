@@ -19,7 +19,7 @@ adminApp
 			} else {
 				$scope.incompleteList.push(company.employees[i].name);
 			}
-		}
+		} 
 	});
 })
 .controller('employeeViewCtrl', function($scope, $http, $stateParams, $location, Employee){
